@@ -1,0 +1,8 @@
+# Ignore local Spec Kit scratch and OS noise
+.DS_Store
+.specify/
+.smoke/
+.smoke-gap/
+dist/
+*.zip
+__pycache__/

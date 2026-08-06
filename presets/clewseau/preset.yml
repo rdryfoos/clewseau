@@ -1,0 +1,39 @@
+schema_version: "1.0"
+
+preset:
+  id: "clewseau"
+  name: "Clewseau"
+  version: "0.1.0"
+  description: "Appends durable-ID and Traces requirements onto Spec Kit spec, tasks, and constitution templates."
+  author: "Rik Dryfoos / Dryfoos Consulting"
+  license: "MIT"
+  homepage: "https://dryfoos.com/"
+
+requires:
+  speckit_version: ">=0.14.0"
+
+provides:
+  templates:
+    - type: "template"
+      name: "spec-template"
+      file: "templates/spec-template.md"
+      description: "Require inherited durable IDs and a risk table traced to FR/AC IDs"
+      strategy: "append"
+
+    - type: "template"
+      name: "tasks-template"
+      file: "templates/tasks-template.md"
+      description: "Require Traces: on every task"
+      strategy: "append"
+
+    - type: "template"
+      name: "constitution-template"
+      file: "templates/constitution-template.md"
+      description: "Append End-to-End Traceability article"
+      strategy: "append"
+
+tags:
+  - "traceability"
+  - "durable-ids"
+  - "governance"
+  - "sdd"
