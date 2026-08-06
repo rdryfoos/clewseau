@@ -35,6 +35,13 @@ specify bundle catalog add \
 specify bundle install clewseau
 ```
 
+If Gate config was not scaffolded automatically, copy it once:
+
+```bash
+cp .specify/extensions/clewseau-gate/config-template.yml \
+   .specify/extensions/clewseau-gate/clewseau-gate-config.yml
+```
+
 Edit `.specify/extensions/clewseau-gate/clewseau-gate-config.yml` so `registry` / globs match your repo.
 
 Run Gate 2:
