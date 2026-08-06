@@ -24,13 +24,7 @@ specify preset add --dev /path/to/clewseau/presets/clewseau
 specify extension add --dev /path/to/clewseau/extensions/clewseau-gate
 ```
 
-Then copy the extension config template and point it at your registry/paths:
-
-```bash
-cp .specify/extensions/clewseau-gate/clewseau-gate-config.template.yml \
-   .specify/extensions/clewseau-gate/clewseau-gate-config.yml
-# edit registry / source / test globs
-```
+Install scaffolds `.specify/extensions/clewseau-gate/clewseau-gate-config.yml` from the extension's `config-template.yml`. Edit registry / source / test globs there.
 
 Run Gate 2:
 
