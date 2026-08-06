@@ -27,7 +27,7 @@ Gate 2 always writes a Clewseau-native **clew** (default path `clew.json`, confi
 - **Exact-set** registry ≡ specs ≡ tasks (no unclaimed registry IDs)
 - Not ReqIF/OSLC; optional ReqIF export can come later. See [`docs/clew-schema.md`](./docs/clew-schema.md)
 
-**Reading a clew in SDLC terms** (requirement → build → proof → Gate → loupe): [`docs/reading-a-clew.md`](./docs/reading-a-clew.md).
+**Reading a clew in SDLC terms** (requirement → build → proof → Gate → loupe): [`docs/reading-a-clew.md`](./docs/reading-a-clew.md). Visual tour with screenshots: [`docs/loupe-field-guide.md`](./docs/loupe-field-guide.md).
 
 ## Vocabulary
 

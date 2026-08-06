@@ -43,7 +43,7 @@ Silent-gap refusal is **AC-only**. Parents are covered when their child ACs are 
 
 ## Worked examples (HomesFlow)
 
-HomesFlow’s live clew at session time: `gate.ok: true`, roughly 61 verified / 13 tracked-debt / 0 GAP / 5 backlog. `samples/homesflow.clew.json` is that real emit; `samples/sample.clew.json` is the preview default (honest today; may later be mocked for cases HomesFlow doesn’t emit).
+HomesFlow’s live clew at session time: `gate.ok: true`, 67 verified / 10 tracked-debt / 0 GAP / 4 backlog (81 rows). `samples/homesflow.clew.json` is that real emit; `samples/sample.clew.json` is the preview default (honest today; may later be mocked for cases HomesFlow doesn’t emit).
 
 ### `AC-GUEST-01` → verified
 
@@ -108,6 +108,7 @@ Gate 1 judgment (`/speckit.analyze` and human review) still matters. Gate 2 is t
 
 ## Further reading
 
+- [`loupe-field-guide.md`](./loupe-field-guide.md) — the same story with screenshots
 - [`../PROMOTION-CONTRACT.md`](../PROMOTION-CONTRACT.md) — normative rules
 - [`clew-schema.md`](./clew-schema.md) — field-level shape
 - [`../presets/clewseau/GLOSSARY.md`](../presets/clewseau/GLOSSARY.md) — locked vocabulary
