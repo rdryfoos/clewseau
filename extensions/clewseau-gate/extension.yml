@@ -3,10 +3,10 @@ schema_version: "1.0"
 extension:
   id: "clewseau-gate"
   name: "Clewseau Gate"
-  version: "0.1.0"
-  description: "Gate 2 — deterministic refusal of silent gaps and untraced scope against a durable-ID registry."
+  version: "0.2.0"
+  description: "Gate 2 — refuse silent gaps and emit clew.json (Clewseau dossier / matrix)."
   category: "visibility"
-  effect: "read-only"
+  effect: "read-write"
   author: "Rik Dryfoos / Dryfoos Consulting"
   license: "MIT"
   homepage: "https://github.com/rdryfoos/clewseau"
@@ -20,7 +20,7 @@ provides:
   commands:
     - name: "speckit.clewseau-gate.check"
       file: "commands/speckit.clewseau-gate.check.md"
-      description: "Run Clewseau Gate 2 traceability check (silent gaps fail)"
+      description: "Run Clewseau Gate 2 (silent gaps fail; write clew.json)"
 
   config:
     - name: "clewseau-gate-config.yml"
@@ -33,7 +33,7 @@ hooks:
     command: "speckit.clewseau-gate.check"
     optional: true
     prompt: "Run Clewseau Gate 2 traceability check?"
-    description: "Refuse silent gaps after implementation"
+    description: "Refuse silent gaps after implementation; refresh clew.json"
 
 tags:
   - "traceability"

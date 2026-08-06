@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Clewseau Gate 2 — portable traceability check.
+# Clewseau Gate 2 — portable traceability check + clew.json matrix emitter.
 # Silent gaps and untraced scope fail. Tracked debt (open tasks with Traces) is allowed.
+# Always writes clew.json (even on failure) so the dossier reflects GAPs.
 set -euo pipefail
 
 export LC_ALL=C
 
 EXT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-# Project root: walk up from extension install path (.specify/extensions/clewseau-gate)
 PROJECT_ROOT="${CLEWSEAU_PROJECT_ROOT:-}"
 if [[ -z "$PROJECT_ROOT" ]]; then
   PROJECT_ROOT="$(cd "$EXT_DIR/../../.." && pwd)"
@@ -15,16 +15,15 @@ cd "$PROJECT_ROOT"
 
 CONFIG="${CLEWSEAU_CONFIG:-$EXT_DIR/clewseau-gate-config.yml}"
 if [[ ! -f "$CONFIG" ]]; then
-  if [[ -f "$EXT_DIR/clewseau-gate-config.template.yml" ]]; then
-    CONFIG="$EXT_DIR/clewseau-gate-config.template.yml"
-    echo "WARN: using template config; copy to clewseau-gate-config.yml for real projects" >&2
+  if [[ -f "$EXT_DIR/config-template.yml" ]]; then
+    CONFIG="$EXT_DIR/config-template.yml"
+    echo "WARN: using config-template.yml; copy to clewseau-gate-config.yml for real projects" >&2
   else
     echo "FAIL: no clewseau-gate-config.yml (looked in $EXT_DIR)" >&2
     exit 2
   fi
 fi
 
-# Minimal YAML subset reader: key: value and simple list items under a key.
 yaml_scalar() {
   local key="$1"
   awk -v k="$key" '
@@ -56,13 +55,17 @@ TASKS_GLOB="$(yaml_scalar tasks)"
 ID_RE="$(yaml_scalar id_regex)"
 COVERS_RE="$(yaml_scalar covers_regex)"
 TEST_AC_RE="$(yaml_scalar test_ac_regex)"
+CLEW_OUT="$(yaml_scalar clew_path)"
+TARGET_NAME="$(yaml_scalar target_name)"
 
 [[ -n "$REGISTRY" ]] || { echo "FAIL: config missing registry" >&2; exit 2; }
 [[ -n "$ID_RE" ]] || ID_RE='(FR|NFR|AC|US)-[A-Z][A-Z0-9]{1,5}-[0-9]{2,}[a-z]?'
-[[ -n "$COVERS_RE" ]] || COVERS_RE='@covers\s+.*'
+[[ -n "$COVERS_RE" ]] || COVERS_RE='@covers[[:space:]]+.*'
 [[ -n "$TEST_AC_RE" ]] || TEST_AC_RE='AC_[A-Z][A-Z0-9]{1,5}_[0-9]{2,}[a-z]?'
 [[ -n "$SPECS_GLOB" ]] || SPECS_GLOB='specs/**/spec.md'
 [[ -n "$TASKS_GLOB" ]] || TASKS_GLOB='specs/**/tasks.md'
+[[ -n "$CLEW_OUT" ]] || CLEW_OUT='clew.json'
+[[ -n "$TARGET_NAME" ]] || TARGET_NAME="$(basename "$PROJECT_ROOT")"
 
 fail=0
 err() { echo "FAIL: $*" >&2; fail=1; }
@@ -77,7 +80,6 @@ fi
 
 grep -Eoh "$ID_RE" "$REGISTRY" | sort -u > "$tmp/registry.txt"
 
-# Expand simple globs via find (portable; avoids bash-4 globstar/mapfile)
 expand_glob() {
   local pattern="$1"
   local dir base
@@ -89,7 +91,6 @@ expand_glob() {
   elif [[ "$pattern" == */* ]]; then
     dir="$(dirname "$pattern")"
     base="$(basename "$pattern")"
-    # dirname of "src/**" is "src" with basename "**" — treat ** as recurse-all
     if [[ "$base" == "**" ]]; then
       [[ -d "$dir" ]] || return 0
       find "$dir" -type f 2>/dev/null
@@ -111,39 +112,53 @@ sort -u "$tmp/spec.txt" -o "$tmp/spec.txt"
 
 : > "$tmp/tasks.txt"
 : > "$tmp/pending.txt"
-: > "$tmp/task_map.txt"
 while IFS= read -r f; do
   [[ -f "$f" ]] || continue
   grep -Eoh "$ID_RE" "$f" | sort -u >> "$tmp/tasks.txt" || true
   grep -E '^- \[ \]' "$f" | grep -Eo "$ID_RE" | sort -u >> "$tmp/pending.txt" || true
-  sed -nE 's/^- \[(x| )\] (T[0-9]+[a-z]?).*\*\*Traces\*\*: (.*)$/\1|\2|\3/p' "$f" >> "$tmp/task_map.txt" || true
 done < <(expand_glob "$TASKS_GLOB")
 sort -u "$tmp/tasks.txt" -o "$tmp/tasks.txt"
 sort -u "$tmp/pending.txt" -o "$tmp/pending.txt"
 
-# Source covers
-: > "$tmp/covers_raw.txt"
+# covers: path|line|id|excerpt
+: > "$tmp/covers_hits.txt"
 while IFS= read -r g; do
   [[ -z "$g" ]] && continue
   while IFS= read -r f; do
     [[ -f "$f" ]] || continue
-    grep -Eoh "$COVERS_RE" "$f" >> "$tmp/covers_raw.txt" || true
+    grep -nE "$COVERS_RE" "$f" 2>/dev/null | while IFS= read -r line; do
+      lineno="${line%%:*}"
+      rest="${line#*:}"
+      id="$(grep -Eo "$ID_RE" <<<"$rest" | head -1 || true)"
+      [[ -n "$id" ]] || continue
+      excerpt="$(printf '%s' "$rest" | tr '\t' ' ' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | cut -c1-160)"
+      printf '%s|%s|%s|%s\n' "$f" "$lineno" "$id" "$excerpt"
+    done
   done < <(expand_glob "$g")
-done < <(yaml_list src_globs)
+done < <(yaml_list src_globs) >> "$tmp/covers_hits.txt" || true
 
-grep -Eoh "$ID_RE" "$tmp/covers_raw.txt" 2>/dev/null | sort -u > "$tmp/covers.txt" || true
+cut -d'|' -f3 "$tmp/covers_hits.txt" 2>/dev/null | sort -u > "$tmp/covers.txt" || true
 
-# Test-encoded ACs
-: > "$tmp/test_names.txt"
+# proofs: path|line|id|name
+: > "$tmp/proof_hits.txt"
 while IFS= read -r g; do
   [[ -z "$g" ]] && continue
   while IFS= read -r f; do
     [[ -f "$f" ]] || continue
-    grep -Eoh "$TEST_AC_RE" "$f" >> "$tmp/test_names.txt" || true
+    grep -nE "$TEST_AC_RE" "$f" 2>/dev/null | while IFS= read -r line; do
+      lineno="${line%%:*}"
+      rest="${line#*:}"
+      raw="$(grep -Eo "$TEST_AC_RE" <<<"$rest" | head -1 || true)"
+      [[ -n "$raw" ]] || continue
+      id="$(printf '%s' "$raw" | tr '_' '-')"
+      name="$(grep -Eo 'test_[A-Za-z0-9_]+|func test_[A-Za-z0-9_]+' <<<"$rest" | head -1 | sed 's/^func //' || true)"
+      [[ -n "$name" ]] || name="$raw"
+      printf '%s|%s|%s|%s\n' "$f" "$lineno" "$id" "$name"
+    done
   done < <(expand_glob "$g")
-done < <(yaml_list test_globs)
+done < <(yaml_list test_globs) >> "$tmp/proof_hits.txt" || true
 
-tr '_' '-' < "$tmp/test_names.txt" | sort -u > "$tmp/test_acs.txt" || true
+cut -d'|' -f3 "$tmp/proof_hits.txt" 2>/dev/null | sort -u > "$tmp/test_acs.txt" || true
 
 # 1) Spec / tasks IDs must be subset of registry
 while IFS= read -r id; do
@@ -156,7 +171,7 @@ while IFS= read -r id; do
   grep -qx "$id" "$tmp/registry.txt" || err "tasks reference ID not in registry: $id"
 done < "$tmp/tasks.txt"
 
-# 2) Every task with a checkbox should have Traces (best-effort: lines matching task bullets)
+# 2) Every task with a checkbox should have Traces
 while IFS= read -r f; do
   [[ -f "$f" ]] || continue
   while IFS= read -r line; do
@@ -168,7 +183,7 @@ while IFS= read -r f; do
   done < "$f"
 done < <(expand_glob "$TASKS_GLOB")
 
-# 3) Untraced scope: covers / test ACs must be in registry
+# 3) Untraced scope
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
   grep -qx "$id" "$tmp/registry.txt" || err "untraced scope (@covers): $id not in registry"
@@ -179,7 +194,7 @@ while IFS= read -r id; do
   grep -qx "$id" "$tmp/registry.txt" || err "untraced scope (test name): $id not in registry"
 done < "$tmp/test_acs.txt"
 
-# 4) Silent gaps: every AC in registry needs a test OR an open (unchecked) task
+# 4) Silent gaps (ACs only)
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
   [[ "${id%%-*}" == "AC" ]] || continue
@@ -191,6 +206,131 @@ while IFS= read -r id; do
   fi
   err "silent gap: $id has no test and no open tracked-debt task"
 done < "$tmp/registry.txt"
+
+# --- Emit clew.json (always; dossier should show GAPs even when Gate fails) ---
+export CLEW_OUT REGISTRY TARGET_NAME PROJECT_ROOT
+export CLEW_TMP="$tmp"
+python3 - <<'PY'
+import json, os, re, datetime
+from pathlib import Path
+
+tmp = Path(os.environ["CLEW_TMP"])
+registry_path = Path(os.environ["REGISTRY"])
+out_path = Path(os.environ["CLEW_OUT"])
+target = os.environ.get("TARGET_NAME") or "project"
+repo = os.environ.get("PROJECT_ROOT") or str(Path.cwd())
+
+ids = [ln.strip() for ln in (tmp / "registry.txt").read_text().splitlines() if ln.strip()]
+pending = {ln.strip() for ln in (tmp / "pending.txt").read_text().splitlines() if ln.strip()}
+tested = {ln.strip() for ln in (tmp / "test_acs.txt").read_text().splitlines() if ln.strip()}
+covered = {ln.strip() for ln in (tmp / "covers.txt").read_text().splitlines() if ln.strip()}
+
+reg_text = registry_path.read_text(encoding="utf-8", errors="replace").splitlines()
+statements = {}
+for id_ in ids:
+    statements[id_] = id_
+    for line in reg_text:
+        if id_ in line:
+            s = re.sub(r"^[\s#\-*\[\]xX]+", "", line).strip()
+            statements[id_] = s or id_
+            break
+
+impl_by = {i: [] for i in ids}
+covers_file = tmp / "covers_hits.txt"
+if covers_file.exists():
+    for ln in covers_file.read_text().splitlines():
+        if not ln.strip():
+            continue
+        parts = ln.split("|", 3)
+        if len(parts) < 3:
+            continue
+        path, line, id_ = parts[0], parts[1], parts[2]
+        excerpt = parts[3] if len(parts) > 3 else ""
+        if id_ not in impl_by:
+            continue
+        try:
+            line_n = int(line)
+        except ValueError:
+            line_n = 0
+        impl_by[id_].append({"path": path, "line": line_n, "excerpt": excerpt})
+
+proof_by = {i: [] for i in ids}
+proofs_file = tmp / "proof_hits.txt"
+if proofs_file.exists():
+    for ln in proofs_file.read_text().splitlines():
+        if not ln.strip():
+            continue
+        parts = ln.split("|", 3)
+        if len(parts) < 3:
+            continue
+        path, line, id_ = parts[0], parts[1], parts[2]
+        name = parts[3] if len(parts) > 3 else id_
+        if id_ not in proof_by:
+            continue
+        try:
+            line_n = int(line)
+        except ValueError:
+            line_n = 0
+        proof_by[id_].append({"name": name, "path": path, "line": line_n})
+
+def status_for(id_: str) -> str:
+    typ = id_.split("-", 1)[0]
+    if typ == "AC":
+        if id_ in tested:
+            return "verified"
+        if id_ in pending:
+            return "tracked-debt"
+        return "GAP"
+    if id_ in covered or id_ in tested:
+        return "verified"
+    if id_ in pending:
+        return "tracked-debt"
+    return "GAP"
+
+rows = []
+status_counts = {"verified": 0, "tracked-debt": 0, "GAP": 0}
+ac_count = 0
+covered_count = 0
+for id_ in ids:
+    typ = id_.split("-", 1)[0]
+    st = status_for(id_)
+    status_counts[st] += 1
+    if typ == "AC":
+        ac_count += 1
+        if st == "verified":
+            covered_count += 1
+    rows.append({
+        "id": id_,
+        "type": typ,
+        "statement": statements.get(id_, id_),
+        "status": st,
+        "blocked": False,
+        "implementations": impl_by.get(id_, []),
+        "proofs": proof_by.get(id_, []),
+        "attestedBy": None,
+    })
+
+doc = {
+    "schemaVersion": 3,
+    "format": "clew",
+    "emitter": "clewseau-gate",
+    "targetName": target,
+    "repoPath": repo,
+    "generatedAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
+    "totals": {
+        "registryIdCount": len(ids),
+        "acCount": ac_count,
+        "coveredCount": covered_count,
+    },
+    "statusCounts": status_counts,
+    "blockedCount": 0,
+    "rows": rows,
+}
+
+out_path.parent.mkdir(parents=True, exist_ok=True)
+out_path.write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8")
+print(f"Wrote {out_path} ({len(rows)} rows)", flush=True)
+PY
 
 if [[ "$fail" -ne 0 ]]; then
   echo "Clewseau Gate 2: FAILED" >&2

@@ -6,16 +6,16 @@
     "clewseau-gate": {
       "name": "Clewseau Gate",
       "id": "clewseau-gate",
-      "version": "0.1.0",
-      "description": "Gate 2 — deterministic refusal of silent gaps and untraced scope against a durable-ID registry.",
+      "version": "0.2.0",
+      "description": "Gate 2 — refuse silent gaps and emit clew.json (Clewseau dossier / matrix).",
       "author": "Rik Dryfoos / Dryfoos Consulting",
-      "download_url": "https://github.com/rdryfoos/clewseau/releases/download/v0.1.0/clewseau-gate-0.1.0.zip",
+      "download_url": "https://github.com/rdryfoos/clewseau/releases/download/v0.2.0/clewseau-gate-0.2.0.zip",
       "repository": "https://github.com/rdryfoos/clewseau",
       "homepage": "https://github.com/rdryfoos/clewseau",
       "documentation": "https://github.com/rdryfoos/clewseau/blob/main/extensions/clewseau-gate/README.md",
       "license": "MIT",
       "category": "visibility",
-      "effect": "read-only",
+      "effect": "read-write",
       "requires": {
         "speckit_version": ">=0.14.0"
       },

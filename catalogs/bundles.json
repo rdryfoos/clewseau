@@ -6,12 +6,12 @@
     "clewseau": {
       "name": "Clewseau",
       "id": "clewseau",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "role": "developer",
-      "description": "Durable-ID promotion contract for stock Spec Kit: template grammar plus Gate 2 refusal of silent gaps.",
+      "description": "Durable-ID promotion for stock Spec Kit: templates, Gate 2 refusal, and clew.json dossier emission.",
       "author": "Rik Dryfoos / Dryfoos Consulting",
       "license": "MIT",
-      "download_url": "https://github.com/rdryfoos/clewseau/releases/download/v0.1.0/clewseau-0.1.0.zip",
+      "download_url": "https://github.com/rdryfoos/clewseau/releases/download/v0.2.0/clewseau-0.2.0.zip",
       "repository": "https://github.com/rdryfoos/clewseau",
       "requires": {
         "speckit_version": ">=0.14.0"

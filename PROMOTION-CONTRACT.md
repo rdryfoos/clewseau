@@ -21,14 +21,15 @@ Mint durable IDs at intent; refuse silent gaps; allow tracked debt to stay visib
    - **blocked** — cannot proceed; reason recorded
    - **GAP** — silent gap; thread broken
 7. **Refusal.** Gate 1 (judgment, e.g. `/speckit.analyze`) and Gate 2 (deterministic check) fail closed on silent gaps and untraced scope. Passing does not mean zero gaps; it means zero *hidden* ones.
-8. **Attribution is not authentication.** Optional operator stamps record claimed provenance in an already-trusted context. They enforce nothing about who may act.
+8. **Dossier.** Gate 2 emits `clew.json` — a Clewseau-native matrix (`format: "clew"`). The file is written even when the gate fails. It is not ReqIF/OSLC; see `docs/clew-schema.md`.
+9. **Attribution is not authentication.** Optional operator stamps record claimed provenance in an already-trusted context. They enforce nothing about who may act.
 
 ## What Clewseau is not
 
 - Not a fork of Spec Kit, and not a replacement for Spec Kit.
 - Not Thorsten Schlathölter's `clew` (inner-loop constructor). Cite it; do not collide with the name.
 - Not agent kanban / human-lane orchestration (that is a separate Loom-shaped concern).
-- Not a visualizer. Inspection tools may consume a matrix; they must not mint IDs.
+- Not a visualizer. **Panther** (or any viewer) may consume `clew.json`; viewers must not mint IDs or re-scan the target.
 
 ## Paste-ready constitution article
 

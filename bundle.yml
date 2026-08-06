@@ -3,9 +3,9 @@ schema_version: "1.0"
 bundle:
   id: "clewseau"
   name: "Clewseau"
-  version: "0.1.0"
+  version: "0.2.0"
   role: "developer"
-  description: "Durable-ID promotion contract for stock Spec Kit: template grammar plus Gate 2 refusal of silent gaps."
+  description: "Durable-ID promotion for stock Spec Kit: templates, Gate 2 refusal, and clew.json dossier emission."
   author: "Rik Dryfoos / Dryfoos Consulting"
   license: "MIT"
   homepage: "https://github.com/rdryfoos/clewseau"
@@ -24,7 +24,7 @@ provides:
       strategy: "append"
   extensions:
     - id: "clewseau-gate"
-      version: "0.1.0"
+      version: "0.2.0"
 
 tags:
   - "traceability"

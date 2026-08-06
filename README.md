@@ -1,8 +1,8 @@
 # Clewseau
 
-A Spec Kit **bundle**: durable-ID grammar in the templates, plus a Gate 2 refusal that fails closed on silent gaps.
+A Spec Kit **bundle**: durable-ID grammar in the templates, Gate 2 refusal of silent gaps, and emission of **`clew.json`** (the dossier / matrix).
 
-Stock Spec Kit only. No fork. No kanban daemon. No visualizer.
+Stock Spec Kit only. No fork. No kanban daemon. Visualization is separate (**Panther** consumes `clew.json`; it does not re-scan).
 
 Read [`PROMOTION-CONTRACT.md`](./PROMOTION-CONTRACT.md) first — that is the gift. This repo is the installable witness.
 
@@ -11,9 +11,18 @@ Read [`PROMOTION-CONTRACT.md`](./PROMOTION-CONTRACT.md) first — that is the gi
 | Component | Id | Role |
 |-----------|-----|------|
 | Preset | `clewseau` | Appends ID / `Traces:` requirements onto Spec Kit's `spec-template`, `tasks-template`, and `constitution-template` |
-| Extension | `clewseau-gate` | `speckit.clewseau-gate.check` — portable Gate 2 script + config |
+| Extension | `clewseau-gate` | Gate 2 check + **`clew.json` emitter** (`speckit.clewseau-gate.check`) |
 
 Bundle id: `clewseau`.
+
+## `clew.json`
+
+Gate 2 always writes a Clewseau-native matrix dossier (default path `clew.json`, configurable as `clew_path`):
+
+- `format: "clew"`, `schemaVersion: 3`, `emitter: "clewseau-gate"`
+- Rows: id, statement, status (`verified` \| `tracked-debt` \| `GAP`), implementations, proofs
+- Written even when the gate fails, so silent gaps are visible in the file
+- Not ReqIF/OSLC; optional ReqIF export can come later. See [`docs/clew-schema.md`](./docs/clew-schema.md)
 
 ## Install (catalog path)
 
@@ -48,7 +57,7 @@ Run Gate 2:
 
 ```bash
 bash .specify/extensions/clewseau-gate/scripts/check-traceability.sh
-# or via the agent command: /speckit.clewseau-gate.check
+# writes clew.json; or via the agent command: /speckit.clewseau-gate.check
 ```
 
 ## Install (dev path)
@@ -67,16 +76,10 @@ Install scaffolds `clewseau-gate-config.yml` from `config-template.yml`.
 specify bundle validate --path . --offline
 ```
 
-GitHub release `v0.1.0` publishes:
-
-- `clewseau-0.1.0.zip` (bundle)
-- `clewseau-preset-0.1.0.zip`
-- `clewseau-gate-0.1.0.zip`
-
 ## Explicitly out of scope
 
 - Agentic kanban / human approval lanes (Loom)
-- Matrix UI / detective (thread-viz)
+- Matrix UI (**Panther** — separate viewer)
 - Potato Cannon overlays
 - HomesFlow-specific paths (those stay in HomesFlow as a worked example)
 
