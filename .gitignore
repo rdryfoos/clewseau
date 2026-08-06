@@ -6,3 +6,4 @@
 dist/
 *.zip
 __pycache__/
+clew.json
