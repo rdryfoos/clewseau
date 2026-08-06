@@ -2,7 +2,7 @@
 
 **Status:** normative gift. The idea is the product; the scripts are witnesses.
 
-This is the refusal to promote work that will not carry an immutable ID, plus the honest states that replace green theater. Prior art is thick (safety-critical RTM practice; Jonathan Smart / Sooner Safer Happier "Golden Thread"; GitHub Spec Kit; Thorsten Ball's CAS-DD / open-source `clew`). Clewseau's contribution is making admission cheap enough that AI-speed work still cannot hide.
+This is the refusal to promote work that will not carry an immutable ID, plus the honest states that replace green theater. Prior art is thick (safety-critical RTM practice; Jonathan Smart / Sooner Safer Happier "Golden Thread"; GitHub Spec Kit; Thorsten Schlathölter's CAS-DD / open-source `clew`). Clewseau's contribution is making admission cheap enough that AI-speed work still cannot hide.
 
 ## One sentence
 
@@ -26,7 +26,7 @@ Mint durable IDs at intent; refuse silent gaps; allow tracked debt to stay visib
 ## What Clewseau is not
 
 - Not a fork of Spec Kit, and not a replacement for Spec Kit.
-- Not Thorsten's `clew` (inner-loop constructor). Cite it; do not collide with the name.
+- Not Thorsten Schlathölter's `clew` (inner-loop constructor). Cite it; do not collide with the name.
 - Not agent kanban / human-lane orchestration (that is a separate Loom-shaped concern).
 - Not a visualizer. Inspection tools may consume a matrix; they must not mint IDs.
 
@@ -49,4 +49,4 @@ Add to `.specify/memory/constitution.md` (or feed `/speckit.constitution`):
 - Business / programme "golden thread" usage; Jonathan Smart, *Sooner Safer Happier*
 - Safety-critical requirements traceability matrices (avionics, medical, rail practice)
 - GitHub Spec Kit (stock SDD workflow Clewseau overlays)
-- Thorsten Ball — CAS-DD and open-source `clew` (inner-loop code-anchored specs); complementary altitude to Clewseau's promotion/refusal focus
+- Thorsten Schlathölter — CAS-DD and open-source `clew` (inner-loop code-anchored specs); complementary altitude to Clewseau's promotion/refusal focus

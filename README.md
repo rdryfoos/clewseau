@@ -82,7 +82,7 @@ GitHub release `v0.1.0` publishes:
 
 ## Community submission
 
-After the catalog install path is proven on a clean Spec Kit project, file a Spec Kit [Bundle Submission](https://github.com/github/spec-kit/issues/new?template=bundle_submission.yml) with the release artifact URL and required catalog URLs above.
+Catalog install is ready. Peer review with collaborators precedes Spec Kit community filing; submission packaging is prepared privately and filed when that review is done.
 
 ## License
 
