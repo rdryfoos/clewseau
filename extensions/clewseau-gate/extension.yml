@@ -9,7 +9,8 @@ extension:
   effect: "read-only"
   author: "Rik Dryfoos / Dryfoos Consulting"
   license: "MIT"
-  homepage: "https://dryfoos.com/"
+  homepage: "https://github.com/rdryfoos/clewseau"
+  repository: "https://github.com/rdryfoos/clewseau"
 
 requires:
   speckit_version: ">=0.14.0"

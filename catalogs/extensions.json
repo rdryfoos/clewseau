@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-08-06T00:00:00Z",
+  "catalog_url": "https://raw.githubusercontent.com/rdryfoos/clewseau/main/catalogs/extensions.json",
+  "extensions": {
+    "clewseau-gate": {
+      "name": "Clewseau Gate",
+      "id": "clewseau-gate",
+      "version": "0.1.0",
+      "description": "Gate 2 — deterministic refusal of silent gaps and untraced scope against a durable-ID registry.",
+      "author": "Rik Dryfoos / Dryfoos Consulting",
+      "download_url": "https://github.com/rdryfoos/clewseau/releases/download/v0.1.0/clewseau-gate-0.1.0.zip",
+      "repository": "https://github.com/rdryfoos/clewseau",
+      "homepage": "https://github.com/rdryfoos/clewseau",
+      "documentation": "https://github.com/rdryfoos/clewseau/blob/main/extensions/clewseau-gate/README.md",
+      "license": "MIT",
+      "category": "visibility",
+      "effect": "read-only",
+      "requires": {
+        "speckit_version": ">=0.14.0"
+      },
+      "provides": {
+        "commands": 1,
+        "hooks": 1
+      },
+      "tags": [
+        "traceability",
+        "gate",
+        "ci",
+        "governance",
+        "sdd"
+      ],
+      "verified": false,
+      "created_at": "2026-08-06T00:00:00Z",
+      "updated_at": "2026-08-06T00:00:00Z"
+    }
+  }
+}

@@ -15,16 +15,27 @@ Read [`PROMOTION-CONTRACT.md`](./PROMOTION-CONTRACT.md) first — that is the gi
 
 Bundle id: `clewseau`.
 
-## Install (dev path today)
+## Install (catalog path)
 
-From a Spec Kit project (`specify init` already done):
+From a Spec Kit project (`specify init` already done). Add Clewseau's install-allowed catalogs, then install the bundle:
 
 ```bash
-specify preset add --dev /path/to/clewseau/presets/clewseau
-specify extension add --dev /path/to/clewseau/extensions/clewseau-gate
+specify preset catalog add \
+  https://raw.githubusercontent.com/rdryfoos/clewseau/main/catalogs/presets.json \
+  --name clewseau --install-allowed
+
+specify extension catalog add \
+  https://raw.githubusercontent.com/rdryfoos/clewseau/main/catalogs/extensions.json \
+  --name clewseau --install-allowed
+
+specify bundle catalog add \
+  https://raw.githubusercontent.com/rdryfoos/clewseau/main/catalogs/bundles.json \
+  --id clewseau --policy install-allowed
+
+specify bundle install clewseau
 ```
 
-Install scaffolds `.specify/extensions/clewseau-gate/clewseau-gate-config.yml` from the extension's `config-template.yml`. Edit registry / source / test globs there.
+Edit `.specify/extensions/clewseau-gate/clewseau-gate-config.yml` so `registry` / globs match your repo.
 
 Run Gate 2:
 
@@ -33,14 +44,27 @@ bash .specify/extensions/clewseau-gate/scripts/check-traceability.sh
 # or via the agent command: /speckit.clewseau-gate.check
 ```
 
-Catalog-published `specify bundle install clewseau` comes after the preset and extension are in install-allowed catalogs. Until then, use `--dev` as above; `bundle.yml` is the composition contract.
-
-## Validate / build this repo
+## Install (dev path)
 
 ```bash
-specify bundle validate --path . --offline   # warnings OK until components are catalogued
-specify bundle build --path .
+specify preset add --dev /path/to/clewseau/presets/clewseau
+specify extension add --dev /path/to/clewseau/extensions/clewseau-gate
 ```
+
+Install scaffolds `clewseau-gate-config.yml` from `config-template.yml`.
+
+## Release artifacts
+
+```bash
+./scripts/build-release.sh          # → dist/*.zip
+specify bundle validate --path . --offline
+```
+
+GitHub release `v0.1.0` publishes:
+
+- `clewseau-0.1.0.zip` (bundle)
+- `clewseau-preset-0.1.0.zip`
+- `clewseau-gate-0.1.0.zip`
 
 ## Explicitly out of scope
 
@@ -48,6 +72,10 @@ specify bundle build --path .
 - Matrix UI / detective (thread-viz)
 - Potato Cannon overlays
 - HomesFlow-specific paths (those stay in HomesFlow as a worked example)
+
+## Community submission
+
+After the catalog install path is proven on a clean Spec Kit project, file a Spec Kit [Bundle Submission](https://github.com/github/spec-kit/issues/new?template=bundle_submission.yml) with the release artifact URL and required catalog URLs above.
 
 ## License
 

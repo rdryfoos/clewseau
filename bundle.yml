@@ -8,8 +8,8 @@ bundle:
   description: "Durable-ID promotion contract for stock Spec Kit: template grammar plus Gate 2 refusal of silent gaps."
   author: "Rik Dryfoos / Dryfoos Consulting"
   license: "MIT"
-  homepage: "https://dryfoos.com/"
-  # repository: set when the public GitHub remote exists
+  homepage: "https://github.com/rdryfoos/clewseau"
+  repository: "https://github.com/rdryfoos/clewseau"
 
 requires:
   speckit_version: ">=0.14.0"

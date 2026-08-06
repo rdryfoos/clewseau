@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2026-08-06T00:00:00Z",
+  "catalog_url": "https://raw.githubusercontent.com/rdryfoos/clewseau/main/catalogs/bundles.json",
+  "bundles": {
+    "clewseau": {
+      "name": "Clewseau",
+      "id": "clewseau",
+      "version": "0.1.0",
+      "role": "developer",
+      "description": "Durable-ID promotion contract for stock Spec Kit: template grammar plus Gate 2 refusal of silent gaps.",
+      "author": "Rik Dryfoos / Dryfoos Consulting",
+      "license": "MIT",
+      "download_url": "https://github.com/rdryfoos/clewseau/releases/download/v0.1.0/clewseau-0.1.0.zip",
+      "repository": "https://github.com/rdryfoos/clewseau",
+      "requires": {
+        "speckit_version": ">=0.14.0"
+      },
+      "provides": {
+        "extensions": 1,
+        "presets": 1,
+        "steps": 0,
+        "workflows": 0
+      },
+      "tags": [
+        "traceability",
+        "governance",
+        "durable-ids",
+        "gate",
+        "sdd"
+      ],
+      "verified": false
+    }
+  }
+}
