@@ -5,7 +5,7 @@ bundle:
   name: "Clewseau"
   version: "0.2.0"
   role: "developer"
-  description: "Durable-ID promotion for stock Spec Kit: templates, Gate 2 refusal, and clew.json dossier emission."
+  description: "Durable-ID promotion for stock Spec Kit: templates, Gate 2 refusal, and clew.json emission."
   author: "Rik Dryfoos / Dryfoos Consulting"
   license: "MIT"
   homepage: "https://github.com/rdryfoos/clewseau"

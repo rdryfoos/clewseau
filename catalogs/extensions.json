@@ -7,7 +7,7 @@
       "name": "Clewseau Gate",
       "id": "clewseau-gate",
       "version": "0.2.0",
-      "description": "Gate 2 — refuse silent gaps and emit clew.json (Clewseau dossier / matrix).",
+      "description": "Gate 2 — refuse silent gaps and emit a clew (`clew.json`).",
       "author": "Rik Dryfoos / Dryfoos Consulting",
       "download_url": "https://github.com/rdryfoos/clewseau/releases/download/v0.2.0/clewseau-gate-0.2.0.zip",
       "repository": "https://github.com/rdryfoos/clewseau",

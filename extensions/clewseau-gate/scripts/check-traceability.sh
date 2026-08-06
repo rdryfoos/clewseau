@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Clewseau Gate 2 — portable traceability check + clew.json matrix emitter.
-# Silent gaps and untraced scope fail. Tracked debt (open tasks with Traces) is allowed.
-# Always writes clew.json (even on failure) so the dossier reflects GAPs.
+# Exact-set registry ≡ specs ≡ tasks. Silent AC gaps and untraced scope fail.
+# Tracked debt is allowed. US/FR/NFR without own carrier are backlog (planning altitude) — not silent-gap candidates.
+# Always writes clew.json (even on failure) so the clew reflects GAPs + gate.
 set -euo pipefail
 
 export LC_ALL=C
@@ -9,7 +10,15 @@ export LC_ALL=C
 EXT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 PROJECT_ROOT="${CLEWSEAU_PROJECT_ROOT:-}"
 if [[ -z "$PROJECT_ROOT" ]]; then
-  PROJECT_ROOT="$(cd "$EXT_DIR/../../.." && pwd)"
+  # Spec Kit install: <project>/.specify/extensions/<ext>/ → three levels up.
+  # Clewseau repo layout: <clewseau>/extensions/<ext>/ → two levels up.
+  parent_dir="$(basename "$(dirname "$EXT_DIR")")"
+  grandparent_dir="$(basename "$(dirname "$(dirname "$EXT_DIR")")")"
+  if [[ "$parent_dir" == "extensions" && "$grandparent_dir" == ".specify" ]]; then
+    PROJECT_ROOT="$(cd "$EXT_DIR/../../.." && pwd)"
+  else
+    PROJECT_ROOT="$(cd "$EXT_DIR/../.." && pwd)"
+  fi
 fi
 cd "$PROJECT_ROOT"
 
@@ -68,17 +77,37 @@ TARGET_NAME="$(yaml_scalar target_name)"
 [[ -n "$TARGET_NAME" ]] || TARGET_NAME="$(basename "$PROJECT_ROOT")"
 
 fail=0
-err() { echo "FAIL: $*" >&2; fail=1; }
-
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
+: > "$tmp/failures.jsonl"
+
+# kind | id-or-empty | detail — collected for clew.json gate.failures
+record_fail() {
+  local kind="$1"
+  local id="${2:-}"
+  local detail="$3"
+  echo "FAIL: $detail" >&2
+  fail=1
+  python3 -c '
+import json,sys
+kind, id_, detail = sys.argv[1], sys.argv[2], sys.argv[3]
+row = {"kind": kind, "detail": detail}
+if id_:
+    row["id"] = id_
+print(json.dumps(row, ensure_ascii=False))
+' "$kind" "$id" "$detail" >> "$tmp/failures.jsonl"
+}
 
 if [[ ! -f "$REGISTRY" ]]; then
-  err "registry not found: $REGISTRY"
-  exit 1
+  record_fail "registry-missing" "" "registry not found: $REGISTRY"
+  # Still try to emit an empty-ish clew below if possible; exit after emit.
 fi
 
-grep -Eoh "$ID_RE" "$REGISTRY" | sort -u > "$tmp/registry.txt"
+if [[ -f "$REGISTRY" ]]; then
+  grep -Eoh "$ID_RE" "$REGISTRY" | sort -u > "$tmp/registry.txt"
+else
+  : > "$tmp/registry.txt"
+fi
 
 expand_glob() {
   local pattern="$1"
@@ -112,13 +141,24 @@ sort -u "$tmp/spec.txt" -o "$tmp/spec.txt"
 
 : > "$tmp/tasks.txt"
 : > "$tmp/pending.txt"
+: > "$tmp/pending_hits.txt"
 while IFS= read -r f; do
   [[ -f "$f" ]] || continue
   grep -Eoh "$ID_RE" "$f" | sort -u >> "$tmp/tasks.txt" || true
-  grep -E '^- \[ \]' "$f" | grep -Eo "$ID_RE" | sort -u >> "$tmp/pending.txt" || true
+  # Open checkbox tasks that name registry IDs (usually via Traces:) — debt carriers.
+  grep -nE '^- \[ \]' "$f" 2>/dev/null | while IFS= read -r line; do
+    lineno="${line%%:*}"
+    rest="${line#*:}"
+    excerpt="$(printf '%s' "$rest" | tr '\t' ' ' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | cut -c1-200)"
+    while IFS= read -r id; do
+      [[ -n "$id" ]] || continue
+      printf '%s|%s|%s|%s\n' "$f" "$lineno" "$id" "$excerpt"
+    done < <(grep -Eo "$ID_RE" <<<"$rest" || true)
+  done >> "$tmp/pending_hits.txt" || true
 done < <(expand_glob "$TASKS_GLOB")
 sort -u "$tmp/tasks.txt" -o "$tmp/tasks.txt"
-sort -u "$tmp/pending.txt" -o "$tmp/pending.txt"
+cut -d'|' -f3 "$tmp/pending_hits.txt" 2>/dev/null | sort -u > "$tmp/pending.txt" || : > "$tmp/pending.txt"
+
 
 # covers: path|line|id|excerpt
 : > "$tmp/covers_hits.txt"
@@ -129,10 +169,12 @@ while IFS= read -r g; do
     grep -nE "$COVERS_RE" "$f" 2>/dev/null | while IFS= read -r line; do
       lineno="${line%%:*}"
       rest="${line#*:}"
-      id="$(grep -Eo "$ID_RE" <<<"$rest" | head -1 || true)"
-      [[ -n "$id" ]] || continue
       excerpt="$(printf '%s' "$rest" | tr '\t' ' ' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | cut -c1-160)"
-      printf '%s|%s|%s|%s\n' "$f" "$lineno" "$id" "$excerpt"
+      # One hit per ID — @covers may list several (e.g. FR-HOME-04, AC-HOME-15).
+      while IFS= read -r id; do
+        [[ -n "$id" ]] || continue
+        printf '%s|%s|%s|%s\n' "$f" "$lineno" "$id" "$excerpt"
+      done < <(grep -Eo "$ID_RE" <<<"$rest" || true)
     done
   done < <(expand_glob "$g")
 done < <(yaml_list src_globs) >> "$tmp/covers_hits.txt" || true
@@ -160,16 +202,27 @@ done < <(yaml_list test_globs) >> "$tmp/proof_hits.txt" || true
 
 cut -d'|' -f3 "$tmp/proof_hits.txt" 2>/dev/null | sort -u > "$tmp/test_acs.txt" || true
 
-# 1) Spec / tasks IDs must be subset of registry
+# 1) Exact-set drift: registry ≡ specs, registry ≡ tasks (HomesFlow Gate 2 parity).
+#    Specs/tasks may not invent IDs; registry IDs may not sit unclaimed in either artifact.
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
-  grep -qx "$id" "$tmp/registry.txt" || err "spec references ID not in registry: $id"
-done < "$tmp/spec.txt"
+  record_fail "spec-orphan" "$id" "spec references ID not in registry: $id"
+done < <(comm -13 "$tmp/registry.txt" "$tmp/spec.txt")
 
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
-  grep -qx "$id" "$tmp/registry.txt" || err "tasks reference ID not in registry: $id"
-done < "$tmp/tasks.txt"
+  record_fail "spec-unclaimed" "$id" "registry ID missing from specs: $id"
+done < <(comm -23 "$tmp/registry.txt" "$tmp/spec.txt")
+
+while IFS= read -r id; do
+  [[ -z "$id" ]] && continue
+  record_fail "task-orphan" "$id" "tasks reference ID not in registry: $id"
+done < <(comm -13 "$tmp/registry.txt" "$tmp/tasks.txt")
+
+while IFS= read -r id; do
+  [[ -z "$id" ]] && continue
+  record_fail "task-unclaimed" "$id" "registry ID missing from tasks: $id"
+done < <(comm -23 "$tmp/registry.txt" "$tmp/tasks.txt")
 
 # 2) Every task with a checkbox should have Traces
 while IFS= read -r f; do
@@ -177,7 +230,7 @@ while IFS= read -r f; do
   while IFS= read -r line; do
     if [[ "$line" =~ ^-\ \[[x\ ]\]\ T ]]; then
       if ! grep -Eq '\*\*Traces\*\*:' <<<"$line"; then
-        err "task missing Traces field: ${line:0:80}"
+        record_fail "missing-traces" "" "task missing Traces field: ${line:0:80}"
       fi
     fi
   done < "$f"
@@ -186,15 +239,15 @@ done < <(expand_glob "$TASKS_GLOB")
 # 3) Untraced scope
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
-  grep -qx "$id" "$tmp/registry.txt" || err "untraced scope (@covers): $id not in registry"
+  grep -qx "$id" "$tmp/registry.txt" || record_fail "orphan-covers" "$id" "untraced scope (@covers): $id not in registry"
 done < "$tmp/covers.txt"
 
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
-  grep -qx "$id" "$tmp/registry.txt" || err "untraced scope (test name): $id not in registry"
+  grep -qx "$id" "$tmp/registry.txt" || record_fail "orphan-test" "$id" "untraced scope (test name): $id not in registry"
 done < "$tmp/test_acs.txt"
 
-# 4) Silent gaps (ACs only)
+# 4) Silent gaps — ACs only (coverage altitude: AC is the atomic proof unit)
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
   [[ "${id%%-*}" == "AC" ]] || continue
@@ -204,12 +257,13 @@ while IFS= read -r id; do
   if grep -qx "$id" "$tmp/pending.txt"; then
     continue
   fi
-  err "silent gap: $id has no test and no open tracked-debt task"
+  record_fail "silent-gap" "$id" "silent gap: $id has no test and no open tracked-debt task"
 done < "$tmp/registry.txt"
 
-# --- Emit clew.json (always; dossier should show GAPs even when Gate fails) ---
+# --- Emit clew.json (always; clew should show GAPs even when Gate fails) ---
 export CLEW_OUT REGISTRY TARGET_NAME PROJECT_ROOT
 export CLEW_TMP="$tmp"
+export CLEW_FAIL="$fail"
 python3 - <<'PY'
 import json, os, re, datetime
 from pathlib import Path
@@ -219,14 +273,25 @@ registry_path = Path(os.environ["REGISTRY"])
 out_path = Path(os.environ["CLEW_OUT"])
 target = os.environ.get("TARGET_NAME") or "project"
 repo = os.environ.get("PROJECT_ROOT") or str(Path.cwd())
+gate_failed = os.environ.get("CLEW_FAIL", "0") != "0"
 
 ids = [ln.strip() for ln in (tmp / "registry.txt").read_text().splitlines() if ln.strip()]
 pending = {ln.strip() for ln in (tmp / "pending.txt").read_text().splitlines() if ln.strip()}
 tested = {ln.strip() for ln in (tmp / "test_acs.txt").read_text().splitlines() if ln.strip()}
 covered = {ln.strip() for ln in (tmp / "covers.txt").read_text().splitlines() if ln.strip()}
 
-reg_text = registry_path.read_text(encoding="utf-8", errors="replace").splitlines()
+failures = []
+fail_path = tmp / "failures.jsonl"
+if fail_path.exists():
+    for ln in fail_path.read_text().splitlines():
+        if ln.strip():
+            failures.append(json.loads(ln))
+
 statements = {}
+if registry_path.is_file():
+    reg_text = registry_path.read_text(encoding="utf-8", errors="replace").splitlines()
+else:
+    reg_text = []
 for id_ in ids:
     statements[id_] = id_
     for line in reg_text:
@@ -273,6 +338,30 @@ if proofs_file.exists():
             line_n = 0
         proof_by[id_].append({"name": name, "path": path, "line": line_n})
 
+debt_by = {i: [] for i in ids}
+pending_hits = tmp / "pending_hits.txt"
+seen_debt = set()
+if pending_hits.exists():
+    for ln in pending_hits.read_text().splitlines():
+        if not ln.strip():
+            continue
+        parts = ln.split("|", 3)
+        if len(parts) < 3:
+            continue
+        path, line, id_ = parts[0], parts[1], parts[2]
+        excerpt = parts[3] if len(parts) > 3 else ""
+        if id_ not in debt_by:
+            continue
+        key = (path, line, id_)
+        if key in seen_debt:
+            continue
+        seen_debt.add(key)
+        try:
+            line_n = int(line)
+        except ValueError:
+            line_n = 0
+        debt_by[id_].append({"path": path, "line": line_n, "excerpt": excerpt})
+
 def status_for(id_: str) -> str:
     typ = id_.split("-", 1)[0]
     if typ == "AC":
@@ -281,14 +370,15 @@ def status_for(id_: str) -> str:
         if id_ in pending:
             return "tracked-debt"
         return "GAP"
+    # US/FR/NFR: planning altitude — backlog when no own carrier; not silent-gap / GAP.
     if id_ in covered or id_ in tested:
         return "verified"
     if id_ in pending:
         return "tracked-debt"
-    return "GAP"
+    return "backlog"
 
 rows = []
-status_counts = {"verified": 0, "tracked-debt": 0, "GAP": 0}
+status_counts = {"verified": 0, "tracked-debt": 0, "GAP": 0, "backlog": 0}
 ac_count = 0
 covered_count = 0
 for id_ in ids:
@@ -304,9 +394,9 @@ for id_ in ids:
         "type": typ,
         "statement": statements.get(id_, id_),
         "status": st,
-        "blocked": False,
         "implementations": impl_by.get(id_, []),
         "proofs": proof_by.get(id_, []),
+        "debtTasks": debt_by.get(id_, []),
         "attestedBy": None,
     })
 
@@ -317,19 +407,26 @@ doc = {
     "targetName": target,
     "repoPath": repo,
     "generatedAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
+    "gate": {
+        "ok": not gate_failed and len(failures) == 0,
+        "failures": failures,
+    },
     "totals": {
         "registryIdCount": len(ids),
         "acCount": ac_count,
         "coveredCount": covered_count,
     },
     "statusCounts": status_counts,
-    "blockedCount": 0,
     "rows": rows,
 }
 
+# Prefer structured failures if bash recorded any; else respect CLEW_FAIL.
+if failures:
+    doc["gate"]["ok"] = False
+
 out_path.parent.mkdir(parents=True, exist_ok=True)
 out_path.write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8")
-print(f"Wrote {out_path} ({len(rows)} rows)", flush=True)
+print(f"Wrote {out_path} ({len(rows)} rows) gate.ok={doc['gate']['ok']}", flush=True)
 PY
 
 if [[ "$fail" -ne 0 ]]; then

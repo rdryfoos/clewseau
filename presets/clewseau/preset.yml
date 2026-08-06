@@ -4,7 +4,7 @@ preset:
   id: "clewseau"
   name: "Clewseau"
   version: "0.1.0"
-  description: "Appends durable-ID and Traces requirements onto Spec Kit spec, tasks, and constitution templates."
+  description: "Appends durable-ID, Traces, and Clewseau vocabulary onto Spec Kit spec, tasks, and constitution templates."
   author: "Rik Dryfoos / Dryfoos Consulting"
   license: "MIT"
   homepage: "https://github.com/rdryfoos/clewseau"
@@ -30,7 +30,7 @@ provides:
     - type: "template"
       name: "constitution-template"
       file: "templates/constitution-template.md"
-      description: "Append End-to-End Traceability article"
+      description: "Append End-to-End Traceability article and Clewseau vocabulary"
       strategy: "append"
 
 tags:

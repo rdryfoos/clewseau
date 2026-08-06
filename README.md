@@ -1,8 +1,8 @@
 # Clewseau
 
-A Spec Kit **bundle**: durable-ID grammar in the templates, Gate 2 refusal of silent gaps, and emission of **`clew.json`** (the dossier / matrix).
+A Spec Kit **bundle**: durable-ID grammar in the templates, Gate 2 refusal of silent gaps, and emission of a **clew** (default file `clew.json`).
 
-Stock Spec Kit only. No fork. No kanban daemon. Visualization is separate (**clewloupe** consumes `clew.json`; it does not re-scan).
+Stock Spec Kit only. No fork. No kanban daemon. Visualization is separate (**clewloupe** consumes the clew; it does not re-scan).
 
 Read [`PROMOTION-CONTRACT.md`](./PROMOTION-CONTRACT.md) first — that is the gift. This repo is the installable witness.
 
@@ -11,18 +11,44 @@ Read [`PROMOTION-CONTRACT.md`](./PROMOTION-CONTRACT.md) first — that is the gi
 | Component | Id | Role |
 |-----------|-----|------|
 | Preset | `clewseau` | Appends ID / `Traces:` requirements onto Spec Kit's `spec-template`, `tasks-template`, and `constitution-template` |
-| Extension | `clewseau-gate` | Gate 2 check + **`clew.json` emitter** (`speckit.clewseau-gate.check`) |
+| Extension | `clewseau-gate` | Gate 2 check + **clew emitter** (`speckit.clewseau-gate.check`) |
 
 Bundle id: `clewseau`.
 
-## `clew.json`
+## The clew (`clew.json`)
 
-Gate 2 always writes a Clewseau-native matrix dossier (default path `clew.json`, configurable as `clew_path`):
+Gate 2 always writes a Clewseau-native **clew** (default path `clew.json`, configurable as `clew_path`):
 
 - `format: "clew"`, `schemaVersion: 3`, `emitter: "clewseau-gate"`
-- Rows: id, statement, status (`verified` \| `tracked-debt` \| `GAP`), implementations, proofs
-- Written even when the gate fails, so silent gaps are visible in the file
+- Rows: id, statement, status (`verified` \| `tracked-debt` \| `GAP` \| `backlog`), implementations, proofs
+- Top-level `gate: { ok, failures[] }` so non-row refusals are visible to viewers
+- Written even when the gate fails, so silent AC gaps are visible in the file
+- Silent-gap refusal is **AC-only** (coverage altitude); US/FR/NFR without a carrier are `backlog`, not `GAP`
+- **Exact-set** registry ≡ specs ≡ tasks (no unclaimed registry IDs)
 - Not ReqIF/OSLC; optional ReqIF export can come later. See [`docs/clew-schema.md`](./docs/clew-schema.md)
+
+**Reading a clew in SDLC terms** (requirement → build → proof → Gate → loupe): [`docs/reading-a-clew.md`](./docs/reading-a-clew.md).
+
+## Vocabulary
+
+| Term | Meaning |
+|------|---------|
+| **clew** | Gate-emitted traceability artifact (`format: "clew"`). Not “dossier.” |
+| **clew.json** | Default on-disk path (Gate `clew_path`). |
+| **`{name}.clew.json`** | Portable copies / samples. |
+| **verified** / **tracked-debt** / **GAP** / **backlog** | Honest coverage states — see the reading guide. |
+| **clewloupe** | Viewer only; consumes a clew; no target re-scan. |
+
+Preset paste-ready article + glossary stub: `presets/clewseau/templates/constitution-template.md`, `presets/clewseau/GLOSSARY.md`.
+
+## Samples
+
+| File | Role |
+|------|------|
+| [`samples/homesflow.clew.json`](./samples/homesflow.clew.json) | Real Gate 2 emit against HomesFlow |
+| [`samples/sample.clew.json`](./samples/sample.clew.json) | Same honest emit (preview default) |
+
+See [`samples/README.md`](./samples/README.md). Rebuild with `python3 scripts/build-sample-clew.py` after regenerating the real emit.
 
 ## Install (catalog path)
 

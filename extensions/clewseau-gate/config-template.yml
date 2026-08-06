@@ -6,7 +6,7 @@ registry: "PRD.md"
 # Optional display name in clew.json (defaults to project directory name)
 target_name: ""
 
-# Where Gate 2 writes the dossier (Clewseau native matrix; format: clew)
+# Where Gate 2 writes the clew (Clewseau native matrix; format: clew)
 clew_path: "clew.json"
 
 # Spec Kit feature artifacts (globs relative to project root)

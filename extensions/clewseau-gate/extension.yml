@@ -4,7 +4,7 @@ extension:
   id: "clewseau-gate"
   name: "Clewseau Gate"
   version: "0.2.0"
-  description: "Gate 2 — refuse silent gaps and emit clew.json (Clewseau dossier / matrix)."
+  description: "Gate 2 — refuse silent gaps and emit a clew (`clew.json`)."
   category: "visibility"
   effect: "read-write"
   author: "Rik Dryfoos / Dryfoos Consulting"
