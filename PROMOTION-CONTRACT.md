@@ -29,7 +29,7 @@ Mint durable IDs at intent; refuse silent gaps; allow tracked debt to stay visib
 - Not a fork of Spec Kit, and not a replacement for Spec Kit.
 - Not Thorsten Schlathölter's `clew` (inner-loop constructor). Cite it; do not collide with the name.
 - Not agent kanban / human-lane orchestration (that is a separate Loom-shaped concern).
-- Not a visualizer. **Panther** (or any viewer) may consume `clew.json`; viewers must not mint IDs or re-scan the target.
+- Not a visualizer. **clewloupe** (or any viewer) may consume `clew.json`; viewers must not mint IDs or re-scan the target.
 
 ## Paste-ready constitution article
 

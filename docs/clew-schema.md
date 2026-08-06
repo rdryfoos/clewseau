@@ -41,4 +41,4 @@ Native Clewseau matrix artifact. Gate 2 always emits this file (default path `cl
 
 ## Consumers
 
-**Panther** (viewer) reads `clew.json` only. It must not re-scan the target.
+**clewloupe** (viewer) reads `clew.json` only. It must not re-scan the target.

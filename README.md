@@ -2,7 +2,7 @@
 
 A Spec Kit **bundle**: durable-ID grammar in the templates, Gate 2 refusal of silent gaps, and emission of **`clew.json`** (the dossier / matrix).
 
-Stock Spec Kit only. No fork. No kanban daemon. Visualization is separate (**Panther** consumes `clew.json`; it does not re-scan).
+Stock Spec Kit only. No fork. No kanban daemon. Visualization is separate (**clewloupe** consumes `clew.json`; it does not re-scan).
 
 Read [`PROMOTION-CONTRACT.md`](./PROMOTION-CONTRACT.md) first — that is the gift. This repo is the installable witness.
 
@@ -79,7 +79,7 @@ specify bundle validate --path . --offline
 ## Explicitly out of scope
 
 - Agentic kanban / human approval lanes (Loom)
-- Matrix UI (**Panther** — separate viewer)
+- Matrix UI (**clewloupe** — separate viewer)
 - Potato Cannon overlays
 - HomesFlow-specific paths (those stay in HomesFlow as a worked example)
 

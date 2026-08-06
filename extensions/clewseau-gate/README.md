@@ -1,6 +1,6 @@
 # Clewseau Gate
 
-Gate 2: compare the ID registry to specs, tasks, coverage annotations, and test names. Silent gaps and untraced scope fail. **Always writes `clew.json`** (configurable via `clew_path`) — the Clewseau dossier for Panther or any matrix consumer.
+Gate 2: compare the ID registry to specs, tasks, coverage annotations, and test names. Silent gaps and untraced scope fail. **Always writes `clew.json`** (configurable via `clew_path`) — the Clewseau dossier for clewloupe or any matrix consumer.
 
 Install:
 
