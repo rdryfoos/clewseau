@@ -1,6 +1,6 @@
 # clewloupe field guide
 
-A tour of the little ecosystem — **Clewseau**, the **clew**, and **clewloupe** — in plain English, one screenshot at a time.
+A tour of the ecosystem — **Clewseau**, the **clew**, and **clewloupe** — in plain English, one screenshot at a time.
 
 ## Why bother (then we look)
 
