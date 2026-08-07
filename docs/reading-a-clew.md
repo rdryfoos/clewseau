@@ -6,7 +6,7 @@ Schema details live in [`clew-schema.md`](./clew-schema.md). This guide is the w
 
 ## What a clew is
 
-Gate 2 scans your Spec Kit project (registry / PRD, specs, tasks, `@covers`, named tests) and writes a **clew**: a matrix of durable IDs with honest status. Default path is repo-root `clew.json`. Portable samples use `{name}.clew.json`.
+Clewseau's Gate 2 scans your Spec Kit project (registry / PRD, specs, tasks, `@covers`, named tests) and writes a **clew**: a matrix of durable IDs with honest status. Default path is repo-root `clew.json`. Portable samples use `{name}.clew.json`.
 
 **clewloupe** only reads that file. It does not re-scan the target.
 
