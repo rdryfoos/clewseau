@@ -29,6 +29,8 @@ Gate 2 always writes a Clewseau-native **clew** (default path `clew.json`, confi
 
 **Reading a clew in SDLC terms** (requirement → build → proof → Gate → loupe): [`docs/reading-a-clew.md`](./docs/reading-a-clew.md). Visual tour with screenshots: [`docs/loupe-field-guide.md`](./docs/loupe-field-guide.md).
 
+**Does it work cold?** A zero-context agent on stock Spec Kit + this bundle delivered a PRD item end to end, Gate-clean: [`docs/evidence-cold-agent-trial.md`](./docs/evidence-cold-agent-trial.md).
+
 ## Vocabulary
 
 | Term | Meaning |
