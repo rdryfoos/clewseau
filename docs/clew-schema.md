@@ -71,4 +71,4 @@ Older clew files may omit `debtTasks` / `registry` or still carry unused `blocke
 
 ## Consumers
 
-**clewloupe** (viewer) reads `clew.json` only. It must not re-scan the target.
+**clewloupe** (viewer) reads `clew.json` only. It must not re-scan the target. Every rendering must carry its meaning at rest — printed or screenshotted, it still testifies; links, hovers, expands, and live source fetches are courtesies to the reader, never load-bearing parts of the record.

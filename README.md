@@ -1,5 +1,7 @@
 # Clewseau
 
+When people build things, we tie a piece of string from the **wish**, to the **work**, to the **proof it's done**. Clewseau is the inspector who makes sure nobody skips the string: every wish gets a name, every bit of work says which wish it's for, and every wish needs its proof. If a string is missing or broken, Clewseau stops the line and points at the loose end. Then it winds all the string into a ball and saves it in a file — that ball of string is called a **clew** — so anyone can check it later, even long after everyone's gone home. (A *clew* is literally a ball of thread — the one Ariadne handed Theseus so he could find his way back out of the labyrinth.)
+
 A Spec Kit **bundle**: durable-ID grammar in the templates, Gate 2 refusal of silent gaps, and emission of a **clew** (default file `clew.json`).
 
 Stock Spec Kit only. No fork. No kanban daemon. Visualization is separate (**clewloupe** consumes the clew; it does not re-scan).
@@ -42,6 +44,8 @@ Gate 2 always writes a Clewseau-native **clew** (default path `clew.json`, confi
 | **clewloupe** | Viewer only; consumes a clew; no target re-scan. |
 
 Preset paste-ready article + glossary stub: `presets/clewseau/templates/constitution-template.md`, `presets/clewseau/GLOSSARY.md`.
+
+Convention: reader-facing repos (this one, clewloupe, the vendored gate README) open with a plain-language explainer like the one at the top of this file — keep it when rewriting.
 
 ## Samples
 

@@ -36,9 +36,9 @@ Same rows, partitioned by status in the same flow order:
 
 Click any row and the right pane walks its golden thread top to bottom:
 
-- **Requirement**: the durable ID and its statement, plus a **▸ registry** toggle that expands to the actual PRD/registry source around the line where the ID was minted.
-- **Implementation**: every `@covers` carrier found in source, each expandable to the real code around it.
-- **Proof**: named tests that encode the ID (for ACs), expandable the same way.
+- **Requirement**: the durable ID and its statement, plus a **▸ file:line** toggle (e.g. `HomesFlow.prd.md:258`) that expands to the actual PRD/registry source around the line where the ID was minted.
+- **Implementation**: every `@covers` carrier found in source. Each is labeled with the carrier's **file basename and line** (e.g. `HomeDetailView.swift:3`), with the full path below and an "also covers: …" line naming the other IDs that share the same annotation. Each expands to the real code around it.
+- **Proof**: named tests that encode the ID (for ACs), labeled by test name with the path below, expandable the same way.
 
 Every claim in the descent can be opened to the file and line that backs it — requirement included. The braided line down the left side is the thread itself. Its two states matter more than any color: **solid** means the thread holds; **frayed** means it is broken.
 
@@ -46,7 +46,7 @@ Every claim in the descent can be opened to the file and line that backs it — 
 
 ![Verified descent](images/03-verified-descent.png)
 
-`AC-GUEST-01` end to end: the requirement statement with its registry line (`HomesFlow.prd.md:258`), six `@covers` carriers, and a named proof `test_AC_GUEST_01_guest_fields_only`, expanded to the real test code. Green nodes, solid braid. This is what "verified" means: a named artifact you can open, not "the tests passed once."
+`AC-GUEST-01` end to end: the requirement statement with its registry line (`HomesFlow.prd.md:258`), six `@covers` carriers each labeled by file and line, and a named proof `test_AC_GUEST_01_guest_fields_only`, expanded to the real test code. Green nodes, solid braid. This is what "verified" means: a named artifact you can open, not "the tests passed once."
 
 Note this verified row also carries an **Open debt (Traces:)** block — an XCUITest still open on `T064`. Verified with additional open work is a normal, honest state.
 
@@ -56,7 +56,7 @@ Note this verified row also carries an **Open debt (Traces:)** block — an XCUI
 
 `AC-HOME-10` is not done, and the clew shows exactly who says so:
 
-- The **▸ registry** expand is open: the PRD source around line 221, the requirement in its own words.
+- The registry expand (**▸ HomesFlow.prd.md:221**) is open: the PRD source around that line, the requirement in its own words.
 - The **Open debt (Traces:)** block names the literal open checkbox task (`T024e`, snapshot/UI test deferred until test infra exists) that claims this ID.
 - Implementation is green: `@covers AC-HOME-10` carriers exist in source. Proof is red but the braid stays solid.
 
@@ -105,7 +105,7 @@ The scratch tree after the staged break. Three things change at once:
 | Solid braid, green nodes | Thread holds; proof exists |
 | Solid braid, red node(s) | Incomplete but excused: tracked debt or backlog altitude |
 | Open debt (Traces:) block | The exact open task that excuses (or carries) the incompleteness |
-| ▸ registry / ▸ @covers / test name | Expand to the actual source line behind the claim |
+| ▸ file:line / ▸ test name | Expand to the actual source behind the claim |
 | Frayed braid | Thread broken: silent gap, or Gate refused clew-wide |
 | Red banner, hot GAP tile | At least one AC has neither proof nor admitted debt |
 
