@@ -49,6 +49,7 @@ Each failure: `{ kind, detail, id? }`.
 | `id` | Durable ID from the registry |
 | `type` | `AC` / `FR` / `NFR` / `US` (prefix) |
 | `statement` | Best-effort prose from the registry line |
+| `registry` | `{ path, line }` where the ID sits in the registry (relative to `repoPath`); `null` if the registry file was unreadable |
 | `status` | `verified` \| `tracked-debt` \| `GAP` \| `backlog` |
 | `implementations` | `{ path, line, excerpt }` from coverage annotations |
 | `proofs` | `{ name, path, line }` from test-encoded AC IDs |
@@ -66,7 +67,7 @@ Each failure: `{ kind, detail, id? }`.
 
 Backlog rows are “covered” in the promotion-contract sense when their child ACs are verified or debt — not by requiring `@covers` on the US/FR/NFR ID itself.
 
-Older clew files may omit `debtTasks` or still carry unused `blocked` / `blockedCount` fields. Gate emits `debtTasks` (possibly empty); clewloupe treats a missing field as `[]`.
+Older clew files may omit `debtTasks` / `registry` or still carry unused `blocked` / `blockedCount` fields. Gate emits `debtTasks` (possibly empty) and `registry` (possibly `null`); clewloupe treats missing fields as `[]` / absent.
 
 ## Consumers
 

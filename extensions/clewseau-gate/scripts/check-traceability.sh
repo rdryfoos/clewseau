@@ -288,16 +288,22 @@ if fail_path.exists():
             failures.append(json.loads(ln))
 
 statements = {}
+registry_refs = {}
 if registry_path.is_file():
     reg_text = registry_path.read_text(encoding="utf-8", errors="replace").splitlines()
 else:
     reg_text = []
+try:
+    registry_rel = os.path.relpath(registry_path, repo)
+except ValueError:
+    registry_rel = str(registry_path)
 for id_ in ids:
     statements[id_] = id_
-    for line in reg_text:
+    for n, line in enumerate(reg_text, start=1):
         if id_ in line:
             s = re.sub(r"^[\s#\-*\[\]xX]+", "", line).strip()
             statements[id_] = s or id_
+            registry_refs[id_] = {"path": registry_rel, "line": n}
             break
 
 impl_by = {i: [] for i in ids}
@@ -393,6 +399,7 @@ for id_ in ids:
         "id": id_,
         "type": typ,
         "statement": statements.get(id_, id_),
+        "registry": registry_refs.get(id_),
         "status": st,
         "implementations": impl_by.get(id_, []),
         "proofs": proof_by.get(id_, []),
