@@ -45,7 +45,7 @@ Silent-gap refusal is **AC-only**. Parents are covered when their child ACs are 
 
 ## Worked examples (HomesFlow)
 
-HomesFlow’s live trace-manifest at session time: `gate.ok: true`, 67 verified / 10 tracked-debt / 0 GAP / 4 backlog (81 rows). `samples/homesflow.trace-manifest.json` is that real emit; `samples/sample.trace-manifest.json` is the preview default (honest today; may later be mocked for cases HomesFlow doesn’t emit).
+HomesFlow’s live trace-manifest at session time: `gate.ok: true`, 67 verified / 10 tracked-debt / 0 GAP / 5 backlog (82 rows). `samples/homesflow.trace-manifest.json` is that real emit; `samples/sample.trace-manifest.json` is the preview default (honest today; may later be mocked for cases HomesFlow doesn’t emit).
 
 ### `AC-GUEST-01` → verified
 
@@ -82,12 +82,12 @@ HomesFlow’s live trace-manifest at session time: `gate.ok: true`, 67 verified 
 4. **Manifest:** empty arrays, status `backlog` — not `GAP`.
 5. **Loupe:** muted / red-not-fray on empty steps; braid stays solid while the Golden Thread is intact. Do not fray a story label for lacking its own carrier.
 
-### `US-CLEW-01` / `FR-CLEW-01` / `AC-CLEW-01` → anointed backlog
+### `US-SHARE-01` → anointed backlog
 
-1. **Requirement:** Rik decided the SpecAssay-native HomesFlow slice is wanted and minted its IDs into the PRD — no spec, no tasks, no code yet. (These IDs predate the rename and are scheduled for tombstoning as a temporary probe; they are left in place to demonstrate durability.)
-2. **Anointment:** one open TODO in `specs/backlog/tasks.md` — `- [ ] T900 Deliver … — **Carries**: US-CLEW-01, FR-CLEW-01, AC-CLEW-01`.
+1. **Requirement:** an Owner story minted ahead of the work (a read-only procedure-share link) — in the PRD registry, but no spec, tasks, or code yet.
+2. **Anointment:** one open TODO in `specs/backlog/tasks.md` — `- [ ] T901 Deliver read-only procedure sharing link — **Carries**: US-SHARE-01`.
 3. **Carriers:** none — and that’s the point; the TODO is the only thread.
-4. **Manifest:** status `backlog` for all three (yes, the AC too — an anointed AC isn’t a *silent* gap; the TODO names it), `debtTasks` lists the carrying TODO, `gate.ok: true`.
+4. **Manifest:** status `backlog`, `debtTasks` lists the carrying TODO, `gate.ok: true`. Minted, visible, not a broken thread.
 5. **Loupe:** muted / red-not-fray with the carrying TODO visible under the Requirement. Delete the TODO without picking the work up and the Gate fails exact-set on the next run.
 
 ### What a `GAP` would look like (HomesFlow has none)

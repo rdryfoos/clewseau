@@ -1,8 +1,6 @@
 # Loupe field guide
 
-A tour of the ecosystem — **SpecAssay**, the **trace-manifest**, and **Loupe** — simply, one screenshot at a time.
-
-> **Note on the screenshots:** these captures predate the rename and still show the previous chrome (`clewloupe` branding, a "Get clew…" button, `clew.json`). The captions below use the current names; the images will be refreshed from the renamed Loupe UI.
+A tour of the ecosystem — **SpecAssay**, the **trace-manifest**, and **Loupe** — simply, one screenshot at a time. The captures are a live render of HomesFlow's real Gate 2 emit (`samples/homesflow.trace-manifest.json`); the three broken shots (section 6) came from a deliberate, real break in a scratch copy.
 
 ## Why bother (then we look)
 
@@ -94,9 +92,9 @@ Red without fray means *incomplete but excused*. Someone wrote it down on a task
 
 Minting an ID is a promise — and that is a feature, not a trap. Name a wish only when you mean it; if nothing claims it yet, write one open TODO that carries it (**anointed backlog**, usually in `specs/backlog/tasks.md`). That is enough ceremony that fat-finger drift still fails, while honest "build this soon" stays green.
 
-Here `AC-CLEW-01` shows exactly that state: status **BACKLOG** (an AC, and still not a GAP — the TODO means it is not *silent*), the registry line it was minted on, and the open TODO `T900` that carries it. Zero code, zero proofs, Golden Thread intact. Drop the TODO without picking up the work and the next check fails — the Thread will not carry an unclaimed promise. (These `*-CLEW-01` IDs predate the rename and are scheduled for tombstoning; they stay put to demonstrate durability.)
+Here `US-SHARE-01` shows exactly that state: a minted-ahead Owner story (a read-only procedure-share link), status **BACKLOG**, the registry line it was minted on, and the open TODO `T901` that carries it. Zero spec, zero code, zero proofs, Golden Thread intact. Drop the TODO without picking up the work and the next check fails exact-set — the Thread will not carry an unclaimed promise.
 
-Filter tile `Backlog` reads 7: four planning-altitude stories plus the three anointed CLEW IDs.
+Filter tile `Backlog` reads 5: four planning-altitude stories plus the anointed `US-SHARE-01`.
 
 ## 5. Backlog altitude: waiting, not broken
 
@@ -111,6 +109,8 @@ The scratch tree after the staged break. Three things change at once:
 - The banner goes red: **Golden Thread broken · 1 refusal.**
 - The **GAP tile goes hot: 1.** Verified dropped by one; that row moved to GAP.
 - Rows with no proof now fray, because the manifest as a whole can no longer vouch for them.
+
+That hot GAP tile is the assayer's whole reason for being. A silent gap is **gilt** — work gilded to gleam like solid gold, with no proof underneath. The assay strips the gilding; the thread frays. (It carries the other reading too: the *guilt* of unfinished work nobody admitted.)
 
 ### The GAP row itself
 
