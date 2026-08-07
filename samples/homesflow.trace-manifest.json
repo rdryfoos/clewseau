@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
-  "format": "clew",
-  "emitter": "clewseau-gate",
+  "format": "trace-manifest",
+  "emitter": "specassay-check",
   "targetName": "HomesFlow",
   "repoPath": "/Users/spudnik/HomesFlow",
   "generatedAt": "2026-08-07T02:44:33.889Z",

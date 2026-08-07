@@ -1,10 +1,10 @@
 
 
-<!-- Clewseau (append) — durable ID discipline -->
+<!-- SpecAssay (append) — durable ID discipline -->
 
-## Clewseau — durable IDs (required)
+## SpecAssay — durable IDs (required)
 
-Every requirement and acceptance criterion MUST carry a durable ID per the project Clewseau / traceability standard.
+Every requirement and acceptance criterion MUST carry a durable ID per the project SpecAssay / traceability standard.
 
 - IDs are assigned **once at the PRD (registry) level**. This feature spec **inherits** them; do **not** mint new IDs here.
 - Grammar: `<TYPE>-<DOMAIN>-<NN>` where TYPE is `US` | `FR` | `NFR` | `AC` (example: `AC-SYNC-04`).

@@ -1,47 +1,49 @@
-# clewloupe field guide
+# Loupe field guide
 
-A tour of the ecosystem — **Clewseau**, the **clew**, and **clewloupe** — simply, one screenshot at a time.
+A tour of the ecosystem — **SpecAssay**, the **trace-manifest**, and **Loupe** — simply, one screenshot at a time.
+
+> **Note on the screenshots:** these captures predate the rename and still show the previous chrome (`clewloupe` branding, a "Get clew…" button, `clew.json`). The captions below use the current names; the images will be refreshed from the renamed Loupe UI.
 
 ## Why bother (then we look)
 
-Everyone can ship plausible code now. The hard part is proving it does what you meant — which wish it served, what work filled that wish, and what proof showed it was done. When that answer takes longer than a coffee, the Thread is already lost. Old ALM stacks tried to hold the map in a second system that always lagged the repo. This stack keeps the map *in* the repo and checks it on every Gate run — and that check belongs in **CI**, not only on the nice developer's laptop. A cowboy without Clewseau installed can still push; CI Gate is the property line.
+Everyone can ship plausible code now. The hard part is proving it does what you meant — which wish it served, what work filled that wish, and what proof showed it was done. When that answer takes longer than a coffee, the Golden Thread is already lost. Old ALM stacks tried to hold the map in a second system that always lagged the repo. This stack keeps the map *in* the repo and checks it on every Gate run — and that check belongs in **CI**, not only on the nice developer's laptop. A cowboy without SpecAssay installed can still push; CI Gate is the property line.
 
-That is the value prop, without the wrestling entrance music: you become the person who can pull any feature and show the wish → work → proof chain before the coffee cools. Clewloupe is the glass. Clewseau is the inspector. The clew is the ball of thread you keep.
+That is the value prop, without the wrestling entrance music: you become the person who can pull any feature and show the wish → work → proof chain before the coffee cools. Loupe is the glass. SpecAssay is the inspector. The trace-manifest is the hallmarked record you keep.
 
-- **Clewseau** — small overlay on stock Spec Kit. Every wish gets a name; work says which wish it serves; wishes need proof. Silent gaps stop the line. Then Gate winds what it found into a file.
-- **clew** — that file (default `clew.json`). Literally a ball of thread (Ariadne's gift so Theseus could find his way out). Living documentation wound from the repo, not typed into a lagging side tool.
-- **clewloupe** — the magnifying glass. Does not re-scan. Only reads the clew. Follow the Thread; spot the fray.
+- **SpecAssay** — small overlay on stock Spec Kit. Every wish gets a name; work says which wish it serves; wishes need proof. Silent gaps stop the line. Then Gate hallmarks what it found into a file.
+- **trace-manifest** — that file (default `trace-manifest.json`). Living documentation wound from the repo, not typed into a lagging side tool. The `format` value belongs to no single tool, so any emitter can write one and Loupe can read it.
+- **Loupe** — the magnifying glass. Does not re-scan. Only reads the trace-manifest. Follow the Golden Thread; spot the fray.
 
 Spec Kit stays Spec Kit. No second career in ALM. The interface is already a little fun; the docs should not scare you out of trying it.
 
-For SDLC wording see [`reading-a-clew.md`](./reading-a-clew.md); for terms see [`../presets/clewseau/GLOSSARY.md`](../presets/clewseau/GLOSSARY.md).
+For SDLC wording see [`reading-a-manifest.md`](./reading-a-manifest.md); for terms see [`../presets/specassay/GLOSSARY.md`](../presets/specassay/GLOSSARY.md).
 
-**Voice note:** the check script is the **Gate**; what the human sees is the **Thread**. Prefer "the Thread is intact / broken" in narrative. Say "Gate" when you mean the script that judged it.
+**Voice note:** the check is the **assay**; what the human sees is the **Golden Thread**. Prefer "the Golden Thread is intact / broken" in narrative. Say "Gate" when you mean the script that judged it.
 
 ### Don't panic about the IDs
 
 Eighty-two durable IDs in the sample can look like a lot. Most of them live in the PRD and the specs — the ordinary places wishes already get written down. You do **not** paste an ID onto every line of code.
 
-**Leave a mark when you touch the work.** If the code serves a named wish, one short comment: `@covers …`. If a task is still open against a wish, name it on the task: `Traces:`. Those marks are greppable; Clewseau watches them; you do not memorize the grid.
+**Leave a mark when you touch the work.** If the code serves a named wish, one short comment: `@covers …`. If a task is still open against a wish, name it on the task: `Carries:`. Those marks are greppable; SpecAssay watches them; you do not memorize the grid.
 
-What you are looking at in the loupe is **living documentation**: the record is wound from the repo itself (names, comments, tasks, tests). When the work drifts, the Thread shows it — that is the point.
+What you are looking at in the loupe is **living documentation**: the record is wound from the repo itself (names, comments, tasks, tests). When the work drifts, the Golden Thread shows it — that is the point.
 
 ## Where these pictures came from
 
-The Thread-intact captures are a real render of HomesFlow's live Gate 2 emit — the same emit shipped as [`../samples/homesflow.clew.json`](../samples/homesflow.clew.json). No hand-edited JSON. HomesFlow is a small real app used as public evidence of the practice; the count of IDs is "a product with a PRD," not "a compliance mountain."
+The Thread-intact captures are a real render of HomesFlow's live Gate 2 emit — the same emit shipped as [`../samples/homesflow.trace-manifest.json`](../samples/homesflow.trace-manifest.json). No hand-edited JSON. HomesFlow is a small real app used as public evidence of the practice; the count of IDs is "a product with a PRD," not "a compliance mountain."
 
 The three Thread-broken captures (section 6) came from a deliberate break in a scratch copy of the trial tree: one test was renamed so its acceptance criterion lost its named proof while no open task claimed it. Gate was re-run for real, refused for real, and the scratch copy was deleted afterward. The refusal is honest; only the break was staged.
 
-## 1. The top bar: is the Thread intact?
+## 1. The top bar: is the Golden Thread intact?
 
-![Overview with Thread intact](images/01-overview-gate-pass.png)
+![Overview with Golden Thread intact](images/01-overview-gate-pass.png)
 
 Before reading any row, the top bar answers the only global question:
 
-- **Thread intact.** The clew contains zero hidden unfinished work. Not zero unfinished work; zero *hidden* unfinished work.
+- **Golden Thread intact.** The trace-manifest contains zero hidden unfinished work. Not zero unfinished work; zero *hidden* unfinished work.
 - The stat tiles read left to right: **Rows** (all durable IDs), then **Backlog → Debt → Verified** — waiting, excused, proven — with **GAP** last. GAP is usually empty; when it isn't, that tile lights up so you notice. Each tile is a filter button.
-- The `GAP` tile only lights up red when GAPs exist. Here it reads 0, which is why the Thread is intact.
-- **Get clew…** loads any other `*.clew.json` file. The loupe never re-scans a repo; it only reads what Gate emitted.
+- The `GAP` tile only lights up red when GAPs exist. Here it reads 0, which is why the Golden Thread is intact.
+- **Read Manifest…** loads any other `*.trace-manifest.json` file. The loupe never re-scans a repo; it only reads what Gate emitted.
 
 ## 2. Board lens: the four buckets
 
@@ -52,19 +54,19 @@ Same rows, partitioned by status in the same order:
 - **Backlog**: minted and waiting — planning-altitude stories and features without their own carrier, plus anything anointed into backlog (section 5). Not a defect.
 - **Tracked debt**: not done, and the team said so on an open task. Honest yellow.
 - **Verified**: proof exists. Each card counts its proofs.
-- **GAP**: last and usually empty, and the column says why. When this column has cards, the Thread is broken.
+- **GAP**: last and usually empty, and the column says why. When this column has cards, the Golden Thread is broken.
 
 ## 3. The Descent: one thread, three tiers
 
-Click any row and the right pane walks the Thread top to bottom:
+Click any row and the right pane walks the Golden Thread top to bottom:
 
 - **Requirement**: the durable ID and its statement, plus a **▸ file:line** toggle (e.g. `HomesFlow.prd.md:258`) that expands to the actual PRD/registry source around the line where the ID was minted.
 - **Implementation**: every `@covers` mark found in source. Each is labeled with the file basename and line (e.g. `HomeDetailView.swift:3`), with the full path below and an "also covers: …" line naming the other IDs that share the same annotation. Each expands to the real code around it.
 - **Proof**: named tests that encode the ID (for ACs), labeled by test name with the path below, expandable the same way.
 
-**`@covers` in one breath.** A one-line mark — `// @covers AC-GUEST-01, FR-HOME-03` — naming which wishes this code serves. Leave it when you touch the file. Gate reads it; Clewseau never invents one for you. Clewloupe lists those hits under Implementation. The task-side twin is `**Traces**:` on an open checkbox. Missing or made-up IDs fail closed, so the habit stays light: mark what you meant, and the check keeps you honest.
+**`@covers` in one breath.** A one-line mark — `// @covers AC-GUEST-01, FR-HOME-03` — naming which wishes this code serves. Leave it when you touch the file. Gate reads it; SpecAssay never invents one for you. Loupe lists those hits under Implementation. The task-side twin is `**Carries**:` on an open checkbox. Missing or made-up IDs fail closed, so the habit stays light: mark what you meant, and the check keeps you honest.
 
-Every claim in the descent can be opened to the file and line that backs it — requirement included. The braided line down the left side is the Thread itself. Its two states matter more than any color: **solid** means the Thread holds; **frayed** means it is broken.
+Every claim in the descent can be opened to the file and line that backs it — requirement included. The braided line down the left side is the Golden Thread itself. Its two states matter more than any color: **solid** means the Thread holds; **frayed** means it is broken.
 
 ### A verified AC, proof and all
 
@@ -72,7 +74,7 @@ Every claim in the descent can be opened to the file and line that backs it — 
 
 `AC-GUEST-01` end to end: the requirement statement with its registry line (`HomesFlow.prd.md:258`), six `@covers` marks each labeled by file and line, and a named proof `test_AC_GUEST_01_guest_fields_only`, expanded to the real test code. Green nodes, solid braid. This is what "verified" means: a named artifact you can open, not "the tests passed once."
 
-Note this verified row also carries an **Open debt (Traces:)** block — an XCUITest still open on `T064`. Verified with additional open work is a normal, honest state.
+Note this verified row also carries an **Open debt (Carries:)** block — an XCUITest still open on `T064`. Verified with additional open work is a normal, honest state.
 
 ### Tracked debt: red, but nothing is hidden
 
@@ -84,7 +86,7 @@ Note this verified row also carries an **Open debt (Traces:)** block — an XCUI
 - Right under it, an open task admits the gap (`T024e`: still needs a snapshot/UI test). That admission is what makes this debt instead of a lie.
 - The middle is green: code already claims this ID. The bottom is red again: no named proof yet. The braid between them stays solid.
 
-Red without fray means *incomplete but excused*. Someone wrote it down on a task, so the Thread stays intact.
+Red without fray means *incomplete but excused*. Someone wrote it down on a task, so the Golden Thread stays intact.
 
 ## 4. Anointed backlog: minted on purpose, carried by a TODO
 
@@ -92,7 +94,7 @@ Red without fray means *incomplete but excused*. Someone wrote it down on a task
 
 Minting an ID is a promise — and that is a feature, not a trap. Name a wish only when you mean it; if nothing claims it yet, write one open TODO that carries it (**anointed backlog**, usually in `specs/backlog/tasks.md`). That is enough ceremony that fat-finger drift still fails, while honest "build this soon" stays green.
 
-Here `AC-CLEW-01` shows exactly that state: status **BACKLOG** (an AC, and still not a GAP — the TODO means it is not *silent*), the registry line it was minted on, and the open TODO `T900` that carries it. Zero code, zero proofs, Thread intact. Drop the TODO without picking up the work and the next check fails — the Thread will not carry an unclaimed promise.
+Here `AC-CLEW-01` shows exactly that state: status **BACKLOG** (an AC, and still not a GAP — the TODO means it is not *silent*), the registry line it was minted on, and the open TODO `T900` that carries it. Zero code, zero proofs, Golden Thread intact. Drop the TODO without picking up the work and the next check fails — the Thread will not carry an unclaimed promise. (These `*-CLEW-01` IDs predate the rename and are scheduled for tombstoning; they stay put to demonstrate durability.)
 
 Filter tile `Backlog` reads 7: four planning-altitude stories plus the three anointed CLEW IDs.
 
@@ -100,25 +102,25 @@ Filter tile `Backlog` reads 7: four planning-altitude stories plus the three ano
 
 Stories and features (`US-…`, `FR-…`, `NFR-…`) are covered through their child ACs, not by stapling `@covers US-…` onto a file. When they have no carrier of their own, they ride as backlog: red nodes, solid braid, and the Proof tier spells it out — "backlog altitude (not a silent gap)." Silent-gap refusal is AC-only.
 
-## 6. Thread broken: what frays and what does not
+## 6. Golden Thread broken: what frays and what does not
 
-![Overview with Thread broken](images/06-overview-gate-failed.png)
+![Overview with Golden Thread broken](images/06-overview-gate-failed.png)
 
 The scratch tree after the staged break. Three things change at once:
 
-- The banner goes red: **Thread broken · 1 refusal.**
+- The banner goes red: **Golden Thread broken · 1 refusal.**
 - The **GAP tile goes hot: 1.** Verified dropped by one; that row moved to GAP.
-- Rows with no proof now fray, because the clew as a whole can no longer vouch for them.
+- Rows with no proof now fray, because the manifest as a whole can no longer vouch for them.
 
 ### The GAP row itself
 
 ![GAP descent with fray](images/07-gap-fray-descent.png)
 
-`AC-HOME-15`, the broken strand. Implementation marks still exist, but the named proof is gone and no open task claims the ID. The braid **frays between Implementation and Proof**, and the Proof tier says why: "No proof — silent gap (thread broken)." This is the one situation the Thread will not carry: unfinished work that nothing durable admits to. (Technically: Gate refuses.)
+`AC-HOME-15`, the broken strand. Implementation marks still exist, but the named proof is gone and no open task claims the ID. The braid **frays between Implementation and Proof**, and the Proof tier says why: "No proof — silent gap (thread broken)." This is the one situation the Golden Thread will not carry: unfinished work that nothing durable admits to. (Technically: Gate refuses.)
 
-### Verified rows stay green even while the Thread is broken
+### Verified rows stay green even while the Golden Thread is broken
 
-![Verified proof under Thread broken](images/08-verified-proof-under-gate-fail.png)
+![Verified proof under Golden Thread broken](images/08-verified-proof-under-gate-fail.png)
 
 `AC-A11Y-01` during the same broken run: named proofs exist, so its Proof tier stays green and its braid stays solid. A break elsewhere does not un-verify this row's evidence.
 
@@ -126,13 +128,13 @@ The scratch tree after the staged break. Three things change at once:
 
 | You see | It means |
 |---|---|
-| Solid braid, green nodes | Thread holds; proof exists |
+| Solid braid, green nodes | Golden Thread holds; proof exists |
 | Solid braid, red node(s) | Incomplete but excused: tracked debt or backlog altitude |
-| Open debt (Traces:) block | The exact open task that excuses (or carries) the incompleteness |
+| Open debt (Carries:) block | The exact open task that excuses (or carries) the incompleteness |
 | ▸ file:line / ▸ test name | Expand to the actual source behind the claim |
-| Frayed braid | Thread broken: silent gap, or the clew was refused as a whole |
+| Frayed braid | Golden Thread broken: silent gap, or the manifest was refused as a whole |
 | Red banner, hot GAP tile | At least one AC has neither proof nor admitted debt |
 
-One sentence version: **green is proven, red-on-solid is honest debt, fray is a broken Thread.**
+One sentence version: **green is proven, red-on-solid is honest debt, fray is a broken Golden Thread.**
 
-And the soft landing: you do not have to be scary-good at this. Clewseau refuses the silent stuff; clewloupe shows the rest. Follow the Thread.
+And the soft landing: you do not have to be scary-good at this. SpecAssay refuses the silent stuff; Loupe shows the rest. Follow the Golden Thread.
