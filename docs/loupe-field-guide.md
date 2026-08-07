@@ -18,9 +18,11 @@ This guide is the visual tour. For SDLC wording see [`reading-a-clew.md`](./read
 
 ### Don't panic about the IDs
 
-Eighty-two durable IDs in the sample below can look like a wallpaper tax. It isn't.
+Eighty-two durable IDs in the sample can look like a lot. Most of them live in the PRD and the specs — the ordinary places wishes already get written down. You do **not** paste an ID onto every line of code.
 
-You do **not** sprinkle an ID on every line of code. A wish gets a name when you mean it. Work that serves it gets a short beacon (`@covers` in source, or `Traces:` on a task). Most files never mention an ID at all. Clewseau keeps the map; you keep building. If a beacon goes stale or a wish goes silent, the Gate says so — you don't have to hold 82 threads in your head.
+When you change code that serves a named wish, you leave a short comment (`@covers …`). When a task is still open against a wish, you name that wish on the task (`Traces:`). That is the whole habit. Clewseau watches those links; you do not memorize the grid.
+
+What you are looking at in the loupe is a form of **living documentation**: the record is wound from the repo itself (names, comments, tasks, tests), not typed into a second tool that lags behind. When the work drifts, the Thread shows it — that is the point.
 
 ## Where these pictures came from
 
@@ -58,7 +60,7 @@ Click any row and the right pane walks its golden thread top to bottom:
 - **Implementation**: every `@covers` carrier found in source. Each is labeled with the carrier's **file basename and line** (e.g. `HomeDetailView.swift:3`), with the full path below and an "also covers: …" line naming the other IDs that share the same annotation. Each expands to the real code around it.
 - **Proof**: named tests that encode the ID (for ACs), labeled by test name with the path below, expandable the same way.
 
-**`@covers` in one breath.** A comment like `// @covers AC-GUEST-01, FR-HOME-03` is a **beacon** — one line, written when you touch the code, naming which wishes that code serves. Gate reads those lines; it never writes them. Clewloupe shows them under Implementation. Closest cousin on the task side is `**Traces**:` on an open checkbox. Neither is runtime magic; both are claims the Thread can check. If the count of beacons ever feels loud, remember: Clewseau is on the case — missing or invented IDs fail closed, so you are never quietly accumulating wallpaper.
+**`@covers` in one breath.** A one-line comment — `// @covers AC-GUEST-01, FR-HOME-03` — naming which wishes this code serves. You write it when you touch the file. Gate reads it; Clewseau never invents one for you. Clewloupe lists those hits under Implementation. The task-side twin is `**Traces**:` on an open checkbox. Missing or made-up IDs fail closed, so the habit stays light: mark what you meant, and the check keeps you honest.
 
 Every claim in the descent can be opened to the file and line that backs it — requirement included. The braided line down the left side is the Thread itself. Its two states matter more than any color: **solid** means the Thread holds; **frayed** means it is broken.
 
