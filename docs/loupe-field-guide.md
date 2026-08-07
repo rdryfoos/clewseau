@@ -58,13 +58,13 @@ Note this verified row also carries an **Open debt (Traces:)** block — an XCUI
 
 ![Tracked-debt descent](images/04-tracked-debt-descent.png)
 
-`AC-HOME-10` is not done, and the clew shows exactly who says so:
+`AC-HOME-10` is not done — and nobody is pretending otherwise.
 
-- **Requirement** node and ID are red (incomplete), with the registry toggle at `HomesFlow.prd.md:221` ready to expand.
-- The **Open debt (Traces:)** block names the literal open checkbox task (`T024e`, snapshot/UI test deferred until test infra exists) that claims this ID.
-- **Implementation** is green: `@covers AC-HOME-10` carriers exist in source. **Proof** is red ("tracked as open debt") but the braid stays solid.
+- The top of the thread is red: the wish is real, the work is incomplete.
+- Right under it, an open task admits the gap (`T024e`: still needs a snapshot/UI test). That admission is what makes this debt instead of a lie.
+- The middle is green: code already claims this ID. The bottom is red again: no named proof yet. The braid between them stays solid.
 
-Red without fray is the loupe's way of saying *incomplete but excused*. The work is visible on an open task, so it is not a silent gap and the Thread stays intact.
+Red without fray means *incomplete but excused*. Someone wrote it down on a task, so the Thread stays intact.
 
 ## 4. Anointed backlog: minted on purpose, carried by a TODO
 
