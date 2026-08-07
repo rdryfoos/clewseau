@@ -10,8 +10,9 @@ Copy into the project glossary (e.g. `glossary.md`) when the repo keeps one. The
 | **clewloupe** | Viewer that consumes a clew only — no target re-scan. |
 | **verified** | Named carrier exists (AC proof and/or `@covers` / proof for US/FR/NFR). |
 | **tracked-debt** | Incomplete, but declared on an open task with `Traces:`. |
-| **GAP** | Silent AC gap — neither proof nor open debt; Gate refuses; thread frays. |
+| **GAP** | Silent AC gap — neither proof nor open debt; the Thread is broken; Gate refuses. |
 | **backlog** | US/FR/NFR with no own carrier — planning altitude, not a silent gap. |
-| **Gate 2** | Deterministic Clewseau check + clew emit (`speckit.clewseau-gate.check`). |
+| **the Thread** | The wish → work → proof chain a clew records. Human-facing: the Thread is intact or broken. Prefer this wording over "Gate passed/failed" except when naming the check script itself. |
+| **Gate 2** | Deterministic Clewseau check + clew emit (`speckit.clewseau-gate.check`). The mechanism that judges the Thread; say "Gate" when you mean this script, "Thread" when you mean what the human sees. |
 
 Do not use **dossier** for this artifact — in Clewseau it is a **clew**.

@@ -40,8 +40,8 @@ Silent-gap refusal is **AC-only**. Parents are covered when their child ACs are 
 | Signal | Meaning |
 |--------|---------|
 | Green node | Carrier present for that step |
-| Red, braid solid | Incomplete but excused (debt, missing `@covers`, empty backlog proof) while Gate passed |
-| Fray / Gate-failed chrome | Thread broken: silent AC gap or other Gate refusal (`gate.ok: false`) |
+| Red, braid solid | Incomplete but excused (debt, missing `@covers`, empty backlog proof) while the Thread is intact |
+| Fray / red banner | Thread broken: silent AC gap or other refusal (`gate.ok: false` — Gate refused the clew) |
 
 ## Worked examples (HomesFlow)
 
@@ -72,7 +72,7 @@ HomesFlow’s live clew at session time: `gate.ok: true`, 67 verified / 10 track
 3. **Implementation carrier:** code has `@covers AC-HOME-10` (Implementation hit — not a named AC proof).
 4. **Proof still open:** `T024e` — snapshot/UI test for leading column; same deferred note. `Traces: AC-HOME-10`.
 5. **Clew:** `implementations: [{…}]`, `proofs: []`, status `tracked-debt`.
-6. **Loupe:** Requirement red (debt) **with open `Traces:` task listed**; Implementation green + expandable **▸ @covers** source; Proof red-not-fray; braid solid if Gate passed.
+6. **Loupe:** Requirement red (debt) **with open `Traces:` task listed**; Implementation green + expandable **▸ file:line** source; Proof red-not-fray; braid solid while the Thread is intact.
 
 ### `US-EDIT-01` / `FR-GUEST-02` → backlog
 
@@ -80,7 +80,7 @@ HomesFlow’s live clew at session time: `gate.ok: true`, 67 verified / 10 track
 2. **Build / claim:** May already have child AC work; the US/FR itself often has no personal `@covers` or named proof.
 3. **Carriers for this ID:** none required at this altitude.
 4. **Clew:** empty arrays, status `backlog` — not `GAP`.
-5. **Loupe:** muted / red-not-fray on empty steps; braid stays solid when Gate passed. Do not fray a story label for lacking its own carrier.
+5. **Loupe:** muted / red-not-fray on empty steps; braid stays solid while the Thread is intact. Do not fray a story label for lacking its own carrier.
 
 ### `US-CLEW-01` / `FR-CLEW-01` / `AC-CLEW-01` → anointed backlog
 
