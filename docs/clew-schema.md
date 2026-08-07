@@ -61,9 +61,9 @@ Each failure: `{ kind, detail, id? }`.
 | Status | Who | Meaning |
 |---|---|---|
 | `verified` | AC: named proof; US/FR/NFR: `@covers` or named proof | Named carrier exists (not “tests ran green”) |
-| `tracked-debt` | Any | Proof missing, but visible on an open task with Traces (`debtTasks` lists those tasks) |
+| `tracked-debt` | Any | Work started (spec/impl presence), proof missing, excused by an open task with Traces (`debtTasks` lists those tasks) |
 | `GAP` | **AC only** (silent gap) | Neither named proof nor open debt — Gate refuses; viewer frays |
-| `backlog` | US / FR / NFR | Planning altitude without own carrier — **not** a silent gap; do not fray |
+| `backlog` | Any | Planning altitude: US/FR/NFR without own carrier, or any ID **anointed into backlog** (registry entry + open `Traces:` TODO and nothing else) — **not** a silent gap; do not fray |
 
 Backlog rows are “covered” in the promotion-contract sense when their child ACs are verified or debt — not by requiring `@covers` on the US/FR/NFR ID itself.
 

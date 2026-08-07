@@ -2,7 +2,7 @@
 
 | File | What |
 |------|------|
-| `homesflow.clew.json` | Real Gate 2 emit against HomesFlow (captured from the stock-Spec-Kit + Clewseau trial copy; `repoPath` reflects that tree) |
+| `homesflow.clew.json` | Real Gate 2 emit against HomesFlow (live tree; includes anointed-backlog rows carried by `specs/backlog/tasks.md`) |
 | `sample.clew.json` | Preview default — may be mocked for interesting cases HomesFlow doesn’t emit |
 
 Today both are the honest HomesFlow emit. Later, `sample.clew.json` can diverge (GAP / fray / etc.) while `homesflow.clew.json` stays the real baseline.

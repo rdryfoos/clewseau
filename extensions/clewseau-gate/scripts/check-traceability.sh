@@ -2,6 +2,8 @@
 # Clewseau Gate 2 — portable traceability check + clew.json matrix emitter.
 # Exact-set registry ≡ specs ≡ tasks. Silent AC gaps and untraced scope fail.
 # Tracked debt is allowed. US/FR/NFR without own carrier are backlog (planning altitude) — not silent-gap candidates.
+# Anointed backlog: a registry ID whose only carrier is an open Traces TODO is backlog, not drift — minting into
+# backlog is deliberate (the TODO proves intent); unclaimed IDs with no TODO still fail exact-set.
 # Always writes clew.json (even on failure) so the clew reflects GAPs + gate.
 set -euo pipefail
 
@@ -203,7 +205,9 @@ done < <(yaml_list test_globs) >> "$tmp/proof_hits.txt" || true
 cut -d'|' -f3 "$tmp/proof_hits.txt" 2>/dev/null | sort -u > "$tmp/test_acs.txt" || true
 
 # 1) Exact-set drift: registry ≡ specs, registry ≡ tasks (HomesFlow Gate 2 parity).
-#    Specs/tasks may not invent IDs; registry IDs may not sit unclaimed in either artifact.
+#    Specs/tasks may not invent IDs; registry IDs may not sit unclaimed in either
+#    artifact — except anointed backlog: a registry ID whose only carrier is an
+#    open Traces TODO is backlog (deliberate, visible), not drift.
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
   record_fail "spec-orphan" "$id" "spec references ID not in registry: $id"
@@ -211,6 +215,11 @@ done < <(comm -13 "$tmp/registry.txt" "$tmp/spec.txt")
 
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
+  # Anointed backlog: an open Traces TODO carries the claim until a spec picks
+  # the ID up. Unclaimed IDs with no TODO still fail (drift / fat-finger).
+  if grep -qx "$id" "$tmp/pending.txt"; then
+    continue
+  fi
   record_fail "spec-unclaimed" "$id" "registry ID missing from specs: $id"
 done < <(comm -23 "$tmp/registry.txt" "$tmp/spec.txt")
 
@@ -279,6 +288,7 @@ ids = [ln.strip() for ln in (tmp / "registry.txt").read_text().splitlines() if l
 pending = {ln.strip() for ln in (tmp / "pending.txt").read_text().splitlines() if ln.strip()}
 tested = {ln.strip() for ln in (tmp / "test_acs.txt").read_text().splitlines() if ln.strip()}
 covered = {ln.strip() for ln in (tmp / "covers.txt").read_text().splitlines() if ln.strip()}
+spec_ids = {ln.strip() for ln in (tmp / "spec.txt").read_text().splitlines() if ln.strip()}
 
 failures = []
 fail_path = tmp / "failures.jsonl"
@@ -294,7 +304,7 @@ if registry_path.is_file():
 else:
     reg_text = []
 try:
-    registry_rel = os.path.relpath(registry_path, repo)
+    registry_rel = os.path.relpath(os.path.realpath(registry_path), os.path.realpath(repo))
 except ValueError:
     registry_rel = str(registry_path)
 for id_ in ids:
@@ -370,17 +380,21 @@ if pending_hits.exists():
 
 def status_for(id_: str) -> str:
     typ = id_.split("-", 1)[0]
+    # Open TODO splits by whether work started: spec/impl presence means debt
+    # (excused incompleteness); registry entry + TODO and nothing else means
+    # anointed backlog (minted on purpose, not yet picked up).
+    started = id_ in spec_ids or id_ in covered
     if typ == "AC":
         if id_ in tested:
             return "verified"
         if id_ in pending:
-            return "tracked-debt"
+            return "tracked-debt" if started else "backlog"
         return "GAP"
     # US/FR/NFR: planning altitude — backlog when no own carrier; not silent-gap / GAP.
     if id_ in covered or id_ in tested:
         return "verified"
     if id_ in pending:
-        return "tracked-debt"
+        return "tracked-debt" if started else "backlog"
     return "backlog"
 
 rows = []

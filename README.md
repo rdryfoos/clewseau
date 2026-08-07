@@ -24,7 +24,7 @@ Gate 2 always writes a Clewseau-native **clew** (default path `clew.json`, confi
 - Top-level `gate: { ok, failures[] }` so non-row refusals are visible to viewers
 - Written even when the gate fails, so silent AC gaps are visible in the file
 - Silent-gap refusal is **AC-only** (coverage altitude); US/FR/NFR without a carrier are `backlog`, not `GAP`
-- **Exact-set** registry ≡ specs ≡ tasks (no unclaimed registry IDs)
+- **Exact-set** registry ≡ specs ≡ tasks (no unclaimed registry IDs) — except **anointed backlog**: an ID whose only carrier is an open `Traces:` TODO is `backlog`, not drift
 - Not ReqIF/OSLC; optional ReqIF export can come later. See [`docs/clew-schema.md`](./docs/clew-schema.md)
 
 **Reading a clew in SDLC terms** (requirement → build → proof → Gate → loupe): [`docs/reading-a-clew.md`](./docs/reading-a-clew.md). Visual tour with screenshots: [`docs/loupe-field-guide.md`](./docs/loupe-field-guide.md).

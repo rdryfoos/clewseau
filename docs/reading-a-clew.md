@@ -27,11 +27,13 @@ For any ID, ask in this order:
 | Status | SDLC meaning |
 |--------|----------------|
 | **verified** | Named proof (and/or `@covers` where required by altitude) exists — not “tests happened to pass.” |
-| **tracked-debt** | Team knew it wasn’t done and left an open `Traces:` task — visible unfinished work. |
+| **tracked-debt** | Work started (spec or code exists) but proof is missing, excused by an open `Traces:` task — visible unfinished work. |
 | **GAP** | AC with neither proof nor open debt — **hidden** unfinished work; Gate fails; braid frays. |
-| **backlog** | US/FR/NFR with no own carrier — planning altitude waiting; not a silent AC gap. |
+| **backlog** | Planning altitude: US/FR/NFR with no own carrier, **or** any ID **anointed into backlog** — minted in the registry with an open `Traces:` TODO and nothing else. |
 
 Silent-gap refusal is **AC-only**. Parents are covered when their child ACs are verified or debt — not by sticking `@covers US-…` on a file.
+
+**Minting an ID is a promise, and the Gate holds you to it immediately.** A registry ID claimed nowhere fails exact-set (that is drift — often a fat-fingered rename in a spec). The deliberate way to mint ahead of the work is **anointed backlog**: mint the ID *and* write one open `Traces:` TODO for it (a conventional home is `specs/backlog/tasks.md`, which the standard tasks glob already matches). The TODO proves intent, names who is carrying the item, and the ID rides as `backlog` — visible, not silent — until a spec claims it and normal rules take over. A typo’d ID never comes with a matching TODO, so the drift tripwire still fires.
 
 ### Colors vs fray (clewloupe)
 
@@ -79,6 +81,14 @@ HomesFlow’s live clew at session time: `gate.ok: true`, 67 verified / 10 track
 3. **Carriers for this ID:** none required at this altitude.
 4. **Clew:** empty arrays, status `backlog` — not `GAP`.
 5. **Loupe:** muted / red-not-fray on empty steps; braid stays solid when Gate passed. Do not fray a story label for lacking its own carrier.
+
+### `US-CLEW-01` / `FR-CLEW-01` / `AC-CLEW-01` → anointed backlog
+
+1. **Requirement:** Rik decided the Clewseau-native HomesFlow slice is wanted and minted its IDs into the PRD — no spec, no tasks, no code yet.
+2. **Anointment:** one open TODO in `specs/backlog/tasks.md` — `- [ ] T900 Deliver … — **Traces**: US-CLEW-01, FR-CLEW-01, AC-CLEW-01`.
+3. **Carriers:** none — and that’s the point; the TODO is the only thread.
+4. **Clew:** status `backlog` for all three (yes, the AC too — an anointed AC isn’t a *silent* gap; the TODO names it), `debtTasks` lists the carrying TODO, `gate.ok: true`.
+5. **Loupe:** muted / red-not-fray with the carrying TODO visible under the Requirement. Delete the TODO without picking the work up and the Gate fails exact-set on the next run.
 
 ### What a `GAP` would look like (HomesFlow has none)
 

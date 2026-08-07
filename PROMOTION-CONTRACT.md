@@ -13,12 +13,13 @@ Mint durable IDs at intent; refuse silent gaps; allow tracked debt to stay visib
 1. **Mint at intent.** IDs are assigned once in the authoritative registry (usually the PRD), not inferred from code later. Feature specs inherit; they do not mint.
 2. **Immutability.** Never renumber. Never reuse. Retire in place (tombstone), do not recycle.
 3. **Atomic ACs.** One acceptance criterion, one independently testable assertion. Split compounds before Spec Kit ingests them.
-4. **Propagation.** Every task declares `Traces:` with the ID(s) it serves. Implementation carriers name the ID (`@covers` or language equivalent). Verification names the AC in the test identifier. Feature specs inherit registry IDs; they do not mint. **Gate 2 exact-set:** registry ≡ specs ≡ tasks (no unclaimed registry IDs, no invented feature IDs).
-5. **Coverage altitude.** A requirement counts as covered when its acceptance criteria are covered (or explicitly tracked as debt). **AC is the atomic unit of “covered”** and of Gate 2 silent-gap refusal. US/FR/NFR are planning altitude: they are not silent-gap candidates; the clew records them as `backlog` when they have no own carrier, not as `GAP`. Quiet waiting in the PRD without a feature claim is **not** allowed — that is exact-set drift, not a spec switch.
+4. **Propagation.** Every task declares `Traces:` with the ID(s) it serves. Implementation carriers name the ID (`@covers` or language equivalent). Verification names the AC in the test identifier. Feature specs inherit registry IDs; they do not mint. **Gate 2 exact-set:** registry ≡ specs ≡ tasks (no unclaimed registry IDs, no invented feature IDs) — with one deliberate exception, anointed backlog (rule 5a).
+5. **Coverage altitude.** A requirement counts as covered when its acceptance criteria are covered (or explicitly tracked as debt). **AC is the atomic unit of “covered”** and of Gate 2 silent-gap refusal. US/FR/NFR are planning altitude: they are not silent-gap candidates; the clew records them as `backlog` when they have no own carrier, not as `GAP`. Quiet waiting in the PRD with **no claim at all** is not allowed — that is exact-set drift, not a spec switch.
+5a. **Anointed backlog.** Minting an ID is a promise, and the Gate holds you to it immediately. The deliberate way to mint ahead of the work: mint the ID **and** write one open `Traces:` TODO for it (conventionally in `specs/backlog/tasks.md`). The TODO is the claim — it proves intent and names who is carrying the item; the ID rides as `backlog` (ACs included: an anointed AC is not a *silent* gap). The moment a spec claims the ID, the anointment expires and normal rules apply. A typo’d ID in a spec never comes with a matching TODO, so drift still fails exact-set.
 6. **Honest states.** Prefer named states over false greens:
    - **verified** — a named proof (AC) or `@covers`/proof (US/FR/NFR) exists (not “tests ran and passed” as a ceremony claim)
-   - **tracked-debt** — proof missing, but visible in an open task / backlog entry
-   - **backlog** — US/FR/NFR without own carrier; not a broken thread
+   - **tracked-debt** — work started (spec/impl presence), proof missing, but visible in an open task / backlog entry
+   - **backlog** — US/FR/NFR without own carrier, or any ID anointed into backlog (registry entry + open `Traces:` TODO and nothing else); not a broken thread
    - **GAP** — silent AC gap; thread broken; Gate refuses
 7. **Refusal.** Gate 1 (judgment, e.g. `/speckit.analyze`) and Gate 2 (deterministic check) fail closed on **silent AC gaps**, **untraced scope**, and **registry↔spec↔tasks drift**. Passing does not mean zero unfinished work; it means zero *hidden* unfinished work at AC altitude, and zero abandoned or invented IDs in the planning layer.
 8. **Clew.** Gate 2 emits a **clew** (default path `clew.json`) — a Clewseau-native matrix (`format: "clew"`) including `gate: { ok, failures[] }` so non-row refusals (orphans, missing Traces, drift) are visible to viewers. The file is written even when the gate fails. It is not ReqIF/OSLC; see `docs/clew-schema.md`.
@@ -59,7 +60,7 @@ Add to `.specify/memory/constitution.md` (or feed `/speckit.constitution`):
 > | **verified** | Named carrier exists (AC proof and/or `@covers` / proof for US/FR/NFR). |
 > | **tracked-debt** | Incomplete, but declared on an open task with `Traces:`. |
 > | **GAP** | Silent AC gap — neither proof nor open debt; Gate refuses; thread frays. |
-> | **backlog** | US/FR/NFR with no own carrier — planning altitude, not a silent gap. |
+> | **backlog** | US/FR/NFR with no own carrier, or any ID anointed into backlog (registry + open `Traces:` TODO only) — planning altitude, not a silent gap. |
 > | **Gate 2** | Deterministic Clewseau check + clew emit (`speckit.clewseau-gate.check`). |
 
 ## Lineage (name prior art first)
