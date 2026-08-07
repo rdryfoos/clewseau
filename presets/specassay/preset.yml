@@ -1,14 +1,14 @@
 schema_version: "1.0"
 
 preset:
-  id: "clewseau"
-  name: "Clewseau"
+  id: "specassay"
+  name: "SpecAssay"
   version: "0.1.0"
-  description: "Appends durable-ID, Traces, and Clewseau vocabulary onto Spec Kit spec, tasks, and constitution templates."
+  description: "Appends durable-ID, Carries, and SpecAssay vocabulary onto Spec Kit spec, tasks, and constitution templates."
   author: "Rik Dryfoos / Dryfoos Consulting"
   license: "MIT"
-  homepage: "https://github.com/rdryfoos/clewseau"
-  repository: "https://github.com/rdryfoos/clewseau"
+  homepage: "https://github.com/rdryfoos/specassay"
+  repository: "https://github.com/rdryfoos/specassay"
 
 requires:
   speckit_version: ">=0.14.0"
@@ -24,13 +24,13 @@ provides:
     - type: "template"
       name: "tasks-template"
       file: "templates/tasks-template.md"
-      description: "Require Traces: on every task"
+      description: "Require Carries: on every task"
       strategy: "append"
 
     - type: "template"
       name: "constitution-template"
       file: "templates/constitution-template.md"
-      description: "Append End-to-End Traceability article and Clewseau vocabulary"
+      description: "Append End-to-End Traceability article and SpecAssay vocabulary"
       strategy: "append"
 
 tags:

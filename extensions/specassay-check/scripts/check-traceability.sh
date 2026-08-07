@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
-# Clewseau Gate 2 — portable traceability check + clew.json matrix emitter.
+# SpecAssay Check (Gate 2) — portable traceability check + trace-manifest.json matrix emitter.
+# The check is the assay: it hallmarks the Golden Thread from wish to work to proof.
 # Exact-set registry ≡ specs ≡ tasks. Silent AC gaps and untraced scope fail.
 # Tracked debt is allowed. US/FR/NFR without own carrier are backlog (planning altitude) — not silent-gap candidates.
-# Anointed backlog: a registry ID whose only carrier is an open Traces TODO is backlog, not drift — minting into
+# Anointed backlog: a registry ID whose only carrier is an open Carries TODO is backlog, not drift — minting into
 # backlog is deliberate (the TODO proves intent); unclaimed IDs with no TODO still fail exact-set.
-# Always writes clew.json (even on failure) so the clew reflects GAPs + gate.
+# Always writes trace-manifest.json (even on failure) so the manifest reflects GAPs + gate.
 set -euo pipefail
 
 export LC_ALL=C
 
 EXT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-PROJECT_ROOT="${CLEWSEAU_PROJECT_ROOT:-}"
+PROJECT_ROOT="${SPECASSAY_PROJECT_ROOT:-}"
 if [[ -z "$PROJECT_ROOT" ]]; then
   # Spec Kit install: <project>/.specify/extensions/<ext>/ → three levels up.
-  # Clewseau repo layout: <clewseau>/extensions/<ext>/ → two levels up.
+  # SpecAssay repo layout: <specassay>/extensions/<ext>/ → two levels up.
   parent_dir="$(basename "$(dirname "$EXT_DIR")")"
   grandparent_dir="$(basename "$(dirname "$(dirname "$EXT_DIR")")")"
   if [[ "$parent_dir" == "extensions" && "$grandparent_dir" == ".specify" ]]; then
@@ -24,13 +25,13 @@ if [[ -z "$PROJECT_ROOT" ]]; then
 fi
 cd "$PROJECT_ROOT"
 
-CONFIG="${CLEWSEAU_CONFIG:-$EXT_DIR/clewseau-gate-config.yml}"
+CONFIG="${SPECASSAY_CONFIG:-$EXT_DIR/specassay-check-config.yml}"
 if [[ ! -f "$CONFIG" ]]; then
   if [[ -f "$EXT_DIR/config-template.yml" ]]; then
     CONFIG="$EXT_DIR/config-template.yml"
-    echo "WARN: using config-template.yml; copy to clewseau-gate-config.yml for real projects" >&2
+    echo "WARN: using config-template.yml; copy to specassay-check-config.yml for real projects" >&2
   else
-    echo "FAIL: no clewseau-gate-config.yml (looked in $EXT_DIR)" >&2
+    echo "FAIL: no specassay-check-config.yml (looked in $EXT_DIR)" >&2
     exit 2
   fi
 fi
@@ -65,17 +66,22 @@ SPECS_GLOB="$(yaml_scalar specs)"
 TASKS_GLOB="$(yaml_scalar tasks)"
 ID_RE="$(yaml_scalar id_regex)"
 COVERS_RE="$(yaml_scalar covers_regex)"
+CARRIES_RE="$(yaml_scalar carries_regex)"
 TEST_AC_RE="$(yaml_scalar test_ac_regex)"
-CLEW_OUT="$(yaml_scalar clew_path)"
+MANIFEST_OUT="$(yaml_scalar manifest_path)"
+# Back-compat: accept the pre-rename config key clew_path if manifest_path is unset.
+[[ -n "$MANIFEST_OUT" ]] || MANIFEST_OUT="$(yaml_scalar clew_path)"
 TARGET_NAME="$(yaml_scalar target_name)"
 
 [[ -n "$REGISTRY" ]] || { echo "FAIL: config missing registry" >&2; exit 2; }
 [[ -n "$ID_RE" ]] || ID_RE='(FR|NFR|AC|US)-[A-Z][A-Z0-9]{1,5}-[0-9]{2,}[a-z]?'
 [[ -n "$COVERS_RE" ]] || COVERS_RE='@covers[[:space:]]+.*'
+# The task-side mark. Accept both **Carries**: (new) and **Traces**: (pre-rename) during transition.
+[[ -n "$CARRIES_RE" ]] || CARRIES_RE='\*\*(Carries|Traces)\*\*:'
 [[ -n "$TEST_AC_RE" ]] || TEST_AC_RE='AC_[A-Z][A-Z0-9]{1,5}_[0-9]{2,}[a-z]?'
 [[ -n "$SPECS_GLOB" ]] || SPECS_GLOB='specs/**/spec.md'
 [[ -n "$TASKS_GLOB" ]] || TASKS_GLOB='specs/**/tasks.md'
-[[ -n "$CLEW_OUT" ]] || CLEW_OUT='clew.json'
+[[ -n "$MANIFEST_OUT" ]] || MANIFEST_OUT='trace-manifest.json'
 [[ -n "$TARGET_NAME" ]] || TARGET_NAME="$(basename "$PROJECT_ROOT")"
 
 fail=0
@@ -83,7 +89,7 @@ tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 : > "$tmp/failures.jsonl"
 
-# kind | id-or-empty | detail — collected for clew.json gate.failures
+# kind | id-or-empty | detail — collected for trace-manifest.json gate.failures
 record_fail() {
   local kind="$1"
   local id="${2:-}"
@@ -102,7 +108,7 @@ print(json.dumps(row, ensure_ascii=False))
 
 if [[ ! -f "$REGISTRY" ]]; then
   record_fail "registry-missing" "" "registry not found: $REGISTRY"
-  # Still try to emit an empty-ish clew below if possible; exit after emit.
+  # Still try to emit an empty-ish manifest below if possible; exit after emit.
 fi
 
 if [[ -f "$REGISTRY" ]]; then
@@ -147,7 +153,7 @@ sort -u "$tmp/spec.txt" -o "$tmp/spec.txt"
 while IFS= read -r f; do
   [[ -f "$f" ]] || continue
   grep -Eoh "$ID_RE" "$f" | sort -u >> "$tmp/tasks.txt" || true
-  # Open checkbox tasks that name registry IDs (usually via Traces:) — debt carriers.
+  # Open checkbox tasks that name registry IDs (usually via Carries:) — debt carriers.
   grep -nE '^- \[ \]' "$f" 2>/dev/null | while IFS= read -r line; do
     lineno="${line%%:*}"
     rest="${line#*:}"
@@ -207,7 +213,7 @@ cut -d'|' -f3 "$tmp/proof_hits.txt" 2>/dev/null | sort -u > "$tmp/test_acs.txt" 
 # 1) Exact-set drift: registry ≡ specs, registry ≡ tasks (HomesFlow Gate 2 parity).
 #    Specs/tasks may not invent IDs; registry IDs may not sit unclaimed in either
 #    artifact — except anointed backlog: a registry ID whose only carrier is an
-#    open Traces TODO is backlog (deliberate, visible), not drift.
+#    open Carries TODO is backlog (deliberate, visible), not drift.
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
   record_fail "spec-orphan" "$id" "spec references ID not in registry: $id"
@@ -215,7 +221,7 @@ done < <(comm -13 "$tmp/registry.txt" "$tmp/spec.txt")
 
 while IFS= read -r id; do
   [[ -z "$id" ]] && continue
-  # Anointed backlog: an open Traces TODO carries the claim until a spec picks
+  # Anointed backlog: an open Carries TODO carries the claim until a spec picks
   # the ID up. Unclaimed IDs with no TODO still fail (drift / fat-finger).
   if grep -qx "$id" "$tmp/pending.txt"; then
     continue
@@ -233,13 +239,13 @@ while IFS= read -r id; do
   record_fail "task-unclaimed" "$id" "registry ID missing from tasks: $id"
 done < <(comm -23 "$tmp/registry.txt" "$tmp/tasks.txt")
 
-# 2) Every task with a checkbox should have Traces
+# 2) Every task with a checkbox should carry its ID(s) via a Carries mark
 while IFS= read -r f; do
   [[ -f "$f" ]] || continue
   while IFS= read -r line; do
     if [[ "$line" =~ ^-\ \[[x\ ]\]\ T ]]; then
-      if ! grep -Eq '\*\*Traces\*\*:' <<<"$line"; then
-        record_fail "missing-traces" "" "task missing Traces field: ${line:0:80}"
+      if ! grep -Eq "$CARRIES_RE" <<<"$line"; then
+        record_fail "missing-carries" "" "task missing Carries field: ${line:0:80}"
       fi
     fi
   done < "$f"
@@ -269,20 +275,20 @@ while IFS= read -r id; do
   record_fail "silent-gap" "$id" "silent gap: $id has no test and no open tracked-debt task"
 done < "$tmp/registry.txt"
 
-# --- Emit clew.json (always; clew should show GAPs even when Gate fails) ---
-export CLEW_OUT REGISTRY TARGET_NAME PROJECT_ROOT
-export CLEW_TMP="$tmp"
-export CLEW_FAIL="$fail"
+# --- Emit trace-manifest.json (always; the manifest should show GAPs even when Gate fails) ---
+export MANIFEST_OUT REGISTRY TARGET_NAME PROJECT_ROOT
+export MANIFEST_TMP="$tmp"
+export MANIFEST_FAIL="$fail"
 python3 - <<'PY'
 import json, os, re, datetime
 from pathlib import Path
 
-tmp = Path(os.environ["CLEW_TMP"])
+tmp = Path(os.environ["MANIFEST_TMP"])
 registry_path = Path(os.environ["REGISTRY"])
-out_path = Path(os.environ["CLEW_OUT"])
+out_path = Path(os.environ["MANIFEST_OUT"])
 target = os.environ.get("TARGET_NAME") or "project"
 repo = os.environ.get("PROJECT_ROOT") or str(Path.cwd())
-gate_failed = os.environ.get("CLEW_FAIL", "0") != "0"
+gate_failed = os.environ.get("MANIFEST_FAIL", "0") != "0"
 
 ids = [ln.strip() for ln in (tmp / "registry.txt").read_text().splitlines() if ln.strip()]
 pending = {ln.strip() for ln in (tmp / "pending.txt").read_text().splitlines() if ln.strip()}
@@ -423,8 +429,8 @@ for id_ in ids:
 
 doc = {
     "schemaVersion": 3,
-    "format": "clew",
-    "emitter": "clewseau-gate",
+    "format": "trace-manifest",
+    "emitter": "specassay-check",
     "targetName": target,
     "repoPath": repo,
     "generatedAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
@@ -441,7 +447,7 @@ doc = {
     "rows": rows,
 }
 
-# Prefer structured failures if bash recorded any; else respect CLEW_FAIL.
+# Prefer structured failures if bash recorded any; else respect MANIFEST_FAIL.
 if failures:
     doc["gate"]["ok"] = False
 
@@ -451,8 +457,8 @@ print(f"Wrote {out_path} ({len(rows)} rows) gate.ok={doc['gate']['ok']}", flush=
 PY
 
 if [[ "$fail" -ne 0 ]]; then
-  echo "Clewseau Gate 2: FAILED" >&2
+  echo "SpecAssay Check (Gate 2): FAILED" >&2
   exit 1
 fi
 
-echo "Clewseau Gate 2: OK ($(wc -l < "$tmp/registry.txt" | tr -d ' ') registry IDs)"
+echo "SpecAssay Check (Gate 2): OK ($(wc -l < "$tmp/registry.txt" | tr -d ' ') registry IDs)"

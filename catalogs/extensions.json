@@ -1,18 +1,18 @@
 {
   "schema_version": "1.0",
   "updated_at": "2026-08-06T00:00:00Z",
-  "catalog_url": "https://raw.githubusercontent.com/rdryfoos/clewseau/main/catalogs/extensions.json",
+  "catalog_url": "https://raw.githubusercontent.com/rdryfoos/specassay/main/catalogs/extensions.json",
   "extensions": {
-    "clewseau-gate": {
-      "name": "Clewseau Gate",
-      "id": "clewseau-gate",
+    "specassay-check": {
+      "name": "SpecAssay Check",
+      "id": "specassay-check",
       "version": "0.2.0",
-      "description": "Gate 2 — refuse silent gaps and emit a clew (`clew.json`).",
+      "description": "Gate 2 — refuse silent gaps and emit a trace-manifest (`trace-manifest.json`).",
       "author": "Rik Dryfoos / Dryfoos Consulting",
-      "download_url": "https://github.com/rdryfoos/clewseau/releases/download/v0.2.0/clewseau-gate-0.2.0.zip",
-      "repository": "https://github.com/rdryfoos/clewseau",
-      "homepage": "https://github.com/rdryfoos/clewseau",
-      "documentation": "https://github.com/rdryfoos/clewseau/blob/main/extensions/clewseau-gate/README.md",
+      "download_url": "https://github.com/rdryfoos/specassay/releases/download/v0.2.0/specassay-check-0.2.0.zip",
+      "repository": "https://github.com/rdryfoos/specassay",
+      "homepage": "https://github.com/rdryfoos/specassay",
+      "documentation": "https://github.com/rdryfoos/specassay/blob/main/extensions/specassay-check/README.md",
       "license": "MIT",
       "category": "visibility",
       "effect": "read-write",

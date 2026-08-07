@@ -6,4 +6,5 @@
 dist/
 *.zip
 __pycache__/
+trace-manifest.json
 clew.json

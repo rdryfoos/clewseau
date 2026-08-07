@@ -1,10 +1,10 @@
 {
   "schemaVersion": 3,
-  "format": "clew",
-  "emitter": "clewseau-gate",
+  "format": "trace-manifest",
+  "emitter": "specassay-check",
   "targetName": "HomesFlow",
-  "repoPath": "/Users/spudnik/HomesFlow",
-  "generatedAt": "2026-08-07T02:44:33.889Z",
+  "repoPath": "/workspace/homesflow",
+  "generatedAt": "2026-08-07T19:43:36.458Z",
   "gate": {
     "ok": true,
     "failures": []
@@ -12,13 +12,13 @@
   "totals": {
     "registryIdCount": 82,
     "acCount": 51,
-    "coveredCount": 45
+    "coveredCount": 46
   },
   "statusCounts": {
-    "verified": 65,
+    "verified": 67,
     "tracked-debt": 10,
     "GAP": 0,
-    "backlog": 7
+    "backlog": 5
   },
   "rows": [
     {
@@ -27,7 +27,7 @@
       "statement": "AC-A11Y-01** \u2014 Given the user has increased text size via iOS Settings (Dynamic Type / Accessibility sizes), when they view dashboard, home detail, or procedure screens, then primary text and controls scale, layouts reflow without clipping essential actions, and primary reading content does not require horizontal scrolling.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 290
+        "line": 294
       },
       "status": "verified",
       "implementations": [
@@ -63,7 +63,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 245,
-          "excerpt": "- [ ] T069a [P] Manual accessibility pass: largest Dynamic Type + VoiceOver on dashboard, home sections, procedure checklist \u2014 **Traces**: AC-A11Y-01, AC-A11Y-02, AC-A11Y-03"
+          "excerpt": "- [ ] T069a [P] Manual accessibility pass: largest Dynamic Type + VoiceOver on dashboard, home sections, procedure checklist \u2014 **Carries**: AC-A11Y-01, AC-A11Y-02, AC-A11Y-03"
         }
       ],
       "attestedBy": null
@@ -74,7 +74,7 @@
       "statement": "AC-A11Y-02** \u2014 Given VoiceOver is enabled, when the user navigates home section tabs (horizontal on iPhone, vertical on iPad), then each tab exposes a combined accessibility label (section name + role), selected state is announced, and interactive controls have meaningful hints where non-obvious.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 291
+        "line": 295
       },
       "status": "verified",
       "implementations": [
@@ -110,7 +110,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 245,
-          "excerpt": "- [ ] T069a [P] Manual accessibility pass: largest Dynamic Type + VoiceOver on dashboard, home sections, procedure checklist \u2014 **Traces**: AC-A11Y-01, AC-A11Y-02, AC-A11Y-03"
+          "excerpt": "- [ ] T069a [P] Manual accessibility pass: largest Dynamic Type + VoiceOver on dashboard, home sections, procedure checklist \u2014 **Carries**: AC-A11Y-01, AC-A11Y-02, AC-A11Y-03"
         }
       ],
       "attestedBy": null
@@ -121,7 +121,7 @@
       "statement": "AC-A11Y-03** \u2014 Given Reduce Motion is enabled in iOS Settings, when the user navigates between sections or primary screens, then non-essential motion animations are omitted or reduced per system preference.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 292
+        "line": 296
       },
       "status": "verified",
       "implementations": [
@@ -152,27 +152,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 245,
-          "excerpt": "- [ ] T069a [P] Manual accessibility pass: largest Dynamic Type + VoiceOver on dashboard, home sections, procedure checklist \u2014 **Traces**: AC-A11Y-01, AC-A11Y-02, AC-A11Y-03"
-        }
-      ],
-      "attestedBy": null
-    },
-    {
-      "id": "AC-CLEW-01",
-      "type": "AC",
-      "statement": "AC-CLEW-01** \u2014 Given a home display name string, when `HomeDisplayName.normalized(_:)` runs, then leading and trailing whitespace are stripped and any internal run of whitespace collapses to a single space.",
-      "registry": {
-        "path": "HomesFlow.prd.md",
-        "line": 298
-      },
-      "status": "backlog",
-      "implementations": [],
-      "proofs": [],
-      "debtTasks": [
-        {
-          "path": "specs/backlog/tasks.md",
-          "line": 8,
-          "excerpt": "- [ ] T900 Deliver `HomeDisplayName.normalized(_:)` natively in HomesFlow (whitespace trim + collapse; the Clewseau trial slice, delivered here as well) \u2014 **Traces**: US-CLEW-01, FR-CLEW-01, AC-CLEW"
+          "excerpt": "- [ ] T069a [P] Manual accessibility pass: largest Dynamic Type + VoiceOver on dashboard, home sections, procedure checklist \u2014 **Carries**: AC-A11Y-01, AC-A11Y-02, AC-A11Y-03"
         }
       ],
       "attestedBy": null
@@ -183,15 +163,10 @@
       "statement": "AC-GUEST-01** \u2014 Given a Guest signs in to a home, when they view info, then only fields marked for Guest visibility are shown and edit controls are disabled.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 258
+        "line": 262
       },
       "status": "verified",
       "implementations": [
-        {
-          "path": "ios/HomesFlow/Core/Providers/ServiceProviderRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-HOME-02, AC-HOME-04, AC-GUEST-01, FR-GUEST-01, AC-HOME-05, AC-SYNC-01, AC-SYNC-07"
-        },
         {
           "path": "ios/HomesFlow/Core/Documents/DocumentRepository.swift",
           "line": 5,
@@ -203,14 +178,19 @@
           "excerpt": "// @covers FR-HOME-03, AC-GUEST-01"
         },
         {
-          "path": "ios/HomesFlow/Features/HomeDetail/HomeDetailView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-HOME-01, FR-NAV-01, FR-USER-02, AC-HOME-09, AC-HOME-10, AC-HOME-11, AC-A11Y-02, AC-A11Y-03, NFR-A11Y-01, AC-GUEST-01, AC-USER-05"
+          "path": "ios/HomesFlow/Core/Providers/ServiceProviderRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-HOME-02, AC-HOME-04, AC-GUEST-01, FR-GUEST-01, AC-HOME-05, AC-SYNC-01, AC-SYNC-07"
         },
         {
           "path": "ios/HomesFlow/Features/Documents/FilesView.swift",
           "line": 5,
           "excerpt": "// @covers FR-HOME-03, FR-NAV-01, AC-HOME-11, AC-HOME-12, AC-HOME-13, AC-HOME-14, AC-GUEST-01"
+        },
+        {
+          "path": "ios/HomesFlow/Features/HomeDetail/HomeDetailView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-HOME-01, FR-NAV-01, FR-USER-02, AC-HOME-09, AC-HOME-10, AC-HOME-11, AC-A11Y-02, AC-A11Y-03, NFR-A11Y-01, AC-GUEST-01, AC-USER-05"
         },
         {
           "path": "ios/HomesFlowTests/GuestTests.swift",
@@ -229,7 +209,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 221,
-          "excerpt": "- [ ] T064 [US-GUEST-01] XCUITest: guest cannot edit provider \u2014 **Traces**: AC-GUEST-01, SC-03"
+          "excerpt": "- [ ] T064 [US-GUEST-01] XCUITest: guest cannot edit provider \u2014 **Carries**: AC-GUEST-01, SC-03"
         }
       ],
       "attestedBy": null
@@ -240,7 +220,7 @@
       "statement": "AC-GUEST-02** \u2014 Given a Guest tries to access a restricted procedure or document via deep link, when the app evaluates permissions, then access is denied and a clear message is shown explaining limitations.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 259
+        "line": 263
       },
       "status": "verified",
       "implementations": [
@@ -255,14 +235,14 @@
           "excerpt": "// @covers FR-USER-01, FR-GUEST-01, AC-PROC-02, AC-PROC-04, AC-PROC-07, AC-GUEST-02"
         },
         {
-          "path": "ios/HomesFlow/Features/Procedures/ProceduresView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-PROC-01, FR-PROC-02, NFR-PERF-01, AC-GUEST-02, AC-GUEST-04"
-        },
-        {
           "path": "ios/HomesFlow/Features/Guest/GuestAccessDeniedView.swift",
           "line": 3,
           "excerpt": "// @covers AC-GUEST-02, FR-GUEST-01"
+        },
+        {
+          "path": "ios/HomesFlow/Features/Procedures/ProceduresView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-PROC-01, FR-PROC-02, NFR-PERF-01, AC-GUEST-02, AC-GUEST-04"
         },
         {
           "path": "ios/HomesFlowTests/GuestTests.swift",
@@ -286,7 +266,7 @@
       "statement": "AC-GUEST-03** \u2014 Given the Guest receives updated guest-visibility content while offline and another actor changes visibility before sync, when devices sync, then the most recent timestamp determines visibility and Guests see the latest allowed content.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 260
+        "line": 264
       },
       "status": "verified",
       "implementations": [
@@ -317,19 +297,19 @@
       "statement": "AC-GUEST-04** \u2014 Given a Guest opens a guest procedure, when they view it, then they can see step descriptions and read-only status but cannot change step statuses.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 264
+        "line": 268
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Features/Procedures/ProceduresView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-PROC-01, FR-PROC-02, NFR-PERF-01, AC-GUEST-02, AC-GUEST-04"
-        },
-        {
           "path": "ios/HomesFlow/Features/Procedures/ProcedureDetailView.swift",
           "line": 4,
           "excerpt": "// @covers FR-PROC-02, FR-PROC-03, FR-LOG-01, AC-PROC-01, AC-PROC-02, AC-PROC-04, AC-PROC-05, AC-PROC-07, AC-PROC-08, AC-GUEST-04, AC-SYNC-07"
+        },
+        {
+          "path": "ios/HomesFlow/Features/Procedures/ProceduresView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-PROC-01, FR-PROC-02, NFR-PERF-01, AC-GUEST-02, AC-GUEST-04"
         },
         {
           "path": "ios/HomesFlowTests/GuestTests.swift",
@@ -353,7 +333,7 @@
       "statement": "AC-GUEST-05** \u2014 Given a Guest attempts to mark a guest step complete, when they submit, then the app rejects the change and logs the attempted unauthorized action for audit.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 265
+        "line": 269
       },
       "status": "verified",
       "implementations": [
@@ -389,14 +369,14 @@
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Home/HomeRepository.swift",
-          "line": 6,
-          "excerpt": "// @covers FR-HOME-01, AC-HOME-01, AC-HOME-02, AC-HOME-08"
-        },
-        {
           "path": "ios/HomesFlow/Core/Storage/HomePhotoService.swift",
           "line": 5,
           "excerpt": "// @covers AC-HOME-01, AC-HOME-06, AC-HOME-07, FR-HOME-01, NFR-PERF-01"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Home/HomeRepository.swift",
+          "line": 6,
+          "excerpt": "// @covers FR-HOME-01, AC-HOME-01, AC-HOME-02, AC-HOME-08"
         },
         {
           "path": "ios/HomesFlow/Features/HomeSetup/HomeSetupView.swift",
@@ -415,7 +395,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 96,
-          "excerpt": "- [ ] T022 [P] [US-ADMIN-01] Unit test `test_AC_HOME_01_valid_home_created` \u2014 **Traces**: AC-HOME-01 \u2014 *validator only; integration test pending*"
+          "excerpt": "- [ ] T022 [P] [US-ADMIN-01] Unit test `test_AC_HOME_01_valid_home_created` \u2014 **Carries**: AC-HOME-01 \u2014 *validator only; integration test pending*"
         }
       ],
       "attestedBy": null
@@ -431,14 +411,14 @@
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Home/HomeDTO.swift",
-          "line": 70,
-          "excerpt": "/// @covers AC-HOME-02"
-        },
-        {
           "path": "ios/HomesFlow/Core/Home/HomeRepository.swift",
           "line": 6,
           "excerpt": "// @covers FR-HOME-01, AC-HOME-01, AC-HOME-02, AC-HOME-08"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Home/HomeDTO.swift",
+          "line": 70,
+          "excerpt": "/// @covers AC-HOME-02"
         },
         {
           "path": "ios/HomesFlow/Features/HomeSetup/HomeSetupView.swift",
@@ -472,9 +452,9 @@
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Home/HomeConflictResolver.swift",
+          "path": "ios/HomesFlow/Core/Sync/OutboxSyncPolicy.swift",
           "line": 3,
-          "excerpt": "// @covers AC-HOME-03"
+          "excerpt": "// @covers AC-SYNC-01, AC-HOME-03"
         },
         {
           "path": "ios/HomesFlow/Core/Home/HomeRepository.swift",
@@ -482,9 +462,9 @@
           "excerpt": "/// @covers AC-HOME-03"
         },
         {
-          "path": "ios/HomesFlow/Core/Sync/OutboxSyncPolicy.swift",
+          "path": "ios/HomesFlow/Core/Home/HomeConflictResolver.swift",
           "line": 3,
-          "excerpt": "// @covers AC-SYNC-01, AC-HOME-03"
+          "excerpt": "// @covers AC-HOME-03"
         },
         {
           "path": "ios/HomesFlow/Features/HomeSetup/HomeSetupView.swift",
@@ -523,7 +503,7 @@
       "statement": "AC-HOME-04** \u2014 Given a Manager user opens the service provider directory, when they search and select a provider, then they can edit contact details and changes are saved and propagated to permitted users.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 253
+        "line": 257
       },
       "status": "verified",
       "implementations": [
@@ -533,14 +513,14 @@
           "excerpt": "// @covers AC-HOME-04, AC-HOME-05, AC-SYNC-01"
         },
         {
-          "path": "ios/HomesFlow/Core/Providers/ServiceProviderRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-HOME-02, AC-HOME-04, AC-GUEST-01, FR-GUEST-01, AC-HOME-05, AC-SYNC-01, AC-SYNC-07"
-        },
-        {
           "path": "ios/HomesFlow/Core/Providers/ServiceProviderFieldMerge.swift",
           "line": 3,
           "excerpt": "// @covers AC-HOME-04, AC-SYNC-01"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Providers/ServiceProviderRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-HOME-02, AC-HOME-04, AC-GUEST-01, FR-GUEST-01, AC-HOME-05, AC-SYNC-01, AC-SYNC-07"
         },
         {
           "path": "ios/HomesFlow/Core/Providers/ServiceProviderDTO.swift",
@@ -579,7 +559,7 @@
       "statement": "AC-HOME-05** \u2014 Given a Manager user edits a provider entry that an Owner later deletes on another device before sync, when both devices sync, then the most recent timestamp between edit and delete determines final state; if delete is most recent the provider is removed and the editor receives a notification that their edit was removed due to delete.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 254
+        "line": 258
       },
       "status": "verified",
       "implementations": [
@@ -630,6 +610,11 @@
       "status": "verified",
       "implementations": [
         {
+          "path": "ios/HomesFlow/Core/Documents/DocumentStorageService.swift",
+          "line": 4,
+          "excerpt": "// @covers FR-HOME-03, AC-HOME-06"
+        },
+        {
           "path": "ios/HomesFlow/Core/Storage/HomePhotoCache.swift",
           "line": 4,
           "excerpt": "// @covers AC-HOME-06, AC-HOME-07, FR-HOME-01"
@@ -638,11 +623,6 @@
           "path": "ios/HomesFlow/Core/Storage/HomePhotoService.swift",
           "line": 5,
           "excerpt": "// @covers AC-HOME-01, AC-HOME-06, AC-HOME-07, FR-HOME-01, NFR-PERF-01"
-        },
-        {
-          "path": "ios/HomesFlow/Core/Documents/DocumentStorageService.swift",
-          "line": 4,
-          "excerpt": "// @covers FR-HOME-03, AC-HOME-06"
         },
         {
           "path": "ios/HomesFlowTests/HomePhotoTests.swift",
@@ -727,14 +707,14 @@
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Home/HomePhotoSyncGate.swift",
-          "line": 3,
-          "excerpt": "// @covers AC-HOME-08"
-        },
-        {
           "path": "ios/HomesFlow/Core/Home/HomeRepository.swift",
           "line": 6,
           "excerpt": "// @covers FR-HOME-01, AC-HOME-01, AC-HOME-02, AC-HOME-08"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Home/HomePhotoSyncGate.swift",
+          "line": 3,
+          "excerpt": "// @covers AC-HOME-08"
         },
         {
           "path": "ios/HomesFlow/Features/Dashboard/DashboardView.swift",
@@ -793,7 +773,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 102,
-          "excerpt": "- [ ] T024d [P] [US-ADMIN-01] Snapshot or UI test: iPad home detail trailing column has no hero/segmented tabs \u2014 **Traces**: AC-HOME-09 \u2014 *deferred: needs snapshot/XCUITest infra; manual iPad pass"
+          "excerpt": "- [ ] T024d [P] [US-ADMIN-01] Snapshot or UI test: iPad home detail trailing column has no hero/segmented tabs \u2014 **Carries**: AC-HOME-09 \u2014 *deferred: needs snapshot/XCUITest infra; manual iPad pas"
         }
       ],
       "attestedBy": null
@@ -829,7 +809,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 103,
-          "excerpt": "- [ ] T024e [P] [US-ADMIN-01] Snapshot or UI test: iPad leading column shows compact home hero + vertical icon section tabs \u2014 **Traces**: AC-HOME-10 \u2014 *deferred: needs snapshot/XCUITest infra; man"
+          "excerpt": "- [ ] T024e [P] [US-ADMIN-01] Snapshot or UI test: iPad leading column shows compact home hero + vertical icon section tabs \u2014 **Carries**: AC-HOME-10 \u2014 *deferred: needs snapshot/XCUITest infra; ma"
         }
       ],
       "attestedBy": null
@@ -845,14 +825,14 @@
       "status": "tracked-debt",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Features/HomeDetail/HomeDetailView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-HOME-01, FR-NAV-01, FR-USER-02, AC-HOME-09, AC-HOME-10, AC-HOME-11, AC-A11Y-02, AC-A11Y-03, NFR-A11Y-01, AC-GUEST-01, AC-USER-05"
-        },
-        {
           "path": "ios/HomesFlow/Features/Documents/FilesView.swift",
           "line": 5,
           "excerpt": "// @covers FR-HOME-03, FR-NAV-01, AC-HOME-11, AC-HOME-12, AC-HOME-13, AC-HOME-14, AC-GUEST-01"
+        },
+        {
+          "path": "ios/HomesFlow/Features/HomeDetail/HomeDetailView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-HOME-01, FR-NAV-01, FR-USER-02, AC-HOME-09, AC-HOME-10, AC-HOME-11, AC-A11Y-02, AC-A11Y-03, NFR-A11Y-01, AC-GUEST-01, AC-USER-05"
         }
       ],
       "proofs": [],
@@ -860,7 +840,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 104,
-          "excerpt": "- [ ] T024f [P] [US-ADMIN-01] UI test: Contacts, Files, and People sections use the three-panel layout on iPad \u2014 **Traces**: AC-HOME-11 \u2014 *deferred: needs snapshot/XCUITest infra; manual iPad pass"
+          "excerpt": "- [ ] T024f [P] [US-ADMIN-01] UI test: Contacts, Files, and People sections use the three-panel layout on iPad \u2014 **Carries**: AC-HOME-11 \u2014 *deferred: needs snapshot/XCUITest infra; manual iPad pas"
         }
       ],
       "attestedBy": null
@@ -881,6 +861,11 @@
           "excerpt": "// @covers AC-HOME-12"
         },
         {
+          "path": "ios/HomesFlow/Features/Documents/FilesView.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-HOME-03, FR-NAV-01, AC-HOME-11, AC-HOME-12, AC-HOME-13, AC-HOME-14, AC-GUEST-01"
+        },
+        {
           "path": "ios/HomesFlow/Features/Providers/ContactsView.swift",
           "line": 3,
           "excerpt": "// @covers FR-HOME-02, FR-NAV-01, AC-HOME-04, AC-HOME-12, AC-SYNC-07"
@@ -889,11 +874,6 @@
           "path": "ios/HomesFlow/Features/Members/MembersView.swift",
           "line": 3,
           "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, FR-NAV-01, AC-HOME-12, AC-SYNC-07"
-        },
-        {
-          "path": "ios/HomesFlow/Features/Documents/FilesView.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-HOME-03, FR-NAV-01, AC-HOME-11, AC-HOME-12, AC-HOME-13, AC-HOME-14, AC-GUEST-01"
         },
         {
           "path": "ios/HomesFlowTests/FilesFeatureTests.swift",
@@ -1054,34 +1034,60 @@
       "attestedBy": null
     },
     {
+      "id": "AC-HOME-15",
+      "type": "AC",
+      "statement": "AC-HOME-15** \u2014 Given a raw home display name with leading/trailing whitespace and internal whitespace runs (spaces, tabs, or newlines), when it is normalized for display, then the result has no leading or trailing whitespace and every internal whitespace run is collapsed to a single space.",
+      "registry": {
+        "path": "HomesFlow.prd.md",
+        "line": 229
+      },
+      "status": "verified",
+      "implementations": [
+        {
+          "path": "ios/HomesFlow/Core/Home/HomeDisplayName.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-HOME-04, AC-HOME-15"
+        }
+      ],
+      "proofs": [
+        {
+          "name": "test_AC_HOME_15_normalizes_whitespace",
+          "path": "ios/HomesFlowTests/HomeDisplayNameTests.swift",
+          "line": 5
+        }
+      ],
+      "debtTasks": [],
+      "attestedBy": null
+    },
+    {
       "id": "AC-LOG-01",
       "type": "AC",
       "statement": "AC-LOG-01** \u2014 Given an Owner or Manager opens the Log Book for a home, when they write and save a household-scope entry, then the entry appears in the unified log with author and timestamp.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 281
+        "line": 285
       },
       "status": "verified",
       "implementations": [
-        {
-          "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03, AC-LOG-04, AC-LOG-06"
-        },
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookEntryDTO.swift",
           "line": 3,
           "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03"
         },
         {
-          "path": "ios/HomesFlow/Features/LogBook/CommunicationsLogView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-05, AC-LOG-06"
+          "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03, AC-LOG-04, AC-LOG-06"
         },
         {
           "path": "ios/HomesFlow/Features/LogBook/LogEntryEditorSheet.swift",
           "line": 3,
           "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-04"
+        },
+        {
+          "path": "ios/HomesFlow/Features/LogBook/CommunicationsLogView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-05, AC-LOG-06"
         },
         {
           "path": "ios/HomesFlowTests/LogBookTests.swift",
@@ -1105,29 +1111,29 @@
       "statement": "AC-LOG-02** \u2014 Given an Owner or Manager views a procedure, when they write a procedure-scope log entry, then the entry is attached to that procedure and also appears in the unified log.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 282
+        "line": 286
       },
       "status": "verified",
       "implementations": [
-        {
-          "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03, AC-LOG-04, AC-LOG-06"
-        },
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookEntryDTO.swift",
           "line": 3,
           "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03"
         },
         {
-          "path": "ios/HomesFlow/Features/LogBook/CommunicationsLogView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-05, AC-LOG-06"
+          "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03, AC-LOG-04, AC-LOG-06"
         },
         {
           "path": "ios/HomesFlow/Features/LogBook/LogEntryEditorSheet.swift",
           "line": 3,
           "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-04"
+        },
+        {
+          "path": "ios/HomesFlow/Features/LogBook/CommunicationsLogView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-05, AC-LOG-06"
         },
         {
           "path": "ios/HomesFlowTests/LogBookTests.swift",
@@ -1151,19 +1157,19 @@
       "statement": "AC-LOG-03** \u2014 Given a permitted user writes a log entry while offline, when the device reconnects, then the entry syncs append-only (no conflict resolution needed) and appears for other permitted users.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 283
+        "line": 287
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03, AC-LOG-04, AC-LOG-06"
-        },
-        {
           "path": "ios/HomesFlow/Core/LogBook/LogBookEntryDTO.swift",
           "line": 3,
           "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03"
+        },
+        {
+          "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03, AC-LOG-04, AC-LOG-06"
         },
         {
           "path": "ios/HomesFlowTests/LogBookTests.swift",
@@ -1187,7 +1193,7 @@
       "statement": "AC-LOG-04** \u2014 Given a log entry has synced to the server, when the author attempts to edit it, then editing is allowed only within a **10-minute** grace window that starts at server receipt; after the window the entry is immutable.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 284
+        "line": 288
       },
       "status": "verified",
       "implementations": [
@@ -1228,7 +1234,7 @@
       "statement": "AC-LOG-05** \u2014 Given a permitted user opens the unified log view, when entries exist at both household and procedure scope, then entries are shown chronologically and can be filtered by scope.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 285
+        "line": 289
       },
       "status": "verified",
       "implementations": [
@@ -1264,7 +1270,7 @@
       "statement": "AC-LOG-06** \u2014 Given a Guest is signed in, when they attempt to view the Log Book directly or via deep link, then access is denied with a clear message.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 286
+        "line": 290
       },
       "status": "verified",
       "implementations": [
@@ -1300,19 +1306,19 @@
       "statement": "AC-PROC-01** \u2014 Given a Manager user views a procedure, when they mark a step Complete, then the step status updates for all users with appropriate visibility, the procedure's aggregate status and progress in the procedures list update immediately, and an activity log entry is created.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 242
+        "line": 246
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
-          "line": 6,
-          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
-        },
-        {
           "path": "ios/HomesFlow/Core/ActivityLog/ActivityLogService.swift",
           "line": 5,
           "excerpt": "// @covers FR-LOG-01, AC-PROC-01"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
+          "line": 6,
+          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
         },
         {
           "path": "ios/HomesFlow/Features/Procedures/ProcedureDetailView.swift",
@@ -1346,7 +1352,7 @@
       "statement": "AC-PROC-02** \u2014 Given a Manager user attempts to update a step beyond their permission (e.g., another home's owner-only procedure or step), when they submit the change, then the app blocks the update and shows a permission error.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 243
+        "line": 247
       },
       "status": "verified",
       "implementations": [
@@ -1387,7 +1393,7 @@
       "statement": "AC-PROC-03** \u2014 Given a Manager user updates a step while offline and another user updates the same step before sync, when both devices reconnect, then the update with the most recent timestamp is persisted and the other user receives a notification about the overwritten change with reference to the activity log.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 244
+        "line": 248
       },
       "status": "verified",
       "implementations": [
@@ -1418,7 +1424,7 @@
       "statement": "AC-PROC-04** \u2014 Given an Owner or Manager user long-presses a step on a procedure they can modify, when the context menu appears, then Edit, Delete, Move Up, and Move Down are available.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 245
+        "line": 249
       },
       "status": "verified",
       "implementations": [
@@ -1469,19 +1475,19 @@
       "statement": "AC-PROC-05** \u2014 Given an Owner or Manager user taps Add on the Steps section, when they enter a title and save, then a new step is appended at the next sort order and appears for permitted users after sync.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 246
+        "line": 250
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/ProcedureDTO.swift",
-          "line": 97,
-          "excerpt": "/// @covers AC-PROC-05, AC-PROC-06"
-        },
-        {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
           "line": 6,
           "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Procedures/ProcedureDTO.swift",
+          "line": 97,
+          "excerpt": "/// @covers AC-PROC-05, AC-PROC-06"
         },
         {
           "path": "ios/HomesFlow/Features/Procedures/ProcedureDetailView.swift",
@@ -1525,19 +1531,19 @@
       "statement": "AC-PROC-06** \u2014 Given an Owner or Manager user creates, renames, reorders, or deletes a step, when the change syncs, then it persists for permitted users and an activity log entry is created.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 247
+        "line": 251
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/ProcedureDTO.swift",
-          "line": 97,
-          "excerpt": "/// @covers AC-PROC-05, AC-PROC-06"
-        },
-        {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
           "line": 6,
           "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Procedures/ProcedureDTO.swift",
+          "line": 97,
+          "excerpt": "/// @covers AC-PROC-05, AC-PROC-06"
         },
         {
           "path": "ios/HomesFlowTests/StepStructureTests.swift",
@@ -1561,7 +1567,7 @@
       "statement": "AC-PROC-07** \u2014 Given a Guest views a procedure, when they interact with steps, then step structure controls (long-press menu, Add step) are not available and step status remains read-only.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 248
+        "line": 252
       },
       "status": "verified",
       "implementations": [
@@ -1607,7 +1613,7 @@
       "statement": "AC-PROC-08** \u2014 Given a user views a step with an attached photo, when they tap **Photo attached**, then the photo opens in a modal preview; step rows show notes below the title, a tappable photo indicator when present, a pencil **Edit** control (when permitted) to the left of the status ellipsis menu, and the ellipsis menu remains rightmost.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 249
+        "line": 253
       },
       "status": "verified",
       "implementations": [
@@ -1653,29 +1659,14 @@
       "statement": "> Conflict model evolution (decided 2026-07-03, source: story map; refined same day): v1 ships timestamp-wins (AC-SYNC-01, implemented and verified). The model is refined to be **data-type-aware**: terminal step statuses are protected (AC-SYNC-05), other status conflicts resolve automatically with loser notification \u2014 no human conflict-resolution UI (AC-SYNC-06), and structural actions are connectivity-gated (AC-SYNC-07). Field-level merge (AC-SYNC-02) is deferred to a later phase alongside version vectors.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 269
+        "line": 273
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
-          "line": 6,
-          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
-        },
-        {
-          "path": "ios/HomesFlow/Core/Providers/ProviderConflictResolver.swift",
+          "path": "ios/HomesFlow/Core/Sync/OverwriteNotificationPolicy.swift",
           "line": 3,
-          "excerpt": "// @covers AC-HOME-04, AC-HOME-05, AC-SYNC-01"
-        },
-        {
-          "path": "ios/HomesFlow/Core/Providers/ServiceProviderRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-HOME-02, AC-HOME-04, AC-GUEST-01, FR-GUEST-01, AC-HOME-05, AC-SYNC-01, AC-SYNC-07"
-        },
-        {
-          "path": "ios/HomesFlow/Core/Providers/ServiceProviderFieldMerge.swift",
-          "line": 3,
-          "excerpt": "// @covers AC-HOME-04, AC-SYNC-01"
+          "excerpt": "// @covers AC-SYNC-01"
         },
         {
           "path": "ios/HomesFlow/Core/Sync/SyncEngine.swift",
@@ -1683,14 +1674,29 @@
           "excerpt": "// @covers NFR-OFFL-01, AC-SYNC-01, AC-SYNC-02, AC-SYNC-03"
         },
         {
-          "path": "ios/HomesFlow/Core/Sync/OverwriteNotificationPolicy.swift",
-          "line": 3,
-          "excerpt": "// @covers AC-SYNC-01"
-        },
-        {
           "path": "ios/HomesFlow/Core/Sync/OutboxSyncPolicy.swift",
           "line": 3,
           "excerpt": "// @covers AC-SYNC-01, AC-HOME-03"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Providers/ProviderConflictResolver.swift",
+          "line": 3,
+          "excerpt": "// @covers AC-HOME-04, AC-HOME-05, AC-SYNC-01"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Providers/ServiceProviderFieldMerge.swift",
+          "line": 3,
+          "excerpt": "// @covers AC-HOME-04, AC-SYNC-01"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Providers/ServiceProviderRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-HOME-02, AC-HOME-04, AC-GUEST-01, FR-GUEST-01, AC-HOME-05, AC-SYNC-01, AC-SYNC-07"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
+          "line": 6,
+          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
         }
       ],
       "proofs": [
@@ -1724,7 +1730,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 116,
-          "excerpt": "- [ ] T027 [US-ADMIN-02] Offline invite conflict resolution \u2014 **Traces**: AC-USER-03, AC-SYNC-01"
+          "excerpt": "- [ ] T027 [US-ADMIN-02] Offline invite conflict resolution \u2014 **Carries**: AC-USER-03, AC-SYNC-01"
         }
       ],
       "attestedBy": null
@@ -1735,7 +1741,7 @@
       "statement": "> Conflict model evolution (decided 2026-07-03, source: story map; refined same day): v1 ships timestamp-wins (AC-SYNC-01, implemented and verified). The model is refined to be **data-type-aware**: terminal step statuses are protected (AC-SYNC-05), other status conflicts resolve automatically with loser notification \u2014 no human conflict-resolution UI (AC-SYNC-06), and structural actions are connectivity-gated (AC-SYNC-07). Field-level merge (AC-SYNC-02) is deferred to a later phase alongside version vectors.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 269
+        "line": 273
       },
       "status": "tracked-debt",
       "implementations": [
@@ -1750,12 +1756,12 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 139,
-          "excerpt": "- [ ] T035 [NFR-OFFL-01] Field-level merge for non-conflicting offline edits \u2014 **Traces**: AC-SYNC-02 \u2014 *deferred post-MVP (2026-07-03 conflict model decision); pairs with version vectors*"
+          "excerpt": "- [ ] T035 [NFR-OFFL-01] Field-level merge for non-conflicting offline edits \u2014 **Carries**: AC-SYNC-02 \u2014 *deferred post-MVP (2026-07-03 conflict model decision); pairs with version vectors*"
         },
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 146,
-          "excerpt": "- [ ] T039 [P] [NFR-OFFL-01] Unit test `test_AC_SYNC_02_disjoint_fields_merge` \u2014 **Traces**: AC-SYNC-02 \u2014 *deferred post-MVP with T035*"
+          "excerpt": "- [ ] T039 [P] [NFR-OFFL-01] Unit test `test_AC_SYNC_02_disjoint_fields_merge` \u2014 **Carries**: AC-SYNC-02 \u2014 *deferred post-MVP with T035*"
         }
       ],
       "attestedBy": null
@@ -1766,19 +1772,19 @@
       "statement": "AC-SYNC-03** \u2014 Given a user attempts an action that depends on stale permissions cached offline, when syncing, then if the server denies the action, the client reverts the change and shows a permission error with guidance to retry.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 273
+        "line": 277
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Sync/SyncEngine.swift",
-          "line": 5,
-          "excerpt": "// @covers NFR-OFFL-01, AC-SYNC-01, AC-SYNC-02, AC-SYNC-03"
-        },
-        {
           "path": "ios/HomesFlow/Core/Sync/PermissionRevertPolicy.swift",
           "line": 3,
           "excerpt": "// @covers AC-SYNC-03"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Sync/SyncEngine.swift",
+          "line": 5,
+          "excerpt": "// @covers NFR-OFFL-01, AC-SYNC-01, AC-SYNC-02, AC-SYNC-03"
         }
       ],
       "proofs": [
@@ -1797,7 +1803,7 @@
       "statement": "AC-SYNC-04** \u2014 Given local changes or homes are pending sync to the server, when the user views the dashboard, then unsynced homes are visibly indicated and the user can pull to refresh to retry sync while online.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 274
+        "line": 278
       },
       "status": "verified",
       "implementations": [
@@ -1838,19 +1844,19 @@
       "statement": "> Conflict model evolution (decided 2026-07-03, source: story map; refined same day): v1 ships timestamp-wins (AC-SYNC-01, implemented and verified). The model is refined to be **data-type-aware**: terminal step statuses are protected (AC-SYNC-05), other status conflicts resolve automatically with loser notification \u2014 no human conflict-resolution UI (AC-SYNC-06), and structural actions are connectivity-gated (AC-SYNC-07). Field-level merge (AC-SYNC-02) is deferred to a later phase alongside version vectors.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 269
+        "line": 273
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/StepStatusConflictPolicy.swift",
-          "line": 3,
-          "excerpt": "// @covers AC-SYNC-05, AC-SYNC-06"
-        },
-        {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
           "line": 6,
           "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Procedures/StepStatusConflictPolicy.swift",
+          "line": 3,
+          "excerpt": "// @covers AC-SYNC-05, AC-SYNC-06"
         },
         {
           "path": "ios/HomesFlowTests/StepStatusConflictPolicyTests.swift",
@@ -1879,19 +1885,19 @@
       "statement": "> Conflict model evolution (decided 2026-07-03, source: story map; refined same day): v1 ships timestamp-wins (AC-SYNC-01, implemented and verified). The model is refined to be **data-type-aware**: terminal step statuses are protected (AC-SYNC-05), other status conflicts resolve automatically with loser notification \u2014 no human conflict-resolution UI (AC-SYNC-06), and structural actions are connectivity-gated (AC-SYNC-07). Field-level merge (AC-SYNC-02) is deferred to a later phase alongside version vectors.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 269
+        "line": 273
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/StepStatusConflictPolicy.swift",
-          "line": 3,
-          "excerpt": "// @covers AC-SYNC-05, AC-SYNC-06"
-        },
-        {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
           "line": 6,
           "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Procedures/StepStatusConflictPolicy.swift",
+          "line": 3,
+          "excerpt": "// @covers AC-SYNC-05, AC-SYNC-06"
         },
         {
           "path": "ios/HomesFlowTests/StepStatusConflictPolicyTests.swift",
@@ -1915,14 +1921,14 @@
       "statement": "> Conflict model evolution (decided 2026-07-03, source: story map; refined same day): v1 ships timestamp-wins (AC-SYNC-01, implemented and verified). The model is refined to be **data-type-aware**: terminal step statuses are protected (AC-SYNC-05), other status conflicts resolve automatically with loser notification \u2014 no human conflict-resolution UI (AC-SYNC-06), and structural actions are connectivity-gated (AC-SYNC-07). Field-level merge (AC-SYNC-02) is deferred to a later phase alongside version vectors.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 269
+        "line": 273
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
-          "line": 6,
-          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
+          "path": "ios/HomesFlow/Core/Sync/StructuralActionPolicy.swift",
+          "line": 3,
+          "excerpt": "// @covers AC-SYNC-07, NFR-OFFL-01"
         },
         {
           "path": "ios/HomesFlow/Core/Providers/ServiceProviderRepository.swift",
@@ -1930,19 +1936,14 @@
           "excerpt": "// @covers FR-HOME-02, AC-HOME-04, AC-GUEST-01, FR-GUEST-01, AC-HOME-05, AC-SYNC-01, AC-SYNC-07"
         },
         {
+          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
+          "line": 6,
+          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
+        },
+        {
           "path": "ios/HomesFlow/Core/Members/MemberRepository.swift",
           "line": 5,
           "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, AC-SYNC-07"
-        },
-        {
-          "path": "ios/HomesFlow/Core/Sync/StructuralActionPolicy.swift",
-          "line": 3,
-          "excerpt": "// @covers AC-SYNC-07, NFR-OFFL-01"
-        },
-        {
-          "path": "ios/HomesFlow/Features/Procedures/ProcedureDetailView.swift",
-          "line": 4,
-          "excerpt": "// @covers FR-PROC-02, FR-PROC-03, FR-LOG-01, AC-PROC-01, AC-PROC-02, AC-PROC-04, AC-PROC-05, AC-PROC-07, AC-PROC-08, AC-GUEST-04, AC-SYNC-07"
         },
         {
           "path": "ios/HomesFlow/Features/Providers/ContactsView.swift",
@@ -1950,14 +1951,19 @@
           "excerpt": "// @covers FR-HOME-02, FR-NAV-01, AC-HOME-04, AC-HOME-12, AC-SYNC-07"
         },
         {
-          "path": "ios/HomesFlow/Features/Members/MembersView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, FR-NAV-01, AC-HOME-12, AC-SYNC-07"
+          "path": "ios/HomesFlow/Features/Procedures/ProcedureDetailView.swift",
+          "line": 4,
+          "excerpt": "// @covers FR-PROC-02, FR-PROC-03, FR-LOG-01, AC-PROC-01, AC-PROC-02, AC-PROC-04, AC-PROC-05, AC-PROC-07, AC-PROC-08, AC-GUEST-04, AC-SYNC-07"
         },
         {
           "path": "ios/HomesFlow/Features/Members/InviteMemberView.swift",
           "line": 3,
           "excerpt": "// @covers AC-USER-01, AC-USER-07, FR-GUEST-02, AC-SYNC-07"
+        },
+        {
+          "path": "ios/HomesFlow/Features/Members/MembersView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, FR-NAV-01, AC-HOME-12, AC-SYNC-07"
         },
         {
           "path": "ios/HomesFlowTests/StructuralActionPolicyTests.swift",
@@ -1967,14 +1973,14 @@
       ],
       "proofs": [
         {
-          "name": "test_AC_SYNC_07_structural_actions_blocked_offline",
-          "path": "ios/HomesFlowTests/StructuralActionPolicyTests.swift",
-          "line": 8
-        },
-        {
           "name": "test_AC_SYNC_07_structural_offline_gate_matrix",
           "path": "ios/HomesFlowTests/SyncConflictMatrixTests.swift",
           "line": 246
+        },
+        {
+          "name": "test_AC_SYNC_07_structural_actions_blocked_offline",
+          "path": "ios/HomesFlowTests/StructuralActionPolicyTests.swift",
+          "line": 8
         }
       ],
       "debtTasks": [],
@@ -1986,29 +1992,29 @@
       "statement": "AC-USER-01** \u2014 Given an Owner provides an email/phone and role and sends an invite, when the invite is accepted, then the invitee is added to the home with the assigned role and receives appropriate permissions immediately.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 229
+        "line": 233
       },
       "status": "verified",
       "implementations": [
-        {
-          "path": "ios/HomesFlow/Core/Members/MemberRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, AC-SYNC-07"
-        },
         {
           "path": "ios/HomesFlow/Core/Members/InvitePolicy.swift",
           "line": 3,
           "excerpt": "// @covers AC-USER-01, AC-USER-02, AC-USER-06, AC-USER-07"
         },
         {
-          "path": "ios/HomesFlow/Features/Members/MembersView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, FR-NAV-01, AC-HOME-12, AC-SYNC-07"
+          "path": "ios/HomesFlow/Core/Members/MemberRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, AC-SYNC-07"
         },
         {
           "path": "ios/HomesFlow/Features/Members/InviteMemberView.swift",
           "line": 3,
           "excerpt": "// @covers AC-USER-01, AC-USER-07, FR-GUEST-02, AC-SYNC-07"
+        },
+        {
+          "path": "ios/HomesFlow/Features/Members/MembersView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, FR-NAV-01, AC-HOME-12, AC-SYNC-07"
         },
         {
           "path": "ios/HomesFlowTests/MemberInviteTests.swift",
@@ -2037,15 +2043,10 @@
       "statement": "AC-USER-02** \u2014 Given an Owner re-sends or revokes an invite before acceptance, when they revoke, then the invite token becomes invalid and the invitee cannot join with that token.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 231
+        "line": 235
       },
       "status": "verified",
       "implementations": [
-        {
-          "path": "ios/HomesFlow/Core/Members/MemberRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, AC-SYNC-07"
-        },
         {
           "path": "ios/HomesFlow/Core/Members/InvitePolicy.swift",
           "line": 3,
@@ -2057,9 +2058,9 @@
           "excerpt": "// @covers FR-NAV-01, AC-USER-02, AC-HOME-10"
         },
         {
-          "path": "ios/HomesFlow/Features/Members/MembersView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, FR-NAV-01, AC-HOME-12, AC-SYNC-07"
+          "path": "ios/HomesFlow/Core/Members/MemberRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, AC-SYNC-07"
         },
         {
           "path": "ios/HomesFlow/Features/Members/PendingInviteDetailView.swift",
@@ -2067,14 +2068,19 @@
           "excerpt": "// @covers AC-USER-02, AC-USER-07, FR-GUEST-02"
         },
         {
-          "path": "ios/HomesFlowTests/MemberInviteTests.swift",
-          "line": 4,
-          "excerpt": "// @covers AC-USER-01, AC-USER-02, AC-USER-04, AC-USER-06, AC-USER-07"
+          "path": "ios/HomesFlow/Features/Members/MembersView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, FR-NAV-01, AC-HOME-12, AC-SYNC-07"
         },
         {
           "path": "ios/HomesFlowTests/PeopleSelectionTests.swift",
           "line": 4,
           "excerpt": "// @covers AC-HOME-10, AC-USER-02"
+        },
+        {
+          "path": "ios/HomesFlowTests/MemberInviteTests.swift",
+          "line": 4,
+          "excerpt": "// @covers AC-USER-01, AC-USER-02, AC-USER-04, AC-USER-06, AC-USER-07"
         }
       ],
       "proofs": [
@@ -2093,7 +2099,7 @@
       "statement": "AC-USER-03** \u2014 Given an Owner invites a user while offline and the invite is processed on another device first, when sync occurs, then the most recent action (invite or revoke) by timestamp determines invite state and the Owner receives a notification of the resolved outcome.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 232
+        "line": 236
       },
       "status": "tracked-debt",
       "implementations": [],
@@ -2102,12 +2108,12 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 116,
-          "excerpt": "- [ ] T027 [US-ADMIN-02] Offline invite conflict resolution \u2014 **Traces**: AC-USER-03, AC-SYNC-01"
+          "excerpt": "- [ ] T027 [US-ADMIN-02] Offline invite conflict resolution \u2014 **Carries**: AC-USER-03, AC-SYNC-01"
         },
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 126,
-          "excerpt": "- [ ] T033a [P] [US-ADMIN-02] Unit test `test_AC_USER_03_offline_invite_conflict` \u2014 **Traces**: AC-USER-03"
+          "excerpt": "- [ ] T033a [P] [US-ADMIN-02] Unit test `test_AC_USER_03_offline_invite_conflict` \u2014 **Carries**: AC-USER-03"
         }
       ],
       "attestedBy": null
@@ -2118,7 +2124,7 @@
       "statement": "AC-USER-04** \u2014 Given an Owner assigns a Manager role to a user, when the user signs in, then they can create and modify procedures and service providers for that home.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 236
+        "line": 240
       },
       "status": "verified",
       "implementations": [
@@ -2140,14 +2146,14 @@
       ],
       "proofs": [
         {
-          "name": "test_AC_USER_04_edit_role_can_modify_procedures",
-          "path": "ios/HomesFlowTests/MemberInviteTests.swift",
-          "line": 84
-        },
-        {
           "name": "test_AC_USER_04_manager_can_update_step",
           "path": "ios/HomesFlowTests/PermissionServiceTests.swift",
           "line": 17
+        },
+        {
+          "name": "test_AC_USER_04_edit_role_can_modify_procedures",
+          "path": "ios/HomesFlowTests/MemberInviteTests.swift",
+          "line": 84
         }
       ],
       "debtTasks": [],
@@ -2159,7 +2165,7 @@
       "statement": "AC-USER-05** \u2014 Given an Owner assigns a Guest role to a user, when the guest signs in, then they see only guest-appropriate fields (e.g., WiFi, guest procedures) and cannot edit protected data.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 237
+        "line": 241
       },
       "status": "verified",
       "implementations": [
@@ -2190,7 +2196,7 @@
       "statement": "AC-USER-06** \u2014 Given concurrent role changes occur on multiple devices, when devices sync, then the change with the most recent timestamp wins and an owner-visible audit entry records the prior role.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 238
+        "line": 242
       },
       "status": "verified",
       "implementations": [
@@ -2221,7 +2227,7 @@
       "statement": "AC-USER-07** \u2014 Given an Owner creates an invite in MVP, when the invitee receives the shared invite link or token and signs in with the invited email, then they can accept the invite (paste token or open link) and join the home with the assigned role.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 230
+        "line": 234
       },
       "status": "verified",
       "implementations": [
@@ -2267,9 +2273,9 @@
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Auth/AppleSignInPolicy.swift",
-          "line": 4,
-          "excerpt": "// @covers FR-AUTH-01"
+          "path": "ios/HomesFlow/Core/Supabase/SupabaseConfig.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-AUTH-01, NFR-SEC-01"
         },
         {
           "path": "ios/HomesFlow/Core/Supabase/SupabaseClientProvider.swift",
@@ -2277,9 +2283,9 @@
           "excerpt": "// @covers FR-AUTH-01"
         },
         {
-          "path": "ios/HomesFlow/Core/Supabase/SupabaseConfig.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-AUTH-01, NFR-SEC-01"
+          "path": "ios/HomesFlow/Core/Auth/AppleSignInPolicy.swift",
+          "line": 4,
+          "excerpt": "// @covers FR-AUTH-01"
         },
         {
           "path": "ios/HomesFlow/Core/Sync/LocalDataStore.swift",
@@ -2292,14 +2298,14 @@
           "excerpt": "// @covers FR-AUTH-01"
         },
         {
-          "path": "ios/HomesFlow/Features/Settings/SettingsView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-NOTIF-01, FR-AUTH-01"
-        },
-        {
           "path": "ios/HomesFlow/Features/Auth/AuthView.swift",
           "line": 4,
           "excerpt": "// @covers FR-AUTH-01"
+        },
+        {
+          "path": "ios/HomesFlow/Features/Settings/SettingsView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-NOTIF-01, FR-AUTH-01"
         },
         {
           "path": "ios/HomesFlowTests/AppleSignInPolicyTests.swift",
@@ -2312,27 +2318,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 75,
-          "excerpt": "- [ ] T017 [P] [US-ADMIN-01] XCUITest: sign-in with email \u2192 dashboard visible \u2014 **Traces**: FR-AUTH-01"
-        }
-      ],
-      "attestedBy": null
-    },
-    {
-      "id": "FR-CLEW-01",
-      "type": "FR",
-      "statement": "FR-CLEW-01** (Priority: Low) \u2014 **Clewseau trial.** Pure helper `HomeDisplayName.normalized(_:)` collapses whitespace in home display names (no UI, no sync). Temporary probe ID \u2014 tombstone after the cold-agent trial.",
-      "registry": {
-        "path": "HomesFlow.prd.md",
-        "line": 68
-      },
-      "status": "backlog",
-      "implementations": [],
-      "proofs": [],
-      "debtTasks": [
-        {
-          "path": "specs/backlog/tasks.md",
-          "line": 8,
-          "excerpt": "- [ ] T900 Deliver `HomeDisplayName.normalized(_:)` natively in HomesFlow (whitespace trim + collapse; the Clewseau trial slice, delivered here as well) \u2014 **Traces**: US-CLEW-01, FR-CLEW-01, AC-CLEW"
+          "excerpt": "- [ ] T017 [P] [US-ADMIN-01] XCUITest: sign-in with email \u2192 dashboard visible \u2014 **Carries**: FR-AUTH-01"
         }
       ],
       "attestedBy": null
@@ -2343,14 +2329,14 @@
       "statement": "FR-GUEST-01** (Priority: Medium) \u2014 Guest users view only approved procedures and info.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 63
+        "line": 64
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
-          "line": 6,
-          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
+          "path": "ios/HomesFlow/Core/Documents/DocumentRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-HOME-03, AC-GUEST-01, FR-GUEST-01"
         },
         {
           "path": "ios/HomesFlow/Core/Providers/ServiceProviderRepository.swift",
@@ -2358,14 +2344,14 @@
           "excerpt": "// @covers FR-HOME-02, AC-HOME-04, AC-GUEST-01, FR-GUEST-01, AC-HOME-05, AC-SYNC-01, AC-SYNC-07"
         },
         {
+          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
+          "line": 6,
+          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
+        },
+        {
           "path": "ios/HomesFlow/Core/Permissions/PermissionService.swift",
           "line": 3,
           "excerpt": "// @covers FR-USER-01, FR-GUEST-01, AC-PROC-02, AC-PROC-04, AC-PROC-07, AC-GUEST-02"
-        },
-        {
-          "path": "ios/HomesFlow/Core/Documents/DocumentRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-HOME-03, AC-GUEST-01, FR-GUEST-01"
         },
         {
           "path": "ios/HomesFlow/Features/Guest/GuestAccessDeniedView.swift",
@@ -2378,7 +2364,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 252,
-          "excerpt": "- [ ] T071 [P] RLS integration tests against contracts/rls-permissions.md \u2014 **Traces**: FR-USER-01, FR-GUEST-01"
+          "excerpt": "- [ ] T071 [P] RLS integration tests against contracts/rls-permissions.md \u2014 **Carries**: FR-USER-01, FR-GUEST-01"
         }
       ],
       "attestedBy": null
@@ -2389,7 +2375,7 @@
       "statement": "FR-GUEST-02** (Priority: Medium) \u2014 Quick guest onboarding via email or SMS invite.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 64
+        "line": 65
       },
       "status": "verified",
       "implementations": [
@@ -2419,16 +2405,6 @@
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Home/HomeRepository.swift",
-          "line": 6,
-          "excerpt": "// @covers FR-HOME-01, AC-HOME-01, AC-HOME-02, AC-HOME-08"
-        },
-        {
-          "path": "ios/HomesFlow/Core/Models/SwiftDataModels.swift",
-          "line": 4,
-          "excerpt": "// @covers FR-HOME-01, FR-USER-01, FR-PROC-01, NFR-OFFL-01"
-        },
-        {
           "path": "ios/HomesFlow/Core/Storage/HomePhotoCache.swift",
           "line": 4,
           "excerpt": "// @covers AC-HOME-06, AC-HOME-07, FR-HOME-01"
@@ -2437,6 +2413,16 @@
           "path": "ios/HomesFlow/Core/Storage/HomePhotoService.swift",
           "line": 5,
           "excerpt": "// @covers AC-HOME-01, AC-HOME-06, AC-HOME-07, FR-HOME-01, NFR-PERF-01"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Models/SwiftDataModels.swift",
+          "line": 4,
+          "excerpt": "// @covers FR-HOME-01, FR-USER-01, FR-PROC-01, NFR-OFFL-01"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Home/HomeRepository.swift",
+          "line": 6,
+          "excerpt": "// @covers FR-HOME-01, AC-HOME-01, AC-HOME-02, AC-HOME-08"
         },
         {
           "path": "ios/HomesFlow/Features/Home/HomeHeroCard.swift",
@@ -2509,6 +2495,11 @@
       "status": "verified",
       "implementations": [
         {
+          "path": "ios/HomesFlow/Core/Documents/DocumentStorageService.swift",
+          "line": 4,
+          "excerpt": "// @covers FR-HOME-03, AC-HOME-06"
+        },
+        {
           "path": "ios/HomesFlow/Core/Documents/DocumentRepository.swift",
           "line": 5,
           "excerpt": "// @covers FR-HOME-03, AC-GUEST-01, FR-GUEST-01"
@@ -2517,11 +2508,6 @@
           "path": "ios/HomesFlow/Core/Documents/DocumentDTO.swift",
           "line": 3,
           "excerpt": "// @covers FR-HOME-03, AC-GUEST-01"
-        },
-        {
-          "path": "ios/HomesFlow/Core/Documents/DocumentStorageService.swift",
-          "line": 4,
-          "excerpt": "// @covers FR-HOME-03, AC-HOME-06"
         },
         {
           "path": "ios/HomesFlow/Features/Documents/DocumentQuickLookPreview.swift",
@@ -2539,24 +2525,44 @@
       "attestedBy": null
     },
     {
+      "id": "FR-HOME-04",
+      "type": "FR",
+      "statement": "FR-HOME-04** (Priority: Low) \u2014 Home display names MUST be normalized for display by trimming leading/trailing whitespace and collapsing internal runs of whitespace to a single space. Pure helper; no UI, networking, or sync behavior.",
+      "registry": {
+        "path": "HomesFlow.prd.md",
+        "line": 59
+      },
+      "status": "verified",
+      "implementations": [
+        {
+          "path": "ios/HomesFlow/Core/Home/HomeDisplayName.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-HOME-04, AC-HOME-15"
+        }
+      ],
+      "proofs": [],
+      "debtTasks": [],
+      "attestedBy": null
+    },
+    {
       "id": "FR-LOG-01",
       "type": "FR",
       "statement": "FR-LOG-01** (Priority: Medium) \u2014 History log of changes for accountability.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 66
+        "line": 67
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/ActivityLog/ActivityLogService.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-LOG-01, AC-PROC-01"
-        },
-        {
           "path": "ios/HomesFlow/Core/ActivityLog/ActivityLogDTO.swift",
           "line": 3,
           "excerpt": "// @covers FR-LOG-01"
+        },
+        {
+          "path": "ios/HomesFlow/Core/ActivityLog/ActivityLogService.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-LOG-01, AC-PROC-01"
         },
         {
           "path": "ios/HomesFlow/Features/Procedures/ProcedureDetailView.swift",
@@ -2574,20 +2580,10 @@
       "statement": "FR-LOG-02** (Priority: Medium) \u2014 User-authored **Log Book**: Owners and Managers write free-form log entries at household scope or attached to a procedure, viewable in a unified chronological log alongside activity history. Entries are append-only offline, editable only within a 10-minute grace window that starts at server receipt. Guests have no Log Book access.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 67
+        "line": 68
       },
       "status": "verified",
       "implementations": [
-        {
-          "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03, AC-LOG-04, AC-LOG-06"
-        },
-        {
-          "path": "ios/HomesFlow/Core/LogBook/LogBookGraceWindowPolicy.swift",
-          "line": 3,
-          "excerpt": "// @covers AC-LOG-04, FR-LOG-02"
-        },
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookScopeFilter.swift",
           "line": 3,
@@ -2599,14 +2595,24 @@
           "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03"
         },
         {
-          "path": "ios/HomesFlow/Features/LogBook/CommunicationsLogView.swift",
+          "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-03, AC-LOG-04, AC-LOG-06"
+        },
+        {
+          "path": "ios/HomesFlow/Core/LogBook/LogBookGraceWindowPolicy.swift",
           "line": 3,
-          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-05, AC-LOG-06"
+          "excerpt": "// @covers AC-LOG-04, FR-LOG-02"
         },
         {
           "path": "ios/HomesFlow/Features/LogBook/LogEntryEditorSheet.swift",
           "line": 3,
           "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-04"
+        },
+        {
+          "path": "ios/HomesFlow/Features/LogBook/CommunicationsLogView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-LOG-02, AC-LOG-01, AC-LOG-02, AC-LOG-05, AC-LOG-06"
         },
         {
           "path": "ios/HomesFlowTests/LogBookTests.swift",
@@ -2624,7 +2630,7 @@
       "statement": "FR-NAV-01** (Priority: High) \u2014 Home detail MUST expose four sections labeled **Procedures**, **Contacts**, **Files**, and **People** with device-appropriate navigation (iPhone: hero + horizontal tabs; iPad: compact left-column hero + vertical icon tabs, with a **three-panel** layout \u2014 sidebar, section list, and section detail \u2014 for every section).",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 59
+        "line": 60
       },
       "status": "verified",
       "implementations": [
@@ -2632,6 +2638,11 @@
           "path": "ios/HomesFlow/Core/Members/PeopleSelection.swift",
           "line": 3,
           "excerpt": "// @covers FR-NAV-01, AC-USER-02, AC-HOME-10"
+        },
+        {
+          "path": "ios/HomesFlow/Features/Documents/FilesView.swift",
+          "line": 5,
+          "excerpt": "// @covers FR-HOME-03, FR-NAV-01, AC-HOME-11, AC-HOME-12, AC-HOME-13, AC-HOME-14, AC-GUEST-01"
         },
         {
           "path": "ios/HomesFlow/Features/Providers/ContactsView.swift",
@@ -2644,19 +2655,14 @@
           "excerpt": "// @covers FR-HOME-01, US-ADMIN-01, AC-HOME-08, AC-SYNC-04, FR-NAV-01"
         },
         {
-          "path": "ios/HomesFlow/Features/HomeDetail/HomeDetailView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-HOME-01, FR-NAV-01, FR-USER-02, AC-HOME-09, AC-HOME-10, AC-HOME-11, AC-A11Y-02, AC-A11Y-03, NFR-A11Y-01, AC-GUEST-01, AC-USER-05"
-        },
-        {
           "path": "ios/HomesFlow/Features/Members/MembersView.swift",
           "line": 3,
           "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, FR-NAV-01, AC-HOME-12, AC-SYNC-07"
         },
         {
-          "path": "ios/HomesFlow/Features/Documents/FilesView.swift",
-          "line": 5,
-          "excerpt": "// @covers FR-HOME-03, FR-NAV-01, AC-HOME-11, AC-HOME-12, AC-HOME-13, AC-HOME-14, AC-GUEST-01"
+          "path": "ios/HomesFlow/Features/HomeDetail/HomeDetailView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-HOME-01, FR-NAV-01, FR-USER-02, AC-HOME-09, AC-HOME-10, AC-HOME-11, AC-A11Y-02, AC-A11Y-03, NFR-A11Y-01, AC-GUEST-01, AC-USER-05"
         }
       ],
       "proofs": [],
@@ -2669,7 +2675,7 @@
       "statement": "FR-NOTIF-01** (Priority: Medium) \u2014 Optional push notifications for changed statuses and new assignments.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 65
+        "line": 66
       },
       "status": "verified",
       "implementations": [
@@ -2689,14 +2695,14 @@
       "statement": "FR-PROC-01** (Priority: High) \u2014 Add/edit procedure lists (e.g., winterizing, arrival prep) with persistent status (Not Started / In Progress / Complete / N/A).",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 60
+        "line": 61
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/ProcedureDTO.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-PROC-01, FR-PROC-02"
+          "path": "ios/HomesFlow/Core/Models/SwiftDataModels.swift",
+          "line": 4,
+          "excerpt": "// @covers FR-HOME-01, FR-USER-01, FR-PROC-01, NFR-OFFL-01"
         },
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -2704,9 +2710,9 @@
           "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
         },
         {
-          "path": "ios/HomesFlow/Core/Models/SwiftDataModels.swift",
-          "line": 4,
-          "excerpt": "// @covers FR-HOME-01, FR-USER-01, FR-PROC-01, NFR-OFFL-01"
+          "path": "ios/HomesFlow/Core/Procedures/ProcedureDTO.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-PROC-01, FR-PROC-02"
         },
         {
           "path": "ios/HomesFlow/Features/Procedures/ProceduresView.swift",
@@ -2724,29 +2730,29 @@
       "statement": "FR-PROC-02** (Priority: High) \u2014 Procedures contain ordered steps, each with its own status. Owner and Manager users can **create, rename, reorder, and delete** steps on procedures they can modify (per visibility). Guests have read-only access to step content and status.",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 61
+        "line": 62
       },
       "status": "verified",
       "implementations": [
-        {
-          "path": "ios/HomesFlow/Core/Procedures/ProcedureDTO.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-PROC-01, FR-PROC-02"
-        },
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
           "line": 6,
           "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
         },
         {
-          "path": "ios/HomesFlow/Features/Procedures/ProceduresView.swift",
+          "path": "ios/HomesFlow/Core/Procedures/ProcedureDTO.swift",
           "line": 3,
-          "excerpt": "// @covers FR-PROC-01, FR-PROC-02, NFR-PERF-01, AC-GUEST-02, AC-GUEST-04"
+          "excerpt": "// @covers FR-PROC-01, FR-PROC-02"
         },
         {
           "path": "ios/HomesFlow/Features/Procedures/ProcedureDetailView.swift",
           "line": 4,
           "excerpt": "// @covers FR-PROC-02, FR-PROC-03, FR-LOG-01, AC-PROC-01, AC-PROC-02, AC-PROC-04, AC-PROC-05, AC-PROC-07, AC-PROC-08, AC-GUEST-04, AC-SYNC-07"
+        },
+        {
+          "path": "ios/HomesFlow/Features/Procedures/ProceduresView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-PROC-01, FR-PROC-02, NFR-PERF-01, AC-GUEST-02, AC-GUEST-04"
         }
       ],
       "proofs": [],
@@ -2759,19 +2765,19 @@
       "statement": "FR-PROC-03** (Priority: High) \u2014 Attach optional notes and photos to individual procedure steps (document attachments remain on the Files tab per FR-HOME-03).",
       "registry": {
         "path": "HomesFlow.prd.md",
-        "line": 62
+        "line": 63
       },
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
-          "line": 6,
-          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
-        },
-        {
           "path": "ios/HomesFlow/Core/Storage/ProcedureAttachmentService.swift",
           "line": 5,
           "excerpt": "// @covers FR-PROC-03"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
+          "line": 6,
+          "excerpt": "// @covers AC-PROC-01, FR-PROC-01, FR-PROC-02, FR-PROC-03, AC-PROC-02, AC-PROC-03, AC-PROC-04, AC-PROC-05, AC-PROC-06, AC-PROC-07, AC-GUEST-03, AC-GUEST-05, FR-"
         },
         {
           "path": "ios/HomesFlow/Features/Procedures/ProcedureDetailView.swift",
@@ -2794,11 +2800,6 @@
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Home/HomeAccessPolicy.swift",
-          "line": 3,
-          "excerpt": "// @covers NFR-SEC-01, FR-USER-01"
-        },
-        {
           "path": "ios/HomesFlow/Core/Models/SwiftDataModels.swift",
           "line": 4,
           "excerpt": "// @covers FR-HOME-01, FR-USER-01, FR-PROC-01, NFR-OFFL-01"
@@ -2807,6 +2808,11 @@
           "path": "ios/HomesFlow/Core/Permissions/PermissionService.swift",
           "line": 3,
           "excerpt": "// @covers FR-USER-01, FR-GUEST-01, AC-PROC-02, AC-PROC-04, AC-PROC-07, AC-GUEST-02"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Home/HomeAccessPolicy.swift",
+          "line": 3,
+          "excerpt": "// @covers NFR-SEC-01, FR-USER-01"
         },
         {
           "path": "ios/HomesFlowTests/HomeAccessPolicyTests.swift",
@@ -2819,7 +2825,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 252,
-          "excerpt": "- [ ] T071 [P] RLS integration tests against contracts/rls-permissions.md \u2014 **Traces**: FR-USER-01, FR-GUEST-01"
+          "excerpt": "- [ ] T071 [P] RLS integration tests against contracts/rls-permissions.md \u2014 **Carries**: FR-USER-01, FR-GUEST-01"
         }
       ],
       "attestedBy": null
@@ -2845,14 +2851,14 @@
           "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, AC-SYNC-07"
         },
         {
-          "path": "ios/HomesFlow/Features/HomeDetail/HomeDetailView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-HOME-01, FR-NAV-01, FR-USER-02, AC-HOME-09, AC-HOME-10, AC-HOME-11, AC-A11Y-02, AC-A11Y-03, NFR-A11Y-01, AC-GUEST-01, AC-USER-05"
-        },
-        {
           "path": "ios/HomesFlow/Features/Members/MembersView.swift",
           "line": 3,
           "excerpt": "// @covers FR-USER-02, AC-USER-01, AC-USER-02, AC-USER-04\u202606, FR-NAV-01, AC-HOME-12, AC-SYNC-07"
+        },
+        {
+          "path": "ios/HomesFlow/Features/HomeDetail/HomeDetailView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-HOME-01, FR-NAV-01, FR-USER-02, AC-HOME-09, AC-HOME-10, AC-HOME-11, AC-A11Y-02, AC-A11Y-03, NFR-A11Y-01, AC-GUEST-01, AC-USER-05"
         },
         {
           "path": "ios/HomesFlowTests/MemberRemovalTests.swift",
@@ -2935,12 +2941,12 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 139,
-          "excerpt": "- [ ] T035 [NFR-OFFL-01] Field-level merge for non-conflicting offline edits \u2014 **Traces**: AC-SYNC-02 \u2014 *deferred post-MVP (2026-07-03 conflict model decision); pairs with version vectors*"
+          "excerpt": "- [ ] T035 [NFR-OFFL-01] Field-level merge for non-conflicting offline edits \u2014 **Carries**: AC-SYNC-02 \u2014 *deferred post-MVP (2026-07-03 conflict model decision); pairs with version vectors*"
         },
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 146,
-          "excerpt": "- [ ] T039 [P] [NFR-OFFL-01] Unit test `test_AC_SYNC_02_disjoint_fields_merge` \u2014 **Traces**: AC-SYNC-02 \u2014 *deferred post-MVP with T035*"
+          "excerpt": "- [ ] T039 [P] [NFR-OFFL-01] Unit test `test_AC_SYNC_02_disjoint_fields_merge` \u2014 **Carries**: AC-SYNC-02 \u2014 *deferred post-MVP with T035*"
         }
       ],
       "attestedBy": null
@@ -2961,14 +2967,14 @@
           "excerpt": "// @covers AC-HOME-01, AC-HOME-06, AC-HOME-07, FR-HOME-01, NFR-PERF-01"
         },
         {
-          "path": "ios/HomesFlow/Features/Procedures/ProceduresView.swift",
-          "line": 3,
-          "excerpt": "// @covers FR-PROC-01, FR-PROC-02, NFR-PERF-01, AC-GUEST-02, AC-GUEST-04"
-        },
-        {
           "path": "ios/HomesFlow/Features/Documents/DocumentQuickLookPreview.swift",
           "line": 5,
           "excerpt": "// @covers FR-HOME-03, AC-HOME-13, NFR-PERF-01"
+        },
+        {
+          "path": "ios/HomesFlow/Features/Procedures/ProceduresView.swift",
+          "line": 3,
+          "excerpt": "// @covers FR-PROC-01, FR-PROC-02, NFR-PERF-01, AC-GUEST-02, AC-GUEST-04"
         }
       ],
       "proofs": [],
@@ -2976,7 +2982,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 254,
-          "excerpt": "- [ ] T072a [P] Performance smoke: screen load & sync latency baselines \u2014 **Traces**: NFR-PERF-01, NFR-SYNC-01"
+          "excerpt": "- [ ] T072a [P] Performance smoke: screen load & sync latency baselines \u2014 **Carries**: NFR-PERF-01, NFR-SYNC-01"
         }
       ],
       "attestedBy": null
@@ -2996,7 +3002,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 256,
-          "excerpt": "- [ ] T072c [P] Enable Xcode crash report collection / document NFR-REL-01 monitoring path \u2014 **Traces**: NFR-REL-01"
+          "excerpt": "- [ ] T072c [P] Enable Xcode crash report collection / document NFR-REL-01 monitoring path \u2014 **Carries**: NFR-REL-01"
         }
       ],
       "attestedBy": null
@@ -3016,7 +3022,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 255,
-          "excerpt": "- [ ] T072b [P] Document NFR-SCALE-01 architecture assumptions in plan.md (no load test in MVP) \u2014 **Traces**: NFR-SCALE-01"
+          "excerpt": "- [ ] T072b [P] Document NFR-SCALE-01 architecture assumptions in plan.md (no load test in MVP) \u2014 **Carries**: NFR-SCALE-01"
         }
       ],
       "attestedBy": null
@@ -3032,11 +3038,6 @@
       "status": "verified",
       "implementations": [
         {
-          "path": "ios/HomesFlow/Core/Home/HomeAccessPolicy.swift",
-          "line": 3,
-          "excerpt": "// @covers NFR-SEC-01, FR-USER-01"
-        },
-        {
           "path": "ios/HomesFlow/Core/Supabase/SupabaseConfig.swift",
           "line": 3,
           "excerpt": "// @covers FR-AUTH-01, NFR-SEC-01"
@@ -3045,6 +3046,11 @@
           "path": "ios/HomesFlow/Core/Sync/LocalDataStore.swift",
           "line": 4,
           "excerpt": "// @covers NFR-SEC-01, FR-AUTH-01"
+        },
+        {
+          "path": "ios/HomesFlow/Core/Home/HomeAccessPolicy.swift",
+          "line": 3,
+          "excerpt": "// @covers NFR-SEC-01, FR-USER-01"
         },
         {
           "path": "ios/HomesFlowTests/HomeAccessPolicyTests.swift",
@@ -3057,7 +3063,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 304,
-          "excerpt": "- [ ] T087 [P] Enforce PR-only merge to `main`: branch protection requires pull request, `craft-gate` + `SonarCloud Code Analysis`, and disallow admin bypass \u2014 **Traces**: plan Phase 0 (infrastructu"
+          "excerpt": "- [ ] T087 [P] Enforce PR-only merge to `main`: branch protection requires pull request, `craft-gate` + `SonarCloud Code Analysis`, and disallow admin bypass \u2014 **Carries**: plan Phase 0 (infrastruct"
         }
       ],
       "attestedBy": null
@@ -3077,7 +3083,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 254,
-          "excerpt": "- [ ] T072a [P] Performance smoke: screen load & sync latency baselines \u2014 **Traces**: NFR-PERF-01, NFR-SYNC-01"
+          "excerpt": "- [ ] T072a [P] Performance smoke: screen load & sync latency baselines \u2014 **Carries**: NFR-PERF-01, NFR-SYNC-01"
         }
       ],
       "attestedBy": null
@@ -3103,27 +3109,27 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 75,
-          "excerpt": "- [ ] T017 [P] [US-ADMIN-01] XCUITest: sign-in with email \u2192 dashboard visible \u2014 **Traces**: FR-AUTH-01"
+          "excerpt": "- [ ] T017 [P] [US-ADMIN-01] XCUITest: sign-in with email \u2192 dashboard visible \u2014 **Carries**: FR-AUTH-01"
         },
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 96,
-          "excerpt": "- [ ] T022 [P] [US-ADMIN-01] Unit test `test_AC_HOME_01_valid_home_created` \u2014 **Traces**: AC-HOME-01 \u2014 *validator only; integration test pending*"
+          "excerpt": "- [ ] T022 [P] [US-ADMIN-01] Unit test `test_AC_HOME_01_valid_home_created` \u2014 **Carries**: AC-HOME-01 \u2014 *validator only; integration test pending*"
         },
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 102,
-          "excerpt": "- [ ] T024d [P] [US-ADMIN-01] Snapshot or UI test: iPad home detail trailing column has no hero/segmented tabs \u2014 **Traces**: AC-HOME-09 \u2014 *deferred: needs snapshot/XCUITest infra; manual iPad pass"
+          "excerpt": "- [ ] T024d [P] [US-ADMIN-01] Snapshot or UI test: iPad home detail trailing column has no hero/segmented tabs \u2014 **Carries**: AC-HOME-09 \u2014 *deferred: needs snapshot/XCUITest infra; manual iPad pas"
         },
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 103,
-          "excerpt": "- [ ] T024e [P] [US-ADMIN-01] Snapshot or UI test: iPad leading column shows compact home hero + vertical icon section tabs \u2014 **Traces**: AC-HOME-10 \u2014 *deferred: needs snapshot/XCUITest infra; man"
+          "excerpt": "- [ ] T024e [P] [US-ADMIN-01] Snapshot or UI test: iPad leading column shows compact home hero + vertical icon section tabs \u2014 **Carries**: AC-HOME-10 \u2014 *deferred: needs snapshot/XCUITest infra; ma"
         },
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 104,
-          "excerpt": "- [ ] T024f [P] [US-ADMIN-01] UI test: Contacts, Files, and People sections use the three-panel layout on iPad \u2014 **Traces**: AC-HOME-11 \u2014 *deferred: needs snapshot/XCUITest infra; manual iPad pass"
+          "excerpt": "- [ ] T024f [P] [US-ADMIN-01] UI test: Contacts, Files, and People sections use the three-panel layout on iPad \u2014 **Carries**: AC-HOME-11 \u2014 *deferred: needs snapshot/XCUITest infra; manual iPad pas"
         }
       ],
       "attestedBy": null
@@ -3143,12 +3149,12 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 116,
-          "excerpt": "- [ ] T027 [US-ADMIN-02] Offline invite conflict resolution \u2014 **Traces**: AC-USER-03, AC-SYNC-01"
+          "excerpt": "- [ ] T027 [US-ADMIN-02] Offline invite conflict resolution \u2014 **Carries**: AC-USER-03, AC-SYNC-01"
         },
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 126,
-          "excerpt": "- [ ] T033a [P] [US-ADMIN-02] Unit test `test_AC_USER_03_offline_invite_conflict` \u2014 **Traces**: AC-USER-03"
+          "excerpt": "- [ ] T033a [P] [US-ADMIN-02] Unit test `test_AC_USER_03_offline_invite_conflict` \u2014 **Carries**: AC-USER-03"
         }
       ],
       "attestedBy": null
@@ -3165,26 +3171,6 @@
       "implementations": [],
       "proofs": [],
       "debtTasks": [],
-      "attestedBy": null
-    },
-    {
-      "id": "US-CLEW-01",
-      "type": "US",
-      "statement": "US-CLEW-01** \u2014 As a developer validating Clewseau, I want a tiny pure display-name normalizer with durable IDs, so a stock Spec Kit + Clewseau agent can take one AC from registry through proof without UI or sync scope.",
-      "registry": {
-        "path": "HomesFlow.prd.md",
-        "line": 47
-      },
-      "status": "backlog",
-      "implementations": [],
-      "proofs": [],
-      "debtTasks": [
-        {
-          "path": "specs/backlog/tasks.md",
-          "line": 8,
-          "excerpt": "- [ ] T900 Deliver `HomeDisplayName.normalized(_:)` natively in HomesFlow (whitespace trim + collapse; the Clewseau trial slice, delivered here as well) \u2014 **Traces**: US-CLEW-01, FR-CLEW-01, AC-CLEW"
-        }
-      ],
       "attestedBy": null
     },
     {
@@ -3230,7 +3216,7 @@
         {
           "path": "specs/001-mvp/tasks.md",
           "line": 221,
-          "excerpt": "- [ ] T064 [US-GUEST-01] XCUITest: guest cannot edit provider \u2014 **Traces**: AC-GUEST-01, SC-03"
+          "excerpt": "- [ ] T064 [US-GUEST-01] XCUITest: guest cannot edit provider \u2014 **Carries**: AC-GUEST-01, SC-03"
         }
       ],
       "attestedBy": null
@@ -3247,6 +3233,26 @@
       "implementations": [],
       "proofs": [],
       "debtTasks": [],
+      "attestedBy": null
+    },
+    {
+      "id": "US-SHARE-01",
+      "type": "US",
+      "statement": "US-SHARE-01** \u2014 As an Owner, I want to share a single procedure as a read-only link with a non-member helper, so that a one-off task can be followed without granting a full Guest invite.",
+      "registry": {
+        "path": "HomesFlow.prd.md",
+        "line": 47
+      },
+      "status": "backlog",
+      "implementations": [],
+      "proofs": [],
+      "debtTasks": [
+        {
+          "path": "specs/backlog/tasks.md",
+          "line": 8,
+          "excerpt": "- [ ] T901 Deliver read-only procedure sharing link \u2014 **Carries**: US-SHARE-01"
+        }
+      ],
       "attestedBy": null
     }
   ]

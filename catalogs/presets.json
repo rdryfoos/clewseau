@@ -1,18 +1,18 @@
 {
   "schema_version": "1.0",
   "updated_at": "2026-08-06T00:00:00Z",
-  "catalog_url": "https://raw.githubusercontent.com/rdryfoos/clewseau/main/catalogs/presets.json",
+  "catalog_url": "https://raw.githubusercontent.com/rdryfoos/specassay/main/catalogs/presets.json",
   "presets": {
-    "clewseau": {
-      "name": "Clewseau",
-      "id": "clewseau",
+    "specassay": {
+      "name": "SpecAssay",
+      "id": "specassay",
       "version": "0.1.0",
-      "description": "Appends durable-ID and Traces requirements onto Spec Kit spec, tasks, and constitution templates.",
+      "description": "Appends durable-ID and Carries requirements onto Spec Kit spec, tasks, and constitution templates.",
       "author": "Rik Dryfoos / Dryfoos Consulting",
-      "repository": "https://github.com/rdryfoos/clewseau",
-      "download_url": "https://github.com/rdryfoos/clewseau/releases/download/v0.1.0/clewseau-preset-0.1.0.zip",
-      "homepage": "https://github.com/rdryfoos/clewseau",
-      "documentation": "https://github.com/rdryfoos/clewseau/blob/main/PROMOTION-CONTRACT.md",
+      "repository": "https://github.com/rdryfoos/specassay",
+      "download_url": "https://github.com/rdryfoos/specassay/releases/download/v0.1.0/specassay-preset-0.1.0.zip",
+      "homepage": "https://github.com/rdryfoos/specassay",
+      "documentation": "https://github.com/rdryfoos/specassay/blob/main/PROMOTION-CONTRACT.md",
       "license": "MIT",
       "requires": {
         "speckit_version": ">=0.14.0"
