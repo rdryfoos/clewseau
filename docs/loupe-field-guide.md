@@ -60,9 +60,9 @@ Note this verified row also carries an **Open debt (Traces:)** block — an XCUI
 
 `AC-HOME-10` is not done, and the clew shows exactly who says so:
 
-- The registry expand (**▸ HomesFlow.prd.md:221**) is open: the PRD source around that line, the requirement in its own words.
+- **Requirement** node and ID are red (incomplete), with the registry toggle at `HomesFlow.prd.md:221` ready to expand.
 - The **Open debt (Traces:)** block names the literal open checkbox task (`T024e`, snapshot/UI test deferred until test infra exists) that claims this ID.
-- Implementation is green: `@covers AC-HOME-10` carriers exist in source. Proof is red but the braid stays solid.
+- **Implementation** is green: `@covers AC-HOME-10` carriers exist in source. **Proof** is red ("tracked as open debt") but the braid stays solid.
 
 Red without fray is the loupe's way of saying *incomplete but excused*. The work is visible on an open task, so it is not a silent gap and the Thread stays intact.
 
