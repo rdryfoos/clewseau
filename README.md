@@ -53,10 +53,10 @@ Convention: reader-facing repos (this one, Loupe, the vendored check README) ope
 
 | File | Role |
 |------|------|
-| [`samples/homesflow.trace-manifest.json`](./samples/homesflow.trace-manifest.json) | Real Gate 2 emit against HomesFlow |
-| [`samples/sample.trace-manifest.json`](./samples/sample.trace-manifest.json) | Same honest emit (preview default) |
+| [`samples/homesflow.trace-manifest.json`](./samples/homesflow.trace-manifest.json) | Real Gate 2 emit against HomesFlow (82 rows, 0 GAP) |
+| [`samples/sample.trace-manifest.json`](./samples/sample.trace-manifest.json) | Clean synthetic `example-app` demo — Loupe's preview default |
 
-See [`samples/README.md`](./samples/README.md). Rebuild with `python3 scripts/build-sample-manifest.py` after regenerating the real emit.
+See [`samples/README.md`](./samples/README.md). The synthetic sample is curated by hand; resync only the real HomesFlow twin with `python3 scripts/build-sample-manifest.py` after regenerating the emit.
 
 ## Install (catalog path)
 
