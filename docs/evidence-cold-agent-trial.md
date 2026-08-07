@@ -20,7 +20,7 @@ The strongest claim a governance tool can make is that it works on someone who h
 5. **Proved** with `test_AC_HOME_15_trims_ends_and_collapses_internal_whitespace` — named to the proof grammar, five assertions covering every edge case the spec lists.
 6. **Emitted** a passing trace-manifest via Gate 2.
 
-A break/fix probe was then run against the delivered slice: renaming the proof flipped the row from `verified` to `tracked-debt` via an open `Carries:` task; restoring the name flipped it back. The Gate refused nothing falsely in either direction. The writeup lives on the PR branch (`docs/clewseau-break-fix-peer-review.md`).
+A break/fix probe was then run against the delivered slice: renaming the proof flipped the row from `verified` to `tracked-debt` via an open `Carries:` task; restoring the name flipped it back. The Gate refused nothing falsely in either direction. The full break/fix writeup lives on the original trial PR branch.
 
 ## What a stock Spec Kit PR would not have carried
 
