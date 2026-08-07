@@ -2,17 +2,19 @@
 
 A tour of the little ecosystem — **Clewseau**, the **clew**, and **clewloupe** — in plain English, one screenshot at a time.
 
-## The pitch (then we look)
+## Why bother (then we look)
 
-When people build things, we tie a piece of string from the **wish**, to the **work**, to the **proof it's done**.
+Anyone can ship plausible code now. The hard part is proving it did what you meant — which wish it served, what work claimed that wish, and what proof still stands. When that answer takes longer than a coffee, the Thread is already lost. Old ALM stacks tried to hold the map in a second system that always lagged the repo. This stack keeps the map *in* the repo and checks it on every Gate run.
 
-- **Clewseau** is a small overlay on stock Spec Kit. It asks every wish for a name, every bit of work to say which wish it serves, and every wish for its proof. When something is missing or silent, it stops the line and points at the loose end. Then it winds the string into a ball and saves it in a file.
-- That ball of string is a **clew** (literally: a ball of thread — Ariadne's gift so Theseus could find his way out). Default file: `clew.json`.
-- **clewloupe** is the magnifying glass. It does not re-scan your repo. It only looks at the ball Clewseau already wound, so you can see where the Thread is intact and where it frayed — usually in less time than a coffee.
+That is the value prop, without the wrestling entrance music: you become the person who can pull any feature and show the wish → work → proof chain before the coffee cools. Clewloupe is the glass. Clewseau is the inspector. The clew is the ball of thread you keep.
 
-The fun part: you get real traceability without a second career in ALM tooling. Spec Kit stays Spec Kit. Clewseau is the inspector. The clew is the souvenir. Clewloupe is how you show people.
+- **Clewseau** — small overlay on stock Spec Kit. Every wish gets a name; work says which wish it serves; wishes need proof. Silent gaps stop the line. Then Gate winds what it found into a file.
+- **clew** — that file (default `clew.json`). Literally a ball of thread (Ariadne's gift so Theseus could find his way out). Living documentation wound from the repo, not typed into a lagging side tool.
+- **clewloupe** — the magnifying glass. Does not re-scan. Only reads the clew. Follow the Thread; spot the fray.
 
-This guide is the visual tour. For SDLC wording see [`reading-a-clew.md`](./reading-a-clew.md); for terms see [`../presets/clewseau/GLOSSARY.md`](../presets/clewseau/GLOSSARY.md).
+Spec Kit stays Spec Kit. No second career in ALM. The interface is already a little fun; the docs should not scare you out of trying it.
+
+For SDLC wording see [`reading-a-clew.md`](./reading-a-clew.md); for terms see [`../presets/clewseau/GLOSSARY.md`](../presets/clewseau/GLOSSARY.md).
 
 **Voice note:** the check script is the **Gate**; what the human sees is the **Thread**. Prefer "the Thread is intact / broken" in narrative. Say "Gate" when you mean the script that judged it.
 
@@ -20,9 +22,9 @@ This guide is the visual tour. For SDLC wording see [`reading-a-clew.md`](./read
 
 Eighty-two durable IDs in the sample can look like a lot. Most of them live in the PRD and the specs — the ordinary places wishes already get written down. You do **not** paste an ID onto every line of code.
 
-When you change code that serves a named wish, you leave a short comment (`@covers …`). When a task is still open against a wish, you name that wish on the task (`Traces:`). That is the whole habit. Clewseau watches those links; you do not memorize the grid.
+**Leave a mark when you touch the work.** If the code serves a named wish, one short comment: `@covers …`. If a task is still open against a wish, name it on the task: `Traces:`. Those marks are greppable; Clewseau watches them; you do not memorize the grid.
 
-What you are looking at in the loupe is a form of **living documentation**: the record is wound from the repo itself (names, comments, tasks, tests), not typed into a second tool that lags behind. When the work drifts, the Thread shows it — that is the point.
+What you are looking at in the loupe is **living documentation**: the record is wound from the repo itself (names, comments, tasks, tests). When the work drifts, the Thread shows it — that is the point.
 
 ## Where these pictures came from
 
@@ -54,13 +56,13 @@ Same rows, partitioned by status in the same order:
 
 ## 3. The Descent: one thread, three tiers
 
-Click any row and the right pane walks its golden thread top to bottom:
+Click any row and the right pane walks the Thread top to bottom:
 
 - **Requirement**: the durable ID and its statement, plus a **▸ file:line** toggle (e.g. `HomesFlow.prd.md:258`) that expands to the actual PRD/registry source around the line where the ID was minted.
-- **Implementation**: every `@covers` carrier found in source. Each is labeled with the carrier's **file basename and line** (e.g. `HomeDetailView.swift:3`), with the full path below and an "also covers: …" line naming the other IDs that share the same annotation. Each expands to the real code around it.
+- **Implementation**: every `@covers` mark found in source. Each is labeled with the file basename and line (e.g. `HomeDetailView.swift:3`), with the full path below and an "also covers: …" line naming the other IDs that share the same annotation. Each expands to the real code around it.
 - **Proof**: named tests that encode the ID (for ACs), labeled by test name with the path below, expandable the same way.
 
-**`@covers` in one breath.** A one-line comment — `// @covers AC-GUEST-01, FR-HOME-03` — naming which wishes this code serves. You write it when you touch the file. Gate reads it; Clewseau never invents one for you. Clewloupe lists those hits under Implementation. The task-side twin is `**Traces**:` on an open checkbox. Missing or made-up IDs fail closed, so the habit stays light: mark what you meant, and the check keeps you honest.
+**`@covers` in one breath.** A one-line mark — `// @covers AC-GUEST-01, FR-HOME-03` — naming which wishes this code serves. Leave it when you touch the file. Gate reads it; Clewseau never invents one for you. Clewloupe lists those hits under Implementation. The task-side twin is `**Traces**:` on an open checkbox. Missing or made-up IDs fail closed, so the habit stays light: mark what you meant, and the check keeps you honest.
 
 Every claim in the descent can be opened to the file and line that backs it — requirement included. The braided line down the left side is the Thread itself. Its two states matter more than any color: **solid** means the Thread holds; **frayed** means it is broken.
 
@@ -68,7 +70,7 @@ Every claim in the descent can be opened to the file and line that backs it — 
 
 ![Verified descent](images/03-verified-descent.png)
 
-`AC-GUEST-01` end to end: the requirement statement with its registry line (`HomesFlow.prd.md:258`), six `@covers` carriers each labeled by file and line, and a named proof `test_AC_GUEST_01_guest_fields_only`, expanded to the real test code. Green nodes, solid braid. This is what "verified" means: a named artifact you can open, not "the tests passed once."
+`AC-GUEST-01` end to end: the requirement statement with its registry line (`HomesFlow.prd.md:258`), six `@covers` marks each labeled by file and line, and a named proof `test_AC_GUEST_01_guest_fields_only`, expanded to the real test code. Green nodes, solid braid. This is what "verified" means: a named artifact you can open, not "the tests passed once."
 
 Note this verified row also carries an **Open debt (Traces:)** block — an XCUITest still open on `T064`. Verified with additional open work is a normal, honest state.
 
@@ -78,7 +80,7 @@ Note this verified row also carries an **Open debt (Traces:)** block — an XCUI
 
 `AC-HOME-10` is not done — and nobody is pretending otherwise.
 
-- The top of the thread is red: the wish is real, the work is incomplete.
+- The top of the Thread is red: the wish is real, the work is incomplete.
 - Right under it, an open task admits the gap (`T024e`: still needs a snapshot/UI test). That admission is what makes this debt instead of a lie.
 - The middle is green: code already claims this ID. The bottom is red again: no named proof yet. The braid between them stays solid.
 
@@ -112,7 +114,7 @@ The scratch tree after the staged break. Three things change at once:
 
 ![GAP descent with fray](images/07-gap-fray-descent.png)
 
-`AC-HOME-15`, the broken strand. Implementation carriers still exist, but the named proof is gone and no open task claims the ID. The braid **frays between Implementation and Proof**, and the Proof tier says why: "No proof — silent gap (thread broken)." This is the one situation the Thread will not carry: unfinished work that nothing durable admits to. (Technically: Gate refuses.)
+`AC-HOME-15`, the broken strand. Implementation marks still exist, but the named proof is gone and no open task claims the ID. The braid **frays between Implementation and Proof**, and the Proof tier says why: "No proof — silent gap (thread broken)." This is the one situation the Thread will not carry: unfinished work that nothing durable admits to. (Technically: Gate refuses.)
 
 ### Verified rows stay green even while the Thread is broken
 
@@ -133,4 +135,4 @@ The scratch tree after the staged break. Three things change at once:
 
 One sentence version: **green is proven, red-on-solid is honest debt, fray is a broken Thread.**
 
-And the soft landing: you do not have to be scary-good at this. Clewseau refuses the silent stuff; clewloupe shows the rest. Follow the string.
+And the soft landing: you do not have to be scary-good at this. Clewseau refuses the silent stuff; clewloupe shows the rest. Follow the Thread.
