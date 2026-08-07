@@ -13,8 +13,7 @@ Copy into the project glossary (e.g. `glossary.md`) when the repo keeps one. The
 | **GAP** | Silent AC gap — neither proof nor open debt; the Thread is broken; Gate refuses. |
 | **backlog** | US/FR/NFR with no own carrier — planning altitude, not a silent gap. |
 | **the Thread** | The wish → work → proof chain a clew records. Human-facing: the Thread is intact or broken. Prefer this wording over "Gate passed/failed" except when naming the check script itself. Prefer **Thread** over "string" in product prose; "clew" already carries the ball-of-thread etymology. |
-| **mark** / **`@covers`** | Leave a mark when you touch the work: a one-line comment in source naming the durable ID(s) that code serves. Greppable; author-written; Gate reads it; clewloupe shows it under Implementation. (Avoid "beacon" — IoT overload.) |
+| **mark** / **`@covers`** | Leave a mark when you touch the work: a one-line comment in source naming the durable ID(s) that code serves. Greppable; author-written; Gate reads it; clewloupe shows it under Implementation. |
 | **`Traces:`** | Mark on a task checkbox naming the ID(s) that task carries — usually open debt or anointed backlog. |
-| **Gate 2** | Deterministic Clewseau check + clew emit (`speckit.clewseau-gate.check`). The mechanism that judges the Thread; say "Gate" when you mean this script, "Thread" when you mean what the human sees. |
+| **Gate 2** | Deterministic Clewseau check + clew emit (`speckit.clewseau-gate.check`). The mechanism that judges the Thread; say "Gate" when you mean this script, "Thread" when you mean what the human sees. Local runs are hygiene; **CI Gate is the property line** that protects the codebase. |
 
-Do not use **dossier** for this artifact — in Clewseau it is a **clew**.

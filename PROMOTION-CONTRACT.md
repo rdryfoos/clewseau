@@ -22,6 +22,7 @@ Mint durable IDs at intent; refuse silent gaps; allow tracked debt to stay visib
    - **backlog** — US/FR/NFR without own carrier, or any ID anointed into backlog (registry entry + open `Traces:` TODO and nothing else); not a broken thread
    - **GAP** — silent AC gap; thread broken; Gate refuses
 7. **Refusal.** Gate 1 (judgment, e.g. `/speckit.analyze`) and Gate 2 (deterministic check) fail closed on **silent AC gaps**, **untraced scope**, and **registry↔spec↔tasks drift**. Passing does not mean zero unfinished work; it means zero *hidden* unfinished work at AC altitude, and zero abandoned or invented IDs in the planning layer.
+7a. **CI is the property line.** A Gate on a compliant laptop is courtesy and fast feedback. A cowboy (or a cold agent) with no local Clewseau install can still push unmarked work. **Gate 2 must run in CI** on every PR and every commit to a protected branch, and must fail the build when the Thread breaks. Local Gate is optional hygiene; CI Gate is what protects the codebase. The clew emitted on that run is the refusal's evidence trail.
 8. **Clew.** Gate 2 emits a **clew** (default path `clew.json`) — a Clewseau-native matrix (`format: "clew"`) including `gate: { ok, failures[] }` so non-row refusals (orphans, missing Traces, drift) are visible to viewers. The file is written even when the gate fails. It is not ReqIF/OSLC; see `docs/clew-schema.md`.
 9. **Attribution is not authentication.** Optional operator stamps record claimed provenance in an already-trusted context. They enforce nothing about who may act.
 10. **Viewer invariant.** Gate PASS ⇔ contiguous braid in clewloupe; Gate FAIL ⇔ fray / clew broken. Red nodes may mark excused incompleteness without fray.
@@ -44,7 +45,7 @@ Add to `.specify/memory/constitution.md` (or feed `/speckit.constitution`):
 > 1. Each acceptance criterion is **atomic** — one independently testable assertion — and maps to at least one automated test *or* an explicitly tracked debt entry. Silent-gap refusal is at **AC altitude**; US/FR/NFR IDs are planning labels (clew status `backlog`), not silent-gap candidates.
 > 2. Every task in `tasks.md` MUST declare the ID(s) it implements via a `Traces:` field.
 > 3. Every verifying test MUST encode the AC ID it protects. Every requirement-bearing source module MUST carry a coverage annotation naming the ID.
-> 4. Coverage is **bidirectional** and machine-checked: no silent AC gaps, no untraced scope, and **exact-set** registry ≡ specs ≡ tasks (no abandoned PRD IDs, no invented feature IDs). CI fails the build on any of these.
+> 4. Coverage is **bidirectional** and machine-checked: no silent AC gaps, no untraced scope, and **exact-set** registry ≡ specs ≡ tasks (no abandoned PRD IDs, no invented feature IDs). **CI fails the build on any of these** — local Gate is hygiene; CI Gate is the property line.
 > 5. `/speckit.analyze` MUST report zero Clewseau traceability violations before `/speckit.implement` runs.
 >
 > ### Article: Clewseau vocabulary

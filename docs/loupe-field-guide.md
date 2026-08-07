@@ -1,10 +1,10 @@
 # clewloupe field guide
 
-A tour of the ecosystem — **Clewseau**, the **clew**, and **clewloupe** — in plain English, one screenshot at a time.
+A tour of the ecosystem — **Clewseau**, the **clew**, and **clewloupe** — simply, one screenshot at a time.
 
 ## Why bother (then we look)
 
-Anyone can ship plausible code now. The hard part is proving it did what you meant — which wish it served, what work claimed that wish, and what proof still stands. When that answer takes longer than a coffee, the Thread is already lost. Old ALM stacks tried to hold the map in a second system that always lagged the repo. This stack keeps the map *in* the repo and checks it on every Gate run.
+Everyone can ship plausible code now. The hard part is proving it does what you meant — which wish it served, what work filled that wish, and what proof showed it was done. When that answer takes longer than a coffee, the Thread is already lost. Old ALM stacks tried to hold the map in a second system that always lagged the repo. This stack keeps the map *in* the repo and checks it on every Gate run — and that check belongs in **CI**, not only on the nice developer's laptop. A cowboy without Clewseau installed can still push; CI Gate is the property line.
 
 That is the value prop, without the wrestling entrance music: you become the person who can pull any feature and show the wish → work → proof chain before the coffee cools. Clewloupe is the glass. Clewseau is the inspector. The clew is the ball of thread you keep.
 

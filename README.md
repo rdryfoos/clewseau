@@ -85,12 +85,14 @@ cp .specify/extensions/clewseau-gate/config-template.yml \
 
 Edit `.specify/extensions/clewseau-gate/clewseau-gate-config.yml` so `registry` / globs match your repo.
 
-Run Gate 2:
+Run Gate 2 locally (fast feedback):
 
 ```bash
 bash .specify/extensions/clewseau-gate/scripts/check-traceability.sh
 # writes clew.json; or via the agent command: /speckit.clewseau-gate.check
 ```
+
+**CI is the property line.** A Gate on a compliant laptop is courtesy. Without Clewseau on the machine, unmarked work can still be pushed. Run the same script (or `speckit.clewseau-gate.check`) on every PR and every commit to a protected branch, and **fail the build** when it exits non-zero. Local Gate is optional hygiene; CI Gate is what protects the Thread. Archive the emitted `clew.json` from that run as the refusal's evidence.
 
 ## Install (dev path)
 

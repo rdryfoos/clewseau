@@ -8,7 +8,7 @@ Every functional requirement, non-functional requirement, and acceptance criteri
 1. Each acceptance criterion is **atomic** — one independently testable assertion — and maps to at least one automated test *or* an explicitly tracked debt entry. Silent-gap refusal is at **AC altitude**; US/FR/NFR IDs are planning labels (clew status `backlog`), not silent-gap candidates.
 2. Every task in `tasks.md` MUST declare the ID(s) it implements via a `Traces:` field.
 3. Every verifying test MUST encode the AC ID it protects. Every requirement-bearing source module MUST carry a coverage annotation naming the ID.
-4. Coverage is **bidirectional** and machine-checked: no silent AC gaps, no untraced scope, and exact-set registry ≡ specs ≡ tasks. CI fails the build on any of these.
+4. Coverage is **bidirectional** and machine-checked: no silent AC gaps, no untraced scope, and exact-set registry ≡ specs ≡ tasks. **CI fails the build on any of these** — local Gate is hygiene; CI Gate is the property line.
 5. `/speckit.analyze` MUST report zero Clewseau traceability violations before `/speckit.implement` runs.
 
 ### Article: Clewseau vocabulary
