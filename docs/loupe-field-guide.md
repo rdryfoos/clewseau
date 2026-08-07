@@ -1,14 +1,30 @@
 # clewloupe field guide
 
-What you are looking at when you open a clew in **clewloupe**, in plain English, one screenshot at a time.
+A tour of the little ecosystem — **Clewseau**, the **clew**, and **clewloupe** — in plain English, one screenshot at a time.
 
-This is the visual companion to [`reading-a-clew.md`](./reading-a-clew.md), which tells the same story in SDLC terms. Vocabulary is locked in [`../presets/clewseau/GLOSSARY.md`](../presets/clewseau/GLOSSARY.md).
+## The pitch (then we look)
+
+When people build things, we tie a piece of string from the **wish**, to the **work**, to the **proof it's done**.
+
+- **Clewseau** is a small overlay on stock Spec Kit. It asks every wish for a name, every bit of work to say which wish it serves, and every wish for its proof. When something is missing or silent, it stops the line and points at the loose end. Then it winds the string into a ball and saves it in a file.
+- That ball of string is a **clew** (literally: a ball of thread — Ariadne's gift so Theseus could find his way out). Default file: `clew.json`.
+- **clewloupe** is the magnifying glass. It does not re-scan your repo. It only looks at the ball Clewseau already wound, so you can see where the Thread is intact and where it frayed — usually in less time than a coffee.
+
+The fun part: you get real traceability without a second career in ALM tooling. Spec Kit stays Spec Kit. Clewseau is the inspector. The clew is the souvenir. Clewloupe is how you show people.
+
+This guide is the visual tour. For SDLC wording see [`reading-a-clew.md`](./reading-a-clew.md); for terms see [`../presets/clewseau/GLOSSARY.md`](../presets/clewseau/GLOSSARY.md).
 
 **Voice note:** the check script is the **Gate**; what the human sees is the **Thread**. Prefer "the Thread is intact / broken" in narrative. Say "Gate" when you mean the script that judged it.
 
+### Don't panic about the IDs
+
+Eighty-two durable IDs in the sample below can look like a wallpaper tax. It isn't.
+
+You do **not** sprinkle an ID on every line of code. A wish gets a name when you mean it. Work that serves it gets a short beacon (`@covers` in source, or `Traces:` on a task). Most files never mention an ID at all. Clewseau keeps the map; you keep building. If a beacon goes stale or a wish goes silent, the Gate says so — you don't have to hold 82 threads in your head.
+
 ## Where these pictures came from
 
-The Thread-intact captures are a real render of HomesFlow's live Gate 2 emit — 82 durable IDs, the same emit shipped as [`../samples/homesflow.clew.json`](../samples/homesflow.clew.json). No hand-edited JSON.
+The Thread-intact captures are a real render of HomesFlow's live Gate 2 emit — the same emit shipped as [`../samples/homesflow.clew.json`](../samples/homesflow.clew.json). No hand-edited JSON. HomesFlow is a small real app used as public evidence of the practice; the count of IDs is "a product with a PRD," not "a compliance mountain."
 
 The three Thread-broken captures (section 6) came from a deliberate break in a scratch copy of the trial tree: one test was renamed so its acceptance criterion lost its named proof while no open task claimed it. Gate was re-run for real, refused for real, and the scratch copy was deleted afterward. The refusal is honest; only the break was staged.
 
@@ -19,7 +35,7 @@ The three Thread-broken captures (section 6) came from a deliberate break in a s
 Before reading any row, the top bar answers the only global question:
 
 - **Thread intact.** The clew contains zero hidden unfinished work. Not zero unfinished work; zero *hidden* unfinished work.
-- The stat tiles read left to right: **Rows** (all durable IDs), then **Backlog → Debt → Verified** — waiting, excused, proven — with **GAP** last. GAP is the least-populated status, so on tight horizontal space it never crowds out busier tiles; when it is nonzero it still screams. Each tile is a filter button.
+- The stat tiles read left to right: **Rows** (all durable IDs), then **Backlog → Debt → Verified** — waiting, excused, proven — with **GAP** last. GAP is usually empty; when it isn't, that tile lights up so you notice. Each tile is a filter button.
 - The `GAP` tile only lights up red when GAPs exist. Here it reads 0, which is why the Thread is intact.
 - **Get clew…** loads any other `*.clew.json` file. The loupe never re-scans a repo; it only reads what Gate emitted.
 
@@ -42,7 +58,7 @@ Click any row and the right pane walks its golden thread top to bottom:
 - **Implementation**: every `@covers` carrier found in source. Each is labeled with the carrier's **file basename and line** (e.g. `HomeDetailView.swift:3`), with the full path below and an "also covers: …" line naming the other IDs that share the same annotation. Each expands to the real code around it.
 - **Proof**: named tests that encode the ID (for ACs), labeled by test name with the path below, expandable the same way.
 
-**`@covers` in one breath.** In source (and sometimes in tests), a comment like `// @covers AC-GUEST-01, FR-HOME-03` is a **beacon**: the author tagging that code as work toward those durable IDs. Gate reads those lines; it never writes them. Clewloupe shows them under Implementation. Closest cousin on the task side is `**Traces**:` on an open checkbox — same idea, different altitude (debt or anointed backlog instead of code). Neither is a runtime annotation; both are claims the Thread can check.
+**`@covers` in one breath.** A comment like `// @covers AC-GUEST-01, FR-HOME-03` is a **beacon** — one line, written when you touch the code, naming which wishes that code serves. Gate reads those lines; it never writes them. Clewloupe shows them under Implementation. Closest cousin on the task side is `**Traces**:` on an open checkbox. Neither is runtime magic; both are claims the Thread can check. If the count of beacons ever feels loud, remember: Clewseau is on the case — missing or invented IDs fail closed, so you are never quietly accumulating wallpaper.
 
 Every claim in the descent can be opened to the file and line that backs it — requirement included. The braided line down the left side is the Thread itself. Its two states matter more than any color: **solid** means the Thread holds; **frayed** means it is broken.
 
@@ -70,9 +86,9 @@ Red without fray means *incomplete but excused*. Someone wrote it down on a task
 
 ![Anointed backlog descent](images/05-anointed-backlog-descent.png)
 
-Minting an ID is a promise, and the Gate holds you to it immediately: an ID claimed nowhere fails exact-set as drift. The deliberate way to mint ahead of the work is **anointed backlog** — mint the ID and write one open `Traces:` TODO for it (conventionally `specs/backlog/tasks.md`).
+Minting an ID is a promise — and that is a feature, not a trap. Name a wish only when you mean it; if nothing claims it yet, write one open TODO that carries it (**anointed backlog**, usually in `specs/backlog/tasks.md`). That is enough ceremony that fat-finger drift still fails, while honest "build this soon" stays green.
 
-Here `AC-CLEW-01` shows exactly that state: status **BACKLOG** (an AC, and still not a GAP — the TODO means it is not *silent*), the registry expand showing the PRD line it was minted on, and the Open debt block naming `T900`, the TODO that carries it. Zero carriers in code, zero proofs, Thread intact. Delete that TODO without picking up the work and the next Gate run fails exact-set — the Thread will not carry an unclaimed promise.
+Here `AC-CLEW-01` shows exactly that state: status **BACKLOG** (an AC, and still not a GAP — the TODO means it is not *silent*), the registry line it was minted on, and the open TODO `T900` that carries it. Zero code, zero proofs, Thread intact. Drop the TODO without picking up the work and the next check fails — the Thread will not carry an unclaimed promise.
 
 Filter tile `Backlog` reads 7: four planning-altitude stories plus the three anointed CLEW IDs.
 
@@ -114,3 +130,5 @@ The scratch tree after the staged break. Three things change at once:
 | Red banner, hot GAP tile | At least one AC has neither proof nor admitted debt |
 
 One sentence version: **green is proven, red-on-solid is honest debt, fray is a broken Thread.**
+
+And the soft landing: you do not have to be scary-good at this. Clewseau refuses the silent stuff; clewloupe shows the rest. Follow the string.
