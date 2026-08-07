@@ -13,6 +13,8 @@ Copy into the project glossary (e.g. `glossary.md`) when the repo keeps one. The
 | **GAP** | Silent AC gap — neither proof nor open debt; the Thread is broken; Gate refuses. |
 | **backlog** | US/FR/NFR with no own carrier — planning altitude, not a silent gap. |
 | **the Thread** | The wish → work → proof chain a clew records. Human-facing: the Thread is intact or broken. Prefer this wording over "Gate passed/failed" except when naming the check script itself. |
+| **`@covers`** | Beacon in source (or a test file): a comment naming the durable ID(s) that code serves. Author-written; Gate reads it; clewloupe shows it under Implementation. |
+| **`Traces:`** | Beacon on a task checkbox naming the ID(s) that task carries — usually open debt or anointed backlog. |
 | **Gate 2** | Deterministic Clewseau check + clew emit (`speckit.clewseau-gate.check`). The mechanism that judges the Thread; say "Gate" when you mean this script, "Thread" when you mean what the human sees. |
 
 Do not use **dossier** for this artifact — in Clewseau it is a **clew**.

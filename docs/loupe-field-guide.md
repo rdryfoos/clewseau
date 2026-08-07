@@ -42,6 +42,8 @@ Click any row and the right pane walks its golden thread top to bottom:
 - **Implementation**: every `@covers` carrier found in source. Each is labeled with the carrier's **file basename and line** (e.g. `HomeDetailView.swift:3`), with the full path below and an "also covers: …" line naming the other IDs that share the same annotation. Each expands to the real code around it.
 - **Proof**: named tests that encode the ID (for ACs), labeled by test name with the path below, expandable the same way.
 
+**`@covers` in one breath.** In source (and sometimes in tests), a comment like `// @covers AC-GUEST-01, FR-HOME-03` is a **beacon**: the author tagging that code as work toward those durable IDs. Gate reads those lines; it never writes them. Clewloupe shows them under Implementation. Closest cousin on the task side is `**Traces**:` on an open checkbox — same idea, different altitude (debt or anointed backlog instead of code). Neither is a runtime annotation; both are claims the Thread can check.
+
 Every claim in the descent can be opened to the file and line that backs it — requirement included. The braided line down the left side is the Thread itself. Its two states matter more than any color: **solid** means the Thread holds; **frayed** means it is broken.
 
 ### A verified AC, proof and all
