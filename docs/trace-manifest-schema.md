@@ -21,7 +21,7 @@ Portable, vendor-neutral **trace-manifest** (matrix artifact). Gate 2 always emi
 | `generatedAt` | ISO-8601 UTC |
 | `gate` | `{ ok: boolean, failures: GateFailure[] }` — full Gate refuse set (including non-row failures) |
 | `totals` | `registryIdCount`, `acCount`, `coveredCount` |
-| `statusCounts` | Counts for `verified`, `tracked-debt`, `GAP`, `backlog` |
+| `statusCounts` | Counts for `proven`, `tracked-debt`, `GAP`, `backlog` |
 | `rows` | Matrix rows |
 
 ### `gate.failures[]`
@@ -50,7 +50,7 @@ Each failure: `{ kind, detail, id? }`.
 | `type` | `AC` / `FR` / `NFR` / `US` (prefix) |
 | `statement` | Best-effort prose from the registry line |
 | `registry` | `{ path, line }` where the ID sits in the registry (relative to `repoPath`); `null` if the registry file was unreadable |
-| `status` | `verified` \| `tracked-debt` \| `GAP` \| `backlog` |
+| `status` | `proven` \| `tracked-debt` \| `GAP` \| `backlog` |
 | `implementations` | `{ path, line, excerpt }` from coverage annotations |
 | `proofs` | `{ name, path, line }` from test-encoded AC IDs |
 | `debtTasks` | `{ path, line, excerpt }` open checkbox tasks that name this ID (usually via `Carries:`) — why `tracked-debt` is excused |
@@ -60,12 +60,12 @@ Each failure: `{ kind, detail, id? }`.
 
 | Status | Who | Meaning |
 |---|---|---|
-| `verified` | AC: named proof; US/FR/NFR: `@covers` or named proof | Named carrier exists (not “tests ran green”) |
+| `proven` | AC: named proof; US/FR/NFR: `@covers` or named proof | Named carrier exists (not “tests ran green”) |
 | `tracked-debt` | Any | Work started (spec/impl presence), proof missing, excused by an open task with Carries (`debtTasks` lists those tasks) |
 | `GAP` | **AC only** (silent gap) | Neither named proof nor open debt — Gate refuses; viewer frays |
 | `backlog` | Any | Planning altitude: US/FR/NFR without own carrier, or any ID **anointed into backlog** (registry entry + open `Carries:` TODO and nothing else) — **not** a silent gap; do not fray |
 
-Backlog rows are “covered” in the promotion-contract sense when their child ACs are verified or debt — not by requiring `@covers` on the US/FR/NFR ID itself.
+Backlog rows are “covered” in the promotion-contract sense when their child ACs are proven or debt — not by requiring `@covers` on the US/FR/NFR ID itself.
 
 Older manifest files may omit `debtTasks` / `registry` or still carry unused `blocked` / `blockedCount` fields. Gate emits `debtTasks` (possibly empty) and `registry` (possibly `null`); Loupe treats missing fields as `[]` / absent.
 

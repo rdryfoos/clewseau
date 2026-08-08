@@ -8,12 +8,12 @@ Copy into the project glossary (e.g. `glossary.md`) when the repo keeps one. The
 | **trace-manifest.json** | Usual on-disk path for a trace-manifest (configurable via `manifest_path`). |
 | **SpecAssay** | Spec Kit overlay: durable IDs, Gate 2, trace-manifest emission. |
 | **Loupe** | Viewer that reads a trace-manifest only — no target re-scan. Reads any emitter's manifest. |
-| **verified** | Named carrier exists (AC proof and/or `@covers` / proof for US/FR/NFR). |
+| **proven** | Named carrier exists (AC proof and/or `@covers` / proof for US/FR/NFR). |
 | **tracked-debt** | Incomplete, but declared on an open task with `Carries:`. |
 | **GAP** | Silent AC gap — neither proof nor open debt; the Golden Thread is broken; Gate refuses. |
 | **backlog** | US/FR/NFR with no own carrier — planning altitude, not a silent gap. |
-| **the Golden Thread** | The wish → work → proof chain a trace-manifest records. Human-facing: the Golden Thread is intact or broken. Prefer this wording over "Gate passed/failed" except when naming the check script itself. The lineage is the UK "golden thread" of building-safety records and Jonathan Smart's business "golden thread" in *Sooner Safer Happier*. |
-| **mark** / **`@covers`** | Leave a mark when you touch the work: a one-line comment in source naming the durable ID(s) that code serves. Greppable; author-written; Gate reads it; Loupe shows it under Implementation. |
+| **the Golden Thread** | The intent → build → proof chain a trace-manifest records. Human-facing: the Golden Thread is intact or broken. Prefer this wording over "Gate passed/failed" except when naming the check script itself. The lineage is the UK "golden thread" of building-safety records and Jonathan Smart's business "golden thread" in *Sooner Safer Happier*. |
+| **mark** / **`@covers`** | Leave a mark when you touch the work: a one-line comment in source naming the durable ID(s) that code serves. Greppable; author-written; Gate reads it; Loupe shows it under Build. |
 | **`Carries:`** | Mark on a task checkbox naming the ID(s) that task carries — usually open debt or anointed backlog. |
 | **Gate 2** | Deterministic SpecAssay check + manifest emit (`speckit.specassay.check`). The mechanism that judges the Golden Thread; say "Gate" when you mean this script, "Golden Thread" when you mean what the human sees. Local runs are hygiene; **CI Gate is the property line** that protects the codebase. |
 

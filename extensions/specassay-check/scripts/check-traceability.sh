@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SpecAssay Check (Gate 2) — portable traceability check + trace-manifest.json matrix emitter.
-# The check is the assay: it hallmarks the Golden Thread from wish to work to proof.
+# The check is the assay: it hallmarks the Golden Thread from intent to build to proof.
 # Exact-set registry ≡ specs ≡ tasks. Silent AC gaps and untraced scope fail.
 # Tracked debt is allowed. US/FR/NFR without own carrier are backlog (planning altitude) — not silent-gap candidates.
 # Anointed backlog: a registry ID whose only carrier is an open Carries TODO is backlog, not drift — minting into
@@ -392,19 +392,19 @@ def status_for(id_: str) -> str:
     started = id_ in spec_ids or id_ in covered
     if typ == "AC":
         if id_ in tested:
-            return "verified"
+            return "proven"
         if id_ in pending:
             return "tracked-debt" if started else "backlog"
         return "GAP"
     # US/FR/NFR: planning altitude — backlog when no own carrier; not silent-gap / GAP.
     if id_ in covered or id_ in tested:
-        return "verified"
+        return "proven"
     if id_ in pending:
         return "tracked-debt" if started else "backlog"
     return "backlog"
 
 rows = []
-status_counts = {"verified": 0, "tracked-debt": 0, "GAP": 0, "backlog": 0}
+status_counts = {"proven": 0, "tracked-debt": 0, "GAP": 0, "backlog": 0}
 ac_count = 0
 covered_count = 0
 for id_ in ids:
@@ -413,7 +413,7 @@ for id_ in ids:
     status_counts[st] += 1
     if typ == "AC":
         ac_count += 1
-        if st == "verified":
+        if st == "proven":
             covered_count += 1
     rows.append({
         "id": id_,

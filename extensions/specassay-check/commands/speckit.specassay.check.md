@@ -7,7 +7,7 @@ description: Run SpecAssay Check (Gate 2) — fail on silent gaps; emit trace-ma
 Run the portable Gate 2 script shipped with this extension. It checks that:
 
 - registry IDs ≡ IDs in specs ≡ IDs in tasks (**exact-set** drift),
-- durable IDs are either verified (named proof) or tracked as debt (open task) for **ACs**,
+- durable IDs are either proven (named proof) or tracked as debt (open task) for **ACs**,
 - coverage annotations / test-encoded IDs are not orphans,
 - checkbox tasks declare `Carries:`,
 
@@ -26,4 +26,4 @@ bash .specify/extensions/specassay-check/scripts/check-traceability.sh
 
 3. Report the script's exit code, any `FAIL:` lines, and confirm `trace-manifest.json` (or configured `manifest_path`) was written.
 4. Do **not** weaken the gate. If something is unfinished, it belongs as tracked debt (unchecked task with `Carries:`), not as a silenced gap.
-5. Reminder: **verified** means a named proof exists — not that a full suite was asserted green by this script.
+5. Reminder: **proven** means a named proof exists — not that a full suite was asserted green by this script.

@@ -15,7 +15,7 @@
     "coveredCount": 46
   },
   "statusCounts": {
-    "verified": 67,
+    "proven": 67,
     "tracked-debt": 10,
     "GAP": 0,
     "backlog": 5
@@ -29,7 +29,7 @@
         "path": "HomesFlow.prd.md",
         "line": 294
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/UI/AccessibilityBaseline.swift",
@@ -76,7 +76,7 @@
         "path": "HomesFlow.prd.md",
         "line": 295
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/UI/AccessibilityBaseline.swift",
@@ -123,7 +123,7 @@
         "path": "HomesFlow.prd.md",
         "line": 296
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/UI/AccessibilityBaseline.swift",
@@ -165,7 +165,7 @@
         "path": "HomesFlow.prd.md",
         "line": 262
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Documents/DocumentRepository.swift",
@@ -222,7 +222,7 @@
         "path": "HomesFlow.prd.md",
         "line": 263
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Models/EntityAccessState.swift",
@@ -268,7 +268,7 @@
         "path": "HomesFlow.prd.md",
         "line": 264
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -299,7 +299,7 @@
         "path": "HomesFlow.prd.md",
         "line": 268
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Features/Procedures/ProcedureDetailView.swift",
@@ -335,7 +335,7 @@
         "path": "HomesFlow.prd.md",
         "line": 269
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -366,7 +366,7 @@
         "path": "HomesFlow.prd.md",
         "line": 214
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Storage/HomePhotoService.swift",
@@ -408,7 +408,7 @@
         "path": "HomesFlow.prd.md",
         "line": 215
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Home/HomeRepository.swift",
@@ -449,7 +449,7 @@
         "path": "HomesFlow.prd.md",
         "line": 216
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Sync/OutboxSyncPolicy.swift",
@@ -505,7 +505,7 @@
         "path": "HomesFlow.prd.md",
         "line": 257
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Providers/ProviderConflictResolver.swift",
@@ -561,7 +561,7 @@
         "path": "HomesFlow.prd.md",
         "line": 258
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Providers/ProviderConflictResolver.swift",
@@ -607,7 +607,7 @@
         "path": "HomesFlow.prd.md",
         "line": 217
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Documents/DocumentStorageService.swift",
@@ -658,7 +658,7 @@
         "path": "HomesFlow.prd.md",
         "line": 218
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Storage/HomePhotoCache.swift",
@@ -704,7 +704,7 @@
         "path": "HomesFlow.prd.md",
         "line": 219
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Home/HomeRepository.swift",
@@ -853,7 +853,7 @@
         "path": "HomesFlow.prd.md",
         "line": 223
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/UI/SectionAddAction.swift",
@@ -919,7 +919,7 @@
         "path": "HomesFlow.prd.md",
         "line": 224
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Documents/DocumentPreviewSupport.swift",
@@ -980,7 +980,7 @@
         "path": "HomesFlow.prd.md",
         "line": 225
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Documents/DocumentPreviewSupport.swift",
@@ -1041,7 +1041,7 @@
         "path": "HomesFlow.prd.md",
         "line": 229
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Home/HomeDisplayName.swift",
@@ -1067,7 +1067,7 @@
         "path": "HomesFlow.prd.md",
         "line": 285
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookEntryDTO.swift",
@@ -1113,7 +1113,7 @@
         "path": "HomesFlow.prd.md",
         "line": 286
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookEntryDTO.swift",
@@ -1159,7 +1159,7 @@
         "path": "HomesFlow.prd.md",
         "line": 287
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookEntryDTO.swift",
@@ -1195,7 +1195,7 @@
         "path": "HomesFlow.prd.md",
         "line": 288
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
@@ -1236,7 +1236,7 @@
         "path": "HomesFlow.prd.md",
         "line": 289
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookScopeFilter.swift",
@@ -1272,7 +1272,7 @@
         "path": "HomesFlow.prd.md",
         "line": 290
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookRepository.swift",
@@ -1308,7 +1308,7 @@
         "path": "HomesFlow.prd.md",
         "line": 246
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/ActivityLog/ActivityLogService.swift",
@@ -1354,7 +1354,7 @@
         "path": "HomesFlow.prd.md",
         "line": 247
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -1395,7 +1395,7 @@
         "path": "HomesFlow.prd.md",
         "line": 248
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -1426,7 +1426,7 @@
         "path": "HomesFlow.prd.md",
         "line": 249
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -1477,7 +1477,7 @@
         "path": "HomesFlow.prd.md",
         "line": 250
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -1533,7 +1533,7 @@
         "path": "HomesFlow.prd.md",
         "line": 251
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -1569,7 +1569,7 @@
         "path": "HomesFlow.prd.md",
         "line": 252
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -1615,7 +1615,7 @@
         "path": "HomesFlow.prd.md",
         "line": 253
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/StepRowPresentation.swift",
@@ -1661,7 +1661,7 @@
         "path": "HomesFlow.prd.md",
         "line": 273
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Sync/OverwriteNotificationPolicy.swift",
@@ -1774,7 +1774,7 @@
         "path": "HomesFlow.prd.md",
         "line": 277
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Sync/PermissionRevertPolicy.swift",
@@ -1805,7 +1805,7 @@
         "path": "HomesFlow.prd.md",
         "line": 278
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Sync/SyncIndicatorPolicy.swift",
@@ -1846,7 +1846,7 @@
         "path": "HomesFlow.prd.md",
         "line": 273
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -1887,7 +1887,7 @@
         "path": "HomesFlow.prd.md",
         "line": 273
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -1923,7 +1923,7 @@
         "path": "HomesFlow.prd.md",
         "line": 273
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Sync/StructuralActionPolicy.swift",
@@ -1994,7 +1994,7 @@
         "path": "HomesFlow.prd.md",
         "line": 233
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Members/InvitePolicy.swift",
@@ -2045,7 +2045,7 @@
         "path": "HomesFlow.prd.md",
         "line": 235
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Members/InvitePolicy.swift",
@@ -2126,7 +2126,7 @@
         "path": "HomesFlow.prd.md",
         "line": 240
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Members/MemberRepository.swift",
@@ -2167,7 +2167,7 @@
         "path": "HomesFlow.prd.md",
         "line": 241
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Features/HomeDetail/HomeDetailView.swift",
@@ -2198,7 +2198,7 @@
         "path": "HomesFlow.prd.md",
         "line": 242
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Members/InvitePolicy.swift",
@@ -2229,7 +2229,7 @@
         "path": "HomesFlow.prd.md",
         "line": 234
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Members/InvitePolicy.swift",
@@ -2270,7 +2270,7 @@
         "path": "HomesFlow.prd.md",
         "line": 54
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Supabase/SupabaseConfig.swift",
@@ -2331,7 +2331,7 @@
         "path": "HomesFlow.prd.md",
         "line": 64
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Documents/DocumentRepository.swift",
@@ -2377,7 +2377,7 @@
         "path": "HomesFlow.prd.md",
         "line": 65
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Features/Members/InviteMemberView.swift",
@@ -2402,7 +2402,7 @@
         "path": "HomesFlow.prd.md",
         "line": 56
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Storage/HomePhotoCache.swift",
@@ -2457,7 +2457,7 @@
         "path": "HomesFlow.prd.md",
         "line": 57
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Providers/ServiceProviderRepository.swift",
@@ -2492,7 +2492,7 @@
         "path": "HomesFlow.prd.md",
         "line": 58
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Documents/DocumentStorageService.swift",
@@ -2532,7 +2532,7 @@
         "path": "HomesFlow.prd.md",
         "line": 59
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Home/HomeDisplayName.swift",
@@ -2552,7 +2552,7 @@
         "path": "HomesFlow.prd.md",
         "line": 67
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/ActivityLog/ActivityLogDTO.swift",
@@ -2582,7 +2582,7 @@
         "path": "HomesFlow.prd.md",
         "line": 68
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/LogBook/LogBookScopeFilter.swift",
@@ -2632,7 +2632,7 @@
         "path": "HomesFlow.prd.md",
         "line": 60
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Members/PeopleSelection.swift",
@@ -2677,7 +2677,7 @@
         "path": "HomesFlow.prd.md",
         "line": 66
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Features/Settings/SettingsView.swift",
@@ -2697,7 +2697,7 @@
         "path": "HomesFlow.prd.md",
         "line": 61
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Models/SwiftDataModels.swift",
@@ -2732,7 +2732,7 @@
         "path": "HomesFlow.prd.md",
         "line": 62
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Procedures/ProcedureRepository.swift",
@@ -2767,7 +2767,7 @@
         "path": "HomesFlow.prd.md",
         "line": 63
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Storage/ProcedureAttachmentService.swift",
@@ -2797,7 +2797,7 @@
         "path": "HomesFlow.prd.md",
         "line": 53
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Models/SwiftDataModels.swift",
@@ -2838,7 +2838,7 @@
         "path": "HomesFlow.prd.md",
         "line": 55
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Members/MemberRemovalPolicy.swift",
@@ -2878,7 +2878,7 @@
         "path": "HomesFlow.prd.md",
         "line": 145
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/UI/AccessibilityBaseline.swift",
@@ -2913,7 +2913,7 @@
         "path": "HomesFlow.prd.md",
         "line": 164
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Models/SwiftDataModels.swift",
@@ -2959,7 +2959,7 @@
         "path": "HomesFlow.prd.md",
         "line": 144
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Storage/HomePhotoService.swift",
@@ -3035,7 +3035,7 @@
         "path": "HomesFlow.prd.md",
         "line": 175
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Core/Supabase/SupabaseConfig.swift",
@@ -3096,7 +3096,7 @@
         "path": "HomesFlow.prd.md",
         "line": 31
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "ios/HomesFlow/Features/Dashboard/DashboardView.swift",

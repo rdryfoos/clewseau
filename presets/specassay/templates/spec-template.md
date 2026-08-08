@@ -4,7 +4,7 @@
 
 ## SpecAssay — durable IDs (required)
 
-Every requirement and acceptance criterion MUST carry a durable ID per the project SpecAssay / traceability standard.
+Every intent and acceptance criterion MUST carry a durable ID per the project SpecAssay / traceability standard.
 
 - IDs are assigned **once at the PRD (registry) level**. This feature spec **inherits** them; do **not** mint new IDs here.
 - Grammar: `<TYPE>-<DOMAIN>-<NN>` where TYPE is `US` | `FR` | `NFR` | `AC` (example: `AC-SYNC-04`).

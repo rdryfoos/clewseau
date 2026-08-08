@@ -15,7 +15,7 @@
     "coveredCount": 3
   },
   "statusCounts": {
-    "verified": 3,
+    "proven": 3,
     "tracked-debt": 1,
     "GAP": 0,
     "backlog": 6
@@ -57,7 +57,7 @@
         "path": "PRD.md",
         "line": 21
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [
         {
           "path": "src/sync/SyncEngine.ts",
@@ -109,7 +109,7 @@
         "path": "PRD.md",
         "line": 26
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [],
       "proofs": [
         {
@@ -191,7 +191,7 @@
         "path": "PRD.md",
         "line": 44
       },
-      "status": "verified",
+      "status": "proven",
       "implementations": [],
       "proofs": [
         {

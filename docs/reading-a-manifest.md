@@ -1,6 +1,6 @@
 # Reading a trace-manifest
 
-How to read a SpecAssay **trace-manifest** (`trace-manifest.json`) in ordinary SDLC terms — requirement → build → proof — then what Gate emits and what **Loupe** paints.
+How to read a SpecAssay **trace-manifest** (`trace-manifest.json`) in ordinary SDLC terms — intent → build → proof — then what Gate emits and what **Loupe** paints.
 
 Schema details live in [`trace-manifest-schema.md`](./trace-manifest-schema.md). This guide is the workflow story.
 
@@ -16,22 +16,22 @@ Passing Gate does **not** mean zero unfinished work. It means zero *hidden* unfi
 
 For any ID, ask in this order:
 
-1. **Where does the requirement live?** (PRD / registry statement)
+1. **Where does the intent live?** (PRD / registry statement)
 2. **What build / tasks are done vs open?** (`Carries:` on checkbox tasks)
 3. **What carriers exist?** (`@covers` in source; named tests encoding the AC)
 4. **What did Gate therefore emit?** (`status`, `implementations[]`, `proofs[]`)
-5. **What does Loupe paint?** Requirement / Implementation / Proof colors; **fray** only when `GAP` or `gate.ok: false`
+5. **What does Loupe paint?** Intent / Build / Proof colors; **fray** only when `GAP` or `gate.ok: false`
 
 ### Status in one line
 
 | Status | SDLC meaning |
 |--------|----------------|
-| **verified** | Named proof (and/or `@covers` where required by altitude) exists — not “tests happened to pass.” |
+| **proven** | Named proof (and/or `@covers` where required by altitude) exists — not “tests happened to pass.” |
 | **tracked-debt** | Work started (spec or code exists) but proof is missing, excused by an open `Carries:` task — visible unfinished work. |
 | **GAP** | AC with neither proof nor open debt — **hidden** unfinished work; Gate fails; the braid frays. |
 | **backlog** | Planning altitude: US/FR/NFR with no own carrier, **or** any ID **anointed into backlog** — minted in the registry with an open `Carries:` TODO and nothing else. |
 
-Silent-gap refusal is **AC-only**. Parents are covered when their child ACs are verified or debt — not by sticking `@covers US-…` on a file.
+Silent-gap refusal is **AC-only**. Parents are covered when their child ACs are proven or debt — not by sticking `@covers US-…` on a file.
 
 **Minting an ID is a promise, and the Gate holds you to it immediately.** A registry ID claimed nowhere fails exact-set (that is drift — often a fat-fingered rename in a spec). The deliberate way to mint ahead of the work is **anointed backlog**: mint the ID *and* write one open `Carries:` TODO for it (a conventional home is `specs/backlog/tasks.md`, which the standard tasks glob already matches). The TODO proves intent, names who is carrying the item, and the ID rides as `backlog` — visible, not silent — until a spec claims it and normal rules take over. A typo’d ID never comes with a matching TODO, so the drift tripwire still fires.
 
@@ -45,38 +45,38 @@ Silent-gap refusal is **AC-only**. Parents are covered when their child ACs are 
 
 ## Worked examples (HomesFlow)
 
-HomesFlow’s live trace-manifest at session time: `gate.ok: true`, 67 verified / 10 tracked-debt / 0 GAP / 5 backlog (82 rows). `samples/homesflow.trace-manifest.json` is that real emit; `samples/sample.trace-manifest.json` is the preview default (honest today; may later be mocked for cases HomesFlow doesn’t emit).
+HomesFlow’s live trace-manifest at session time: `gate.ok: true`, 67 proven / 10 tracked-debt / 0 GAP / 5 backlog (82 rows). `samples/homesflow.trace-manifest.json` is that real emit; `samples/sample.trace-manifest.json` is the preview default (honest today; may later be mocked for cases HomesFlow doesn’t emit).
 
-### `AC-GUEST-01` → verified
+### `AC-GUEST-01` → proven
 
-1. **Requirement:** PRD owns guest visibility — Guest sees only guest-marked fields; edit controls disabled.
+1. **Intent:** PRD owns guest visibility — Guest sees only guest-marked fields; edit controls disabled.
 2. **Build:** Guest restriction work is done and traced in tasks.
 3. **Carriers:** `@covers AC-GUEST-01, …` on the guest test module; named proof `test_AC_GUEST_01_guest_fields_only`.
-4. **Manifest:** `implementations: [{…}]`, `proofs: [{ name: test_AC_GUEST_01_… }]`, status `verified`.
-5. **Loupe:** Requirement / Implementation / Proof green (or Implementation green from `@covers` and Proof green from the named test). Braid solid.
+4. **Manifest:** `implementations: [{…}]`, `proofs: [{ name: test_AC_GUEST_01_… }]`, status `proven`.
+5. **Loupe:** Intent / Build / Proof green (or Build green from `@covers` and Proof green from the named test). Braid solid.
 
-`AC-A11Y-01` is the same story with proofs only (named accessibility tests, empty `implementations[]`): still `verified` because AC altitude keys on the named proof.
+`AC-A11Y-01` is the same story with proofs only (named accessibility tests, empty `implementations[]`): still `proven` because AC altitude keys on the named proof.
 
 ### `AC-HOME-09` → tracked-debt
 
-1. **Requirement:** PRD owns AC-HOME-09 — iPad trailing column is content only (no full-bleed hero / home-level tab bar).
+1. **Intent:** PRD owns AC-HOME-09 — iPad trailing column is content only (no full-bleed hero / home-level tab bar).
 2. **Build done:** `T021a` checked off (iPad shell layout).
 3. **Proof still open:** `T024d` — snapshot/UI test, deferred until XCUITest/snapshot infra; manual iPad pass until then. `Carries: AC-HOME-09`.
 4. **Manifest:** `implementations: []`, `proofs: []`, status `tracked-debt` (ID on an open checkbox task; no named proof).
-5. **Loupe:** Requirement red (debt) **with open `Carries:` task listed**; Implementation red (no `@covers`); Proof red-not-fray (“No proof — tracked as debt”); braid solid if `gate.ok`.
+5. **Loupe:** Intent red (debt) **with open `Carries:` task listed**; Build red (no `@covers`); Proof red-not-fray (“No proof — tracked as debt”); braid solid if `gate.ok`.
 
 ### `AC-HOME-10` → tracked-debt (build further along)
 
-1. **Requirement:** PRD owns AC-HOME-10 — iPad leading column: compact hero + vertical icon tabs; three-panel trailing for all sections.
+1. **Intent:** PRD owns AC-HOME-10 — iPad leading column: compact hero + vertical icon tabs; three-panel trailing for all sections.
 2. **Build done:** `T021a`, `T021c` checked off.
-3. **Implementation carrier:** code has `@covers AC-HOME-10` (Implementation hit — not a named AC proof).
+3. **Build carrier:** code has `@covers AC-HOME-10` (Build hit — not a named AC proof).
 4. **Proof still open:** `T024e` — snapshot/UI test for leading column; same deferred note. `Carries: AC-HOME-10`.
 5. **Manifest:** `implementations: [{…}]`, `proofs: []`, status `tracked-debt`.
-6. **Loupe:** Requirement red (debt) **with open `Carries:` task listed**; Implementation green + expandable **▸ file:line** source; Proof red-not-fray; braid solid while the Golden Thread is intact.
+6. **Loupe:** Intent red (debt) **with open `Carries:` task listed**; Build green + expandable **▸ file:line** source; Proof red-not-fray; braid solid while the Golden Thread is intact.
 
 ### `US-EDIT-01` / `FR-GUEST-02` → backlog
 
-1. **Requirement:** Story or feature ID lives in the registry (planning altitude).
+1. **Intent:** Story or feature ID lives in the registry (planning altitude).
 2. **Build / claim:** May already have child AC work; the US/FR itself often has no personal `@covers` or named proof.
 3. **Carriers for this ID:** none required at this altitude.
 4. **Manifest:** empty arrays, status `backlog` — not `GAP`.
@@ -84,17 +84,17 @@ HomesFlow’s live trace-manifest at session time: `gate.ok: true`, 67 verified 
 
 ### `US-SHARE-01` → anointed backlog
 
-1. **Requirement:** an Owner story minted ahead of the work (a read-only procedure-share link) — in the PRD registry, but no spec, tasks, or code yet.
+1. **Intent:** an Owner story minted ahead of the work (a read-only procedure-share link) — in the PRD registry, but no spec, tasks, or code yet.
 2. **Anointment:** one open TODO in `specs/backlog/tasks.md` — `- [ ] T901 Deliver read-only procedure sharing link — **Carries**: US-SHARE-01`.
 3. **Carriers:** none — and that’s the point; the TODO is the only thread.
 4. **Manifest:** status `backlog`, `debtTasks` lists the carrying TODO, `gate.ok: true`. Minted, visible, not a broken thread.
-5. **Loupe:** muted / red-not-fray with the carrying TODO visible under the Requirement. Delete the TODO without picking the work up and the Gate fails exact-set on the next run.
+5. **Loupe:** muted / red-not-fray with the carrying TODO visible under the Intent. Delete the TODO without picking the work up and the Gate fails exact-set on the next run.
 
 ### What a `GAP` would look like (HomesFlow has none)
 
 If an **AC** had no named proof **and** no open `Carries:` task:
 
-1. Requirement still in the PRD.
+1. Intent still in the PRD.
 2. Build may look “done” in conversation — but nothing durable claims the unfinished proof.
 3. No carriers.
 4. Manifest: status `GAP`; Gate adds `silent-gap` to `gate.failures[]`; `gate.ok: false`.

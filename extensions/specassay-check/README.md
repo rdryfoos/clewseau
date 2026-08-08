@@ -1,6 +1,6 @@
 # SpecAssay Check
 
-Every **wish** is on the **Golden Thread** with its **work** and its **proof**; this check stops the line at any loose end, then strikes a hallmark on what it found — the **trace-manifest**.
+Every **intent** is on the **Golden Thread** with its **build** and its **proof**; this check stops the line at any loose end, then strikes a hallmark on what it found — the **trace-manifest**.
 
 Gate 2: compare the ID registry to specs, tasks, coverage annotations, and test names. **Exact-set** registry ≡ specs ≡ tasks. Silent AC gaps and untraced scope fail. **Always writes a trace-manifest** (default `trace-manifest.json`, configurable via `manifest_path`) for Loupe or any matrix consumer.
 
