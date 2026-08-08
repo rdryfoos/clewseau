@@ -213,3 +213,34 @@ briefing instead of a checkmark.*
 - **Fix `PROMOTION-CONTRACT.md` rule 10.** "Red nodes may mark excused
   incompleteness without fray" is now stale: after the palette work, excused debt
   is amber and not-yet is blue; red is reserved for fray / refusal only.
+
+## Vocabulary — LOCKED (execution pending; not yet applied to code or docs)
+
+The consolidated vocabulary is decided. It is **not yet propagated** — the pass
+across schema, gate script, Loupe UI, samples, and every doc is future work.
+
+- **The three legs (the stool): Intent → Build → Proof.** The three co-equal
+  supports every honest claim stands on — miss one and it topples. As verbs:
+  **intend → build → prove.** As artifacts: an intent, a build, a proof.
+- **Retired:** "requirement" (spec-vs-requirement confusion; bridges poorly to
+  the business) and "wish → work → proof" (fairy-tale drift). "Intent" also
+  absorbs the minting act — "mint durable IDs at intent" = mint the intent.
+- **Status rename `verified` → `proven`.** "Verified/verification" collided with
+  formal V&V; "proven" pairs with the Proof leg and stays honest (a named proof
+  exists, not a correctness claim). Other statuses unchanged (tracked-debt,
+  backlog, GAP).
+- **Metaphor lanes (kept distinct, not merged):** *assay / hallmark* = the
+  judgment (test the gold, strike the mark, refuse the gilt); *Golden Thread* =
+  the linkage binding the three legs; *three-legged stool* = the structure the
+  legs form (Dryfoos ≈ Dreifuß ≈ tripod — the name earns the shape). The
+  illuminate / affirm / refuse **ladder stays a ladder** (escalation, not a
+  stool).
+- **ID grammar kept:** `US / FR / NFR / AC` as immutable type codes. `NFR` stays
+  (entrenched acronym). "Intent" is the umbrella; FR/NFR are not expanded as
+  "…Requirement" in headline prose.
+- **Tracked debt — `FR`.** `FR` expands to "Functional Requirement," which
+  conflicts with the intent framing. Candidate replacement: **`FI` = Functional
+  Intent.** Known wrinkle: `FI` beside a kept `NFR` is asymmetric (intent vs
+  requirement) — accept it, or keep both as opaque codes. Migrating `FR` is a
+  full tombstone-and-remint of every `FR` ID (immutability). Deferred — not part
+  of the initial vocab pass.
