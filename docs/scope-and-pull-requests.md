@@ -239,8 +239,10 @@ across schema, gate script, Loupe UI, samples, and every doc is future work.
   (entrenched acronym). "Intent" is the umbrella; FR/NFR are not expanded as
   "…Requirement" in headline prose.
 - **Tracked debt — `FR`.** `FR` expands to "Functional Requirement," which
-  conflicts with the intent framing. Candidate replacement: **`FI` = Functional
-  Intent.** Known wrinkle: `FI` beside a kept `NFR` is asymmetric (intent vs
-  requirement) — accept it, or keep both as opaque codes. Migrating `FR` is a
-  full tombstone-and-remint of every `FR` ID (immutability). Deferred — not part
-  of the initial vocab pass.
+  conflicts with the intent framing. Candidate replacements: **`FI` = Functional
+  Intent** (on-message, but asymmetric beside a kept `NFR` — intent vs
+  requirement), or **`FUNC` = Functional** (neutral — carries neither
+  "requirement" nor "intent," so it sidesteps the asymmetry; longer prefix).
+  Zero-cost fallback: keep both `FR`/`NFR` as opaque type codes. Migrating `FR`
+  is a full tombstone-and-remint of every `FR` ID (immutability). Deferred — not
+  part of the initial vocab pass.
