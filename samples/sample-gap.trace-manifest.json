@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 3,
+  "format": "trace-manifest",
+  "emitter": "specassay-check",
+  "targetName": "example-app",
+  "repoPath": "/example/app",
+  "generatedAt": "2026-08-07T00:00:00.000Z",
+  "gate": {
+    "ok": false,
+    "failures": [
+      {
+        "kind": "silent-gap",
+        "id": "AC-SYNC-01",
+        "detail": "silent gap: AC-SYNC-01 has no test and no open tracked-debt task"
+      }
+    ]
+  },
+  "totals": {
+    "registryIdCount": 10,
+    "acCount": 5,
+    "coveredCount": 2
+  },
+  "statusCounts": {
+    "proven": 2,
+    "tracked-debt": 1,
+    "GAP": 1,
+    "backlog": 6
+  },
+  "rows": [
+    {
+      "id": "US-SYNC-01",
+      "type": "US",
+      "statement": "As a user, I keep my lists in sync across devices.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 12
+      },
+      "status": "backlog",
+      "implementations": [],
+      "proofs": [],
+      "debtTasks": [],
+      "attestedBy": null
+    },
+    {
+      "id": "FR-SYNC-01",
+      "type": "FR",
+      "statement": "Two-way sync reconciles list changes across devices.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 18
+      },
+      "status": "backlog",
+      "implementations": [],
+      "proofs": [],
+      "debtTasks": [],
+      "attestedBy": null
+    },
+    {
+      "id": "AC-SYNC-01",
+      "type": "AC",
+      "statement": "A change made offline appears on a second device within 5s of reconnect.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 21
+      },
+      "status": "GAP",
+      "implementations": [
+        {
+          "path": "src/sync/SyncEngine.ts",
+          "line": 48,
+          "excerpt": "// @covers FR-SYNC-01, AC-SYNC-01 \u2014 reconcile queued ops on reconnect"
+        }
+      ],
+      "proofs": [],
+      "debtTasks": [],
+      "attestedBy": null
+    },
+    {
+      "id": "AC-SYNC-02",
+      "type": "AC",
+      "statement": "Disjoint field edits on two devices merge without conflict.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 22
+      },
+      "status": "tracked-debt",
+      "implementations": [
+        {
+          "path": "src/sync/Merge.ts",
+          "line": 17,
+          "excerpt": "// @covers AC-SYNC-02 \u2014 field-level merge (partial)"
+        }
+      ],
+      "proofs": [],
+      "debtTasks": [
+        {
+          "path": "specs/sync/tasks.md",
+          "line": 9,
+          "excerpt": "- [ ] T041 Field-level merge test for disjoint edits \u2014 **Carries**: AC-SYNC-02 \u2014 deferred to the sync milestone"
+        }
+      ],
+      "attestedBy": null
+    },
+    {
+      "id": "AC-OFFL-01",
+      "type": "AC",
+      "statement": "The app is fully usable with no network; edits queue locally.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 26
+      },
+      "status": "proven",
+      "implementations": [],
+      "proofs": [
+        {
+          "name": "test_AC_OFFL_01_edits_queue_offline",
+          "path": "tests/offline.test.ts",
+          "line": 14
+        }
+      ],
+      "debtTasks": [],
+      "attestedBy": null
+    },
+    {
+      "id": "US-EDIT-01",
+      "type": "US",
+      "statement": "As a user, I can edit a list item inline.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 31
+      },
+      "status": "backlog",
+      "implementations": [],
+      "proofs": [],
+      "debtTasks": [],
+      "attestedBy": null
+    },
+    {
+      "id": "FR-EDIT-01",
+      "type": "FR",
+      "statement": "Inline edit commits on blur and is undoable.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 34
+      },
+      "status": "backlog",
+      "implementations": [],
+      "proofs": [],
+      "debtTasks": [],
+      "attestedBy": null
+    },
+    {
+      "id": "AC-EDIT-01",
+      "type": "AC",
+      "statement": "Undo restores the prior value within one step after an inline edit.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 36
+      },
+      "status": "backlog",
+      "implementations": [],
+      "proofs": [],
+      "debtTasks": [
+        {
+          "path": "specs/backlog/tasks.md",
+          "line": 4,
+          "excerpt": "- [ ] T900 Deliver inline-edit undo \u2014 **Carries**: US-EDIT-01, FR-EDIT-01, AC-EDIT-01 (anointed backlog)"
+        }
+      ],
+      "attestedBy": null
+    },
+    {
+      "id": "NFR-PERF-01",
+      "type": "NFR",
+      "statement": "List view renders 1,000 items at 60fps on a mid-range device.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 40
+      },
+      "status": "backlog",
+      "implementations": [],
+      "proofs": [],
+      "debtTasks": [],
+      "attestedBy": null
+    },
+    {
+      "id": "AC-A11Y-01",
+      "type": "AC",
+      "statement": "All list actions are reachable by keyboard and announced to screen readers.",
+      "registry": {
+        "path": "PRD.md",
+        "line": 44
+      },
+      "status": "proven",
+      "implementations": [],
+      "proofs": [
+        {
+          "name": "test_AC_A11Y_01_keyboard_and_screenreader",
+          "path": "tests/a11y.test.ts",
+          "line": 22
+        }
+      ],
+      "debtTasks": [],
+      "attestedBy": null
+    }
+  ]
+}
