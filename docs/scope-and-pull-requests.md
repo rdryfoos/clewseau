@@ -175,3 +175,41 @@ Build order, converging strategies rather than one silver bullet:
 None of it asks the developer to tag more code. The value comes from *reading
 the diff against the thread you already have* and *handing author and reviewer a
 briefing instead of a checkmark.*
+
+## Queued for this doc (discussion notes, not yet doctrine)
+
+- **The three-rung ladder** as the organizing spine — escalating intervention,
+  decreasing frequency: **illuminate** (surface it, no verdict — default, always
+  on) → **affirm** (require a human to look/attest — opt-in, blocks until ticked)
+  → **refuse** (the machine's own verdict — only on a *provable* defect).
+  Governing asymmetry: *burden of proof rises with intervention.* Visibility
+  carries no verdict, so it needs no proof; refusal carries the machine's
+  verdict, so it needs full proof; affirmation carries no machine verdict at all
+  — it defers. Principle line: **"Make the truth visible; refuse only what you
+  can prove; for the rest, make a human look."** Maps to the design: illuminate =
+  the briefing (§3), affirm = the acknowledgment, refuse = the two cheap gates
+  (§5).
+- **Config split for the off-thread signal.** `offthread_list: always` (the
+  information — every report, not a toggle); `offthread_ack: off | record |
+  required` (the ceremony — default off; `record` logs the tick; `required`
+  blocks the merge until a human affirms). Lightweight, one line, documented in
+  the config template.
+- **Colors are states, not postures.** The Loupe palette (green = verified,
+  blue = not-yet, amber = owed, red = broken) answers "what state is the work
+  in?"; the ladder answers "what may the machine do?" The two axes coincide at
+  exactly one point — **refuse = red** (Gate fail ⇔ fray). Green stays
+  "verified"; illuminate has no color of its own (it is the lens the colors are
+  seen through); affirm gets its own affordance, not a node color.
+- **Refusal base-rate / smoke-detector framing.** Gate 2 refuses on bookkeeping
+  breakdowns (drift, missing `Carries:`, silent AC gap, invented ID), never on
+  whether the code is *good*. A healthy traced repo sits green — that is the
+  design working, not idling; breaks must be synthesized for demos for exactly
+  that reason. Genuine refusals cluster at two moments: (a) in-flight, pre-merge
+  — the normal "write the test or admit the debt before you ship" nudge
+  (frequent, healthy); (b) rarely, when a refactor / rename / merge silently
+  severs an existing link (uncommon, high-value catch). Steady-state value is the
+  manifest emitted every run (illumination) plus deterrence, not the rare
+  refusal.
+- **Fix `PROMOTION-CONTRACT.md` rule 10.** "Red nodes may mark excused
+  incompleteness without fray" is now stale: after the palette work, excused debt
+  is amber and not-yet is blue; red is reserved for fray / refusal only.
